@@ -1,0 +1,75 @@
+TODO:
+	Need to implement SQLAlchemy model for actions.
+	Need to implement Mod model and API key checks.
+	Send all registered modifications for a board and only
+	load the ones that are registered.
+	Write forum scraper to scrape current users/uids on a forum.
+
+zb_sync should be the websocket handler and should only:
+	- receive actions
+	- process actions
+	- enqueue responses
+	- read from DB any notifications not seen
+
+zb_sync_store should:
+	- dequeue from the response queue and insert into a DB
+
+Other Notes:
+	- boards will eventually need to register in order
+	to verify send/receive destination/origin
+
+	- all timestamps will be recorded in UTC however
+	they will be presented in the user's timezone
+
+	- on connect, if a user's name has changed then update the db
+	- issue a user list refresh for the board
+
+	- users will be identified by their id. names will be mapped
+	based on id.
+
+	- send templates will have receive attr but not source
+
+	- receive templates will have source attr but not receive
+
+	- Mod key "0" is the dev mod key and should only be used
+	for official system communication (such as handshakes)
+
+User Action Relationships:
+	Actions have a corresponding source and receiver.
+	
+	The receiver will be enqueued with an action whose
+	receiver attribute is him/herself.
+
+Authentication:
+	Forums and users will have authentication keys.
+	2-factor authentication
+
+	On page load if a user is logged in handshake with the server
+	and attempt to get the auth key from it.
+
+	If the user is not in the system create a key for them.
+
+	Handshakes should use null/None for api keys
+
+DB Scheme:
+	Forums Table:
+		id (unique primary key)
+		access_key (unique key)
+		bare_location (like s1.zetaboards.com/outline for outline)
+		mod_keys (string containing space delimited keys for modification access)
+
+	Users Table:
+		id (unique primary key)
+		access_key (unique key)
+		board_key (relates to forums table)
+		uid
+		name
+
+	Actions Table:
+		id (unique primary key)
+		timestamp
+		event
+		details
+		source (relates to users table)
+		receiver (relates to users table)
+		seen (boolean defaults to false)

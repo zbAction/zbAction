@@ -1,0 +1,32 @@
+<script>
+var $ = {
+	zb: {
+		stat: {
+			mid: 7
+		}
+	}
+};
+
+var __zbAction = {
+	board_key: '123456789'
+};
+</script>
+<script src="{{ url_for('static', filename='bin/zb.action.min.js') }}"></script>
+<script>
+function test(zbAction){	
+	zbAction.register('testing', function(data){
+		console.log(data);
+	});
+
+	zbAction.send({
+		event: 'testing',
+		details: 'test',
+		receiver: {
+			uid: $.zb.stat.mid,
+			board_key: '123456789'
+		}
+	});
+}
+
+zbAction.ready('modification_key', test);
+</script>
