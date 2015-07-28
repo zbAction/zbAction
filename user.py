@@ -53,7 +53,17 @@ class User(Model):
 
 	@staticmethod
 	def key_exists(key):
-		return Session.query(exists().where(User.access_key==key))
+		with session_factory() as session:
+			try:
+				session.query(
+					User.access_key
+				).filter(
+					User.access_key==key
+				).one()
+
+				return True
+			except:
+				return False
 
 	@staticmethod
 	def create_from(model, name=True):

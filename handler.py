@@ -4,6 +4,7 @@ import traceback
 from tornado import websocket
 
 from shared import *
+from logger import log
 
 from action import Action
 from mod import Mod
@@ -65,6 +66,7 @@ class SocketHandler(websocket.WebSocketHandler):
 			return
 
 		if not Mod.key_exists(mod_key):
+			log('Attempted to use invalid modification key:', mod_key)
 			return
 
 		action = Action.create_from(action)
@@ -78,21 +80,16 @@ class SocketHandler(websocket.WebSocketHandler):
 		action_queue.append(action)
 		mutex.release()
 
-	def seen(self, action, key, mod_key):
-		if not self.user or not verify_api_key(key):
-			return
-
 	def on_message(self, message):
 		try:
-			print 'Received: ' + message
+			log('Received:', message)
 
 			message = json.loads(message)
 
 			# A dict of message handlers.
 			handlers = {
 				'handshake': self.handshake,
-				'action': self.push_action,
-				'seen': self.seen
+				'action': self.push_action
 			}
 
 			handler = handlers[message['type']]
@@ -112,6 +109,8 @@ class SocketHandler(websocket.WebSocketHandler):
 			mutex.acquire()
 			del connections[self.toKey()]
 			mutex.release()
+
+			log('Disconnected from user:', self.toKey())
 
 	def toKey(self):
 		return self.user.toKey()

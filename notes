@@ -1,9 +1,22 @@
 TODO:
 	Need to implement SQLAlchemy model for actions.
-	Need to implement Mod model and API key checks.
+
 	Send all registered modifications for a board and only
 	load the ones that are registered.
+
 	Write forum scraper to scrape current users/uids on a forum.
+
+	On modification submission automatically check for matching keys
+	in manifest.json and whatever JS file they are using.
+
+	Need to add more rows to the mods table (author, directory)
+
+	Each time a modification is submitted the manifest will be read
+	and a new version directory (eg: andrew/111-222-333/1.0.0/poke.js) 
+	will be created. The format will be:
+		- {author}/{mod_key}/{version}/{script_file}
+
+	DONE: Need to implement Mod model and API key checks.
 
 zb_sync should be the websocket handler and should only:
 	- receive actions

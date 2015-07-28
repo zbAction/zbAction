@@ -18,9 +18,7 @@ def parse_val(var):
 
 secrets = secret()
 
-path = os.path.abspath(
-	os.path.join(os.path.dirname(__file__), '..', 'secrets.json')
-)
+path = os.path.abspath(os.path.join('/zba', 'secrets.json'))
 
 with open(path) as f:
 	lines = ''.join(f.readlines())

@@ -3,6 +3,7 @@
 
 (function(window, Socket, undefined){
 	var SOCKET_URL = 'ws://localhost:4242/sync';
+	var MOD_URL = 'http://localhost:4242/mods/list/';
  
 	var ACTION_TEMPLATE = {
 		event: 'string',
@@ -20,7 +21,7 @@
 	var CURRENT_USER = {
 		board_key: __zbAction.board_key,
 		uid: $.zb.stat.mid,
-		name: 'andrew' // $('#top_info strong a').text()
+		name: 'andrew' // $('#top_info a[href*="/profile/"]').text()
 	};
 
 	var zbAction = function(){
@@ -51,24 +52,52 @@
 		// Action details can be anything (pretty much anything)
 		// as they are translated into a JSON string.
 
-		var register = function(evt, fn){
+		// Registered is called as a bind to its corresponding
+		// ModWrapper object.
+		var register = function(key, evt, fn){
 			// Reserved means reserved.
 			if(_reserved_keys.hasOwnProperty(evt))
 				return;
 
-			ws.on(evt, fn);
+			var that = this;
+
+			ws.on(key + '.' + evt, function(resp){
+				resp.event = resp.event.replace(key + '.', '');
+
+				fn.call(that, resp);
+			});
 		};
 
 		var ModWrapper = function(send, key){
 			this.send = send.bind(null, key);
-			this.register = register;
+			this.register = register.bind(this, key);
 		};
+
+		var load_approved = function(data){
+			var approved = data.mods || [];
+
+			for(var n = 0; n < that._wait.length; n++){
+				var fn = that._wait[n];
+
+				if(approved.indexOf(fn.key) !== -1)
+					fn.fn.call(null, new ModWrapper(send, fn.key));
+			}
+		};
+
+		// This is defined on handshake receive.
+		// This is because we need to create a wrapper
+		// that will accept a mod key and user key
+		// in addition to whatever data needs to be sent.
+		//
+		// Note that this is not bound to anything
+		// as it is used as send.bind(null, ...)
+		var send = null;
 
 		var _reserved_keys = {
 			'handshake': function(data){
 				var USER_KEY = data.details;
 
-				var send = function(mod_key, data){
+				send = function(mod_key, data){
 					try{
 						if(CURRENT_USER.board_key !== data.receiver.board_key)
 							throw new Error('Cross-board requests are not allowed.');
@@ -77,12 +106,14 @@
 						// The action data given by developers is
 						// only additional data to fill in the blanks.
 						data = {
-							event: data.event + '',
+							event: mod_key + '.' + data.event,
 							details: JSON.stringify(data.details),
 							source: CURRENT_USER,
 							receiver: {
 								uid: parseInt(data.receiver.uid),
-								board_key: data.receiver.board_key + ''
+								// Cross-board is currently disabled but this is here
+								// in the event I decide to enable it for certain boards.
+								board_key: data.receiver.board_key || CURRENT_USER.board_key
 							}
 						};
 					}
@@ -101,9 +132,7 @@
 					});
 				};
 
-				that._wait.forEach(function(fn){
-					fn.fn.call(null, new ModWrapper(send, fn.key));
-				});
+				$.getJSON(MOD_URL + __zbAction.board_key, load_approved);
 			}
 		};
 

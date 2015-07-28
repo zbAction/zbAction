@@ -1,20 +1,20 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-var $ = {
-	zb: {
-		stat: {
-			mid: 7
-		}
+$.zb = {
+	stat: {
+		mid: 7
 	}
 };
 
 var __zbAction = {
-	board_key: '123456789'
+	board_key: 'dev'
 };
 </script>
 <script src="{{ url_for('static', filename='bin/zb.action.min.js') }}"></script>
 <script>
 function test(zbAction){	
 	zbAction.register('testing', function(data){
+		console.log(this);
 		console.log(data);
 	});
 
@@ -22,11 +22,10 @@ function test(zbAction){
 		event: 'testing',
 		details: 'test',
 		receiver: {
-			uid: $.zb.stat.mid,
-			board_key: '123456789'
+			uid: $.zb.stat.mid
 		}
 	});
 }
 
-zbAction.ready('modification_key', test);
+zbAction.ready('0', test);
 </script>

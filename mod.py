@@ -2,7 +2,7 @@ import json
 
 from sqlalchemy import Column, exists, Integer, String, DateTime
 from sqlalchemy.orm.exc import NoResultFound
-from models import Model, Session, session_factory
+from models import Model, session_factory
 import uuid
 
 import traceback
@@ -23,4 +23,16 @@ class Mod(Model):
 
 	@staticmethod
 	def key_exists(key):
-		return key == 0 or Session.query(exists().where(Mod.api_key==key))
+		if key == 0: return True
+
+		with session_factory() as session:
+			try:
+				session.query(
+					Mod.api_key
+				).filter(
+					Mod.api_key==key
+				).one()
+
+				return True
+			except NoResultFound:
+				return False
