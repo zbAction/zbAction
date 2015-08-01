@@ -14,7 +14,7 @@ zbAction is a WebSocket based communication API that allows users to engage in r
 - MySQL
 - MySQL Python
 - NodeJS
-- Grunt
+- GruntJS
 - Grunt Clean
 - Grunt JSHint
 - Grunt Uglify
