@@ -2,15 +2,17 @@ import os
 import json
 
 class secret:
-	def __str__(self):
-		return json.dumps(self.__dict__)
+	pass
 
 def parse_val(var):
 	if isinstance(var, dict):
 		placeholder = secret()
 
 		for key in var:
-			setattr(placeholder, key, var[key])
+			if isinstance(var[key], dict):
+				setattr(placeholder, key, parse_val(var[key]))
+			else:
+				setattr(placeholder, key, var[key])
 
 		return placeholder
 
