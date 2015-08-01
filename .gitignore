@@ -1,6 +1,7 @@
 # Other Stuff
 secrets.json
 *.sass-cache
+*.map
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
