@@ -1,4 +1,6 @@
-import time
+import os, sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'modules')))
 
 from flask import Flask
 
@@ -22,16 +24,16 @@ store.daemon = True
 dispatcher.daemon = True
 
 if __name__ == '__main__':
-	wsgi = WSGIContainer(app)
+    wsgi = WSGIContainer(app)
 
-	tornado = web.Application([
-		(r'/sync', SocketHandler),
-		(r'.*', web.FallbackHandler, dict(fallback=wsgi))
-	], debug=secrets.DEBUG, autoreload=secrets.DEBUG)
+    tornado = web.Application([
+        (r'/sync', SocketHandler),
+        (r'.*', web.FallbackHandler, dict(fallback=wsgi))
+    ], debug=secrets.DEBUG, autoreload=secrets.DEBUG)
 
-	tornado.listen(4242)
+    tornado.listen(4242)
 
-	store.start()
-	dispatcher.start()
+    store.start()
+    dispatcher.start()
 
-	ioloop.IOLoop.instance().start()
+    ioloop.IOLoop.instance().start()
