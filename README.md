@@ -1,6 +1,8 @@
 ## zbAction
 zbAction is a WebSocket based communication API that allows users to engage in real-time activities through notification-driven events.
 
+<sub>Note that the code is fairly messy and needs to be cleaned up.</sub>
+
 ### Dependencies
 - Python
 - Tornado
