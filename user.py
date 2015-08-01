@@ -2,15 +2,15 @@ import json
 
 from sqlalchemy import Column, exists, Integer, String, DateTime
 from sqlalchemy.orm.exc import NoResultFound
-from models import Model, Session, session_factory
 import uuid
 
+from models import Model, Session, session_factory
 import traceback
 
 class User(Model):
 	__tablename__ = 'users'
 
-	id = Column(Integer, primary_key = True)
+	id = Column(Integer, primary_key=True)
 	access_key = Column(String)
 	board_key = Column(String)
 	uid = Column(Integer)
@@ -23,10 +23,6 @@ class User(Model):
 	def delete(self):
 		with session_factory() as sess:
 			sess.delete(self)
-
-	def get_unread(self):
-		with session_factory() as session:
-			pass
 
 	def toKey(self):
 		return self.board_key + '|' + str(self.uid)
@@ -64,6 +60,22 @@ class User(Model):
 				return True
 			except:
 				return False
+
+	@staticmethod
+	def from_id(id):
+		with session_factory() as session:
+			try:
+				user = session.query(
+					User
+				).filter(
+					User.id==id
+				).one()
+
+				session.expunge(user)
+
+				return user
+			except NoResultFound:
+				return None
 
 	@staticmethod
 	def create_from(model, name=True):

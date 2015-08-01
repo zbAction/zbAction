@@ -20,11 +20,19 @@ module.exports = function(grunt) {
 					'static/bin/zb.action.min.js': ['socket.js', 'zb.action.js']
 				}
 			}
+		},
+		sass: {
+			dist: {
+				files: {
+					'static/css/zba.css': 'static/css/zba.scss'
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.registerTask('default', ['clean', 'jshint', 'uglify']);
+	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.registerTask('default', ['clean', 'jshint', 'uglify', 'sass']);
 };

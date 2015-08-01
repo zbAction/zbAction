@@ -99,8 +99,7 @@
 
 				send = function(mod_key, data){
 					try{
-						if(!data.receiver.board_key)
-							data.receiver.board_key = CURRENT_USER.board_key;
+						data.receiver.board_Key = CURRENT_USER.board_key;
 
 						if(data.receiver.board_key !== CURRENT_USER.board_key)
 							throw new Error('Cross-board requests are not allowed.');

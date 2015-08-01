@@ -13,7 +13,7 @@ def log(*args):
 	template = dedent(template)
 	template = template.format(
 		timestamp=datetime.utcnow(),
-		message='\t' + '\n\t'.join(args)
+		message='\t' + '\n\t'.join(map(lambda x: str(x), args))
 	)
 
 	print template

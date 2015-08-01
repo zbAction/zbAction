@@ -1,16 +1,15 @@
 import json
-
-from sqlalchemy import Column, exists, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm.exc import NoResultFound
-from models import Model, session_factory
 import uuid
 
+from models import Model, session_factory
 import traceback
 
 class Mod(Model):
 	__tablename__ = 'mods'
 
-	id = Column(Integer, primary_key = True)
+	id = Column(Integer, primary_key=True)
 	api_key = Column(String)
 
 	def save(self):

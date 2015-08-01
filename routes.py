@@ -24,3 +24,7 @@ def list_mods(board_key):
 @app.route('/')
 def index():
 	return render_template('test.html')
+
+@app.route('/dev')
+def dev():
+	return render_template('register.html')

@@ -37,17 +37,17 @@ class SocketHandler(websocket.WebSocketHandler):
 		# if the above passes this is a handshake
 		setattr(self, 'user', user)
 		
-		mutex.acquire()
+		conn_mutex.acquire()
 		connections[self.toKey()] = self
-		mutex.release()
+		conn_mutex.release()
 
 		# Send API key.
 
 		handshake = Action(
 			event='handshake',
 			details=self.user.access_key,
-			source=self.user,
-			receiver=self.user
+			source=self.user.id,
+			receiver=self.user.id
 		)
 
 		self.push_action(handshake, self.user.access_key, 0)
@@ -69,16 +69,34 @@ class SocketHandler(websocket.WebSocketHandler):
 			log('Attempted to use invalid modification key:', mod_key)
 			return
 
+		# Action.create_from calls User.create_from
+		# so missing users are already created.
+		if isinstance(action, dict):
+			receiver = action['receiver']
+
 		action = Action.create_from(action)
-		receiver = action.receiver
+
+		# Attempted to send to user not in DB.
+		# This should never occur as we crawl the member list
+		# on install and add users to the table as the log in
+		# if they are not already in it. Just in case though,
+		# add them to the table here. This is only called if
+		# the passed action is a dict because of the nature of
+		# Action.create_from.
+		if action.receiver is None:
+			log('User does not exist:', receiver, 'Creating new user.')
+			User.create_from(receiver).save()
+			return
+
+		receiver = User.from_id(action.receiver)
 
 		# Check for cross-board requests
 		if self.user.board_key != receiver.board_key:
 			return
 
-		mutex.acquire()
+		action_mutex.acquire()
 		action_queue.append(action)
-		mutex.release()
+		action_mutex.release()
 
 	def on_message(self, message):
 		try:
@@ -93,7 +111,6 @@ class SocketHandler(websocket.WebSocketHandler):
 			}
 
 			handler = handlers[message['type']]
-
 			mod_key = message['mod_key'] if 'mod_key' in message else None
 
 			handler(message['data'], message['key'], mod_key)
@@ -106,9 +123,9 @@ class SocketHandler(websocket.WebSocketHandler):
 
 	def on_close(self):
 		if 'user' in self.__dict__:
-			mutex.acquire()
+			conn_mutex.acquire()
 			del connections[self.toKey()]
-			mutex.release()
+			conn_mutex.release()
 
 			log('Disconnected from user:', self.toKey())
 

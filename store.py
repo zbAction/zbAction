@@ -1,14 +1,15 @@
 from threading import Thread
 
+from models import session_factory
 from shared import *
 
 class Store(Thread):
 	def run(self):
 		while 1:
-			mutex.acquire()
+			store_mutex.acquire()
 			
 			while len(store_queue):
-				# dequeue and insert into db
-				break
+				action = store_queue.pop(0)
+				action.save()
 
-			mutex.release()
+			store_mutex.release()

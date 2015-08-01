@@ -1,0 +1,19 @@
+{% extends 'register/step.html' %}
+
+{% block content %}
+<form>
+	<fieldset>
+		<label>Board URL</label>
+		<input type="url" class="form-input" />
+	</fieldset>
+	<fieldset>
+		<label>Select</label>
+		<select class="form-input">
+			<option>Test</option>
+			<option>Another</option>
+			<option>One More</option>
+		</select>
+	</fieldset>
+	<input type="submit" value="Next Step" class="form-button blue" />
+</form>
+{% endblock %}

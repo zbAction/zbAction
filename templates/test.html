@@ -14,7 +14,6 @@ var __zbAction = {
 <script>
 function test(zbAction){	
 	zbAction.register('testing', function(data){
-		console.log(this);
 		console.log(data);
 	});
 
@@ -23,6 +22,14 @@ function test(zbAction){
 		details: 'test',
 		receiver: {
 			uid: $.zb.stat.mid
+		}
+	});
+
+	zbAction.send({
+		event: 'testing',
+		details: 'test',
+		receiver: {
+			uid: 71
 		}
 	});
 }
