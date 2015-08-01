@@ -1,4 +1,4 @@
-<aside class="slide">
+<aside class="slide {% if hidden is defined %}hidden{% endif %}" id="{{ slide_id }}">
 	<div class="wrapper">
 		{% block content %}{% endblock %}
 	</div>

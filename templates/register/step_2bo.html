@@ -1,0 +1,16 @@
+{% extends 'register/step.html' %}
+
+{% set slide_id='step_2bo' %}
+{% set hidden=True %}
+
+{% block content %}
+<p>Please enter your original board URL. We'll start to curate information about your board as soon as you click <span class="literal">Next Step</span> so make sure it's right. Don't know your original board URL? You can find it in the ACP under:</p>
+<code>Account Info -> Rename Board -> Current URL</code>
+<form>
+	<fieldset>
+		<label>Board URL</label>
+		<input type="url" class="form-input" />
+	</fieldset>
+	<button value="next" class="form-button blue">Next Step</button>
+</form>
+{% endblock %}

@@ -7,6 +7,10 @@ Register for zbAction
 {% block content %}
 <section id="slides">
 	{% include 'register/step_1.html' %}
-	{% include 'register/step_2.html' %}
+	{% include 'register/step_2bo.html' %}
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}

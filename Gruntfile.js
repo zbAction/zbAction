@@ -2,8 +2,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			all: {
-				src: ['*.min.*'],
-				filter: 'isFile'
+				src: ['*.min.*', '.sass-cache', '*.pyc', '*.map'],
 			}
 		},
 		jshint: {
@@ -17,7 +16,7 @@ module.exports = function(grunt) {
 		uglify: {
 			everything: {
 				files: {
-					'static/bin/zb.action.min.js': ['socket.js', 'zb.action.js']
+					'static/bin/zb.action.min.js': ['static/socket.js', 'static/zb.action.js']
 				}
 			}
 		},
@@ -26,6 +25,9 @@ module.exports = function(grunt) {
 				files: {
 					'static/css/zba.css': 'static/css/zba.scss'
 				}
+			},
+			options: {
+				cache: false
 			}
 		}
 	});

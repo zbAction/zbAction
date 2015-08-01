@@ -1,0 +1,45 @@
+nav {
+	background: $dark-background;
+}
+
+nav a {
+	color: #fff;
+	padding: 10px 12px 21px;
+	font-size: 12px;
+	text-transform: uppercase;
+	display: table-cell;
+	font-family: Open Sans;
+}
+
+nav a:hover {
+	background: $dark_background_hover;
+}
+
+nav a:nth-of-type(1):before {
+	font-family: Glyphicons Halflings;
+	position: relative;
+	top: 3px;
+	font-size: 14px;
+	content: "\e104";
+}
+
+@each $color in $color-list {
+	$index: index($color-list, $color);
+
+	nav a:nth-of-type(#{$index}){
+		@include nav_item($color);
+	}
+}
+
+#top {
+	background: $header_background;
+	padding: 24px 0px 30px;
+}
+
+#top h1 {
+	font-weight: 300;
+	color: $header_color;
+	font-size: 22px;
+	display: inline-block;
+	font-family: Roboto Slab;
+}

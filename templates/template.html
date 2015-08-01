@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{% block title %}{% endblock %}</title>
+		<title>{% block title %}zbAction{% endblock %}</title>
 		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Merriweather:400,300,700|Roboto+Slab:400,100,300,700|Lora|Bitter|PT+Serif' rel='stylesheet' type='text/css'>
 		<link href="{{ url_for('static', filename='css/zba.css') }}" rel="stylesheet" />
@@ -14,16 +14,17 @@
 				<a href="#">Documentation</a>
 				<a href="#">Support</a>
 				<a href="#">Log In</a>
-				<a href="#">Register</a>
+				<a href="{{ url_for('register') }}">Register</a>
 			</div>
 		</nav>
 		<header id="top">
 			<div class="wrapper">
-				<h1>{{ self.title() or 'ZetaBoard Actions' }}</h1>
+				<h1>{{ self.title() or 'zbAction' }}</h1>
 			</div>
 		</header>
 		<main>
 			{% block content %}{% endblock %}
 		</main>
+		{% block scripts %}{% endblock %}
 	</body>
 </html>

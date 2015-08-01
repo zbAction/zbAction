@@ -1,0 +1,13 @@
+#slides {
+	transition: transform 0.3s;
+	width: 300vw;
+}
+
+.slide {
+	width: 100vw;
+	display: table-cell;
+}
+
+.hidden {
+	display: none;
+}

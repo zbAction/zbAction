@@ -1,0 +1,44 @@
+.alert {
+	color: #31708f;
+	background: #d9edf7;
+	border: 1px solid #C7E6F5;
+	padding: 8px 16px 10px;
+	margin: 0px 0px 20px;
+	font-size: 12px;
+}
+
+.alert a {
+	color: #fff;
+	border-bottom: 1px solid #fff !important;
+}
+
+.green {
+	border: 1px solid #d6e9c6;
+	background: #dff0d8;
+	color: #3c763d;
+}
+
+.yellow {
+	color: #8a6d3b;
+	background: #fcf8e3;
+	border: 1px solid #faebcc;
+}
+
+.red {
+	color: #a94442;
+	background: #f2dede;
+	border: 1px solid #ebccd1;
+}	
+
+.alert ul, .alert li {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.yellow p:before {
+	content: $fa-var-warning;
+	font-family: FontAwesome;
+	margin-right: 6px;
+	position: relative;
+}

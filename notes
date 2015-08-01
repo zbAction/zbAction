@@ -1,6 +1,4 @@
 TODO:
-	Need to implement SQLAlchemy model for actions.
-
 	Send all registered modifications for a board and only
 	load the ones that are registered.
 

@@ -1,0 +1,77 @@
+label {
+	min-width: 100px;
+	display: inline-block;
+	text-align: right;
+	margin-right: 6px;
+	color: #888;
+	font-size: 14px;
+}
+
+fieldset {
+	border: none;
+	margin: 20px 0px;
+}
+
+fieldset + .form-button {
+	margin-top: 0px;
+}
+
+.radio-group {
+	margin: 5px 0px;
+
+	label {
+		text-align: left;
+		position: relative;
+		top: -1px;
+	}
+}
+
+.form-input {
+	padding: 8px 13px;
+	width: 300px;
+	border: 1px solid #ccc;
+	box-sizing: content-box;
+	transition: border 0.3s, box-shadow 0.3s;
+	
+	&:focus {
+		border: 1px solid $focus_border;
+		box-shadow: 0px 0px 4px $focus_shadow;
+	}
+
+	&:invalid {
+		border: 1px solid $invalid_border;
+		box-shadow: 0px 0px 4px $invalid_shadow;
+	}
+}
+
+.form-button {
+	padding: 8px 12px 12px;
+	border: 1px solid #e1e1e1;
+	margin-top: 20px;
+	background: linear-gradient(#f5f5f5, #f1f1f1);
+	color: #777;
+
+	&:hover {
+		background: linear-gradient(#f9f9f9, #f1f1f1);
+		border: 1px solid #cacaca;
+		cursor: pointer;
+		box-shadow: 0px 1px 2px #eee;
+	}
+}
+
+.form-button.blue {
+	background: linear-gradient(#669EFF, #639CFF);
+	color: #fff;
+	border: 1px solid #4A8CFF;
+
+	&:hover {
+		background: linear-gradient(#4B8DFF, #4182FF);
+		color: #fff;
+		border: 1px solid #2272FF;
+		text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.6);
+	}
+}
+
+.form-button + .form-button {
+	margin-left: 6px;
+}
