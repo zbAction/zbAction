@@ -1,19 +1,20 @@
 {% extends 'register/step.html' %}
 
+{% import '_forms.html' as forms %}
+
 {%set slide_id='step_1' %}
 
 {% block content %}
 <aside class="alert yellow">
-	<p>The registration process cannot be resumed if you leave this page.</p>
+	<p>Leaving the page before finishing will result in the loss of all progress.</p>
 </aside>
 <p>Want to use zbAction? Tell us about yourself.</p>
 <form>
 	<fieldset>
-		<label>Email Address</label>
-		<input type="email" class="form-input" id="reg-email" />
+		{{ forms.input(label='Email Address', type='email', id='reg-email', required=True) }}
 	</fieldset>
 	<p>Are you a forum owner or a developer?</p>
-	<button value="owner" class="form-button">Forum Owner</button>
-	<button value="developer" class="form-button">Developer</button>
+	{{ forms.button(name='step_2bo', text='Forum Owner') }}
+	{{ forms.button(name='step_2d', text='Developer') }}
 </form>
 {% endblock %}

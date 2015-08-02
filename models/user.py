@@ -92,14 +92,7 @@ class User(Model):
                 session.expunge(user)
                 return user
             except NoResultFound:
-                access_key = uuid.uuid4()
-
-                # Make sure we generate a truly random access key.
-
-                while User.key_exists(access_key):
-                    access_key = uuid.uuid4()
-
-                access_key = str(access_key)
+                access_key = str(uuid.uuid4())
 
                 user = User(board_key=model['board_key'], uid=model['uid'], access_key=access_key)
                 return user

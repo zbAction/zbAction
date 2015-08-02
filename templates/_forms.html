@@ -1,0 +1,20 @@
+{% macro button(text='', color='', name='', id="", type='button') %}
+	{% if type == 'button' %}
+		<button type="button" class="form-button {{ color }}" name="{{ name }}" value="{{ name }}" id="{{ id }}">
+			{{ text }}
+		</button>
+	{% else %}
+		<input type="{{ type }}" class="form-button {{ color }}" name="{{ name }}" value="{{ text }}" id="{{ id }}" />
+	{% endif %}
+{% endmacro %}
+
+{% macro input(placeholder='', name='', type='text', id='', label='', required=False) %}
+	{% if label|trim|length %}
+		<label>{{ label }}</label>
+	{% endif %}
+	{% if type == 'textarea' %}
+		<textarea name="{{ name }}" class="form-input" id="{{ id }}" placeholder="{{ placeholder }}" required="{{ required }}"></textarea>
+	{% else %}
+		<input type="{{ type }}" name="{{ name }}" class="form-input" id="{{ id }}" placeholder="{{ placeholder }}" required="{{ required }}" autocomplete="off" />
+	{% endif %}
+{% endmacro %}

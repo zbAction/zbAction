@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			all: {
-				src: ['**/*.min.*', '**/*.sass-cache', '**/*.pyc', '**/*.map'],
+				src: ['**/*.min.*', '**/.sass-cache', '**/*.pyc', '**/*.map'],
 			}
 		},
 		jshint: {
@@ -22,9 +22,19 @@ module.exports = function(grunt) {
 		},
 		sass: {
 			dist: {
+				options: {
+					'sourcemap': 'none',
+					'noCache': true
+				},
 				files: {
 					'static/css/zba.css': 'static/css/zba.scss'
 				}
+			}
+		},
+		watch: {
+			sass: {
+				files: '**/*.scss',
+				tasks: ['sass']
 			}
 		}
 	});
@@ -33,5 +43,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	
 	grunt.registerTask('default', ['clean', 'jshint', 'uglify', 'sass']);
 };

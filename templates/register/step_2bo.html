@@ -1,18 +1,24 @@
 {% extends 'register/step.html' %}
 
+{% import '_forms.html' as forms %}
+
 {% set slide_id='step_2bo' %}
 {% set hidden=True %}
 
 {% block content %}
+<aside class="alert yellow">
+	<p>
+		This process may take several minutes depending on the size of your forum.
+	</p>
+</aside>
 <p>
-	Please enter your original forum URL. Make sure it's correct because we'll start to curate information as soon as you click continue. If you don't know your original forum URL you can find it in the ACP under:
+	In order for zbAction to work we need more information about your forum. Please enter your original forum URL. Make sure it's correct because we'll start to curate information as soon as you click continue. Don't know your original forum URL? You can find it in the ACP under:
 </p>
 <code>Account Info -> Domain Manager -> Active Domain Names -> Default</code>
 <form>
 	<fieldset>
-		<label>Board URL</label>
-		<input type="url" class="form-input" />
+		{{ forms.input(placeholder='http://sx.zetaboards.com/example', type='text', id='reg-board-url', required=True) }}
 	</fieldset>
-	<button value="continue" class="form-button red">Continue</button>
+	{{ forms.button(name='step_3bo', color='red', text='Continue', type='submit') }}
 </form>
 {% endblock %}

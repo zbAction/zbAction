@@ -22,6 +22,10 @@ p {
 	line-height: $standard_line_height;
 }
 
+p + p {
+	margin-top: $standard_line_height;
+}
+
 code, pre, .literal {
 	background: $literal_background;
 	color: $red;
@@ -29,14 +33,10 @@ code, pre, .literal {
 	padding: 3px 5px;
 	font-family: Courier New, Menlo, monospace;
 	line-height: $standard_font_size;
-
-	p + & {
-		margin-top: 8px;
-	}
 }
 
 code, pre {
-	margin-bottom: 4px;
+	margin: 12px 0px;
 }
 
 .wrapper {

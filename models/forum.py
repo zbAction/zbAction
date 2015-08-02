@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Boolean, Integer, String, DateTime
 from sqlalchemy.orm.exc import NoResultFound
-import uuid
 
 from db import Model, Session, session_factory
 

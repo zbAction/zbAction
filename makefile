@@ -2,7 +2,6 @@ MAKE: local copy deploy
 
 local:
 	grunt
-	rm -r .sass-cache
 
 copy:
 	ssh zba@zba " \
@@ -30,7 +29,7 @@ copy:
 	scp /zba/secrets.json zba@zba:/zba/secrets.json
 
 deploy:
-	ssh -f zba@zba "killall -s SIGKILL python; python /var/www/zba/zb_sync.py &> output"
+	ssh -f zba@zba "killall -s SIGKILL python; python /var/www/zba/zb_sync.py &> output; python /var/www/zba/main.py &> web_output;"
 
 clean:
-	grunt clean
+	grunt cleanp

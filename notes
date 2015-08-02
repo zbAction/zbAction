@@ -24,6 +24,15 @@ TODO:
 
 	Need to setup DB on production server.
 
+	Registration Steps:
+		Category
+			BO:
+				Board URL
+				Scrape
+				Password
+			Dev:
+				Password
+
 	DONE: Need to implement Mod model and API key checks.
 
 zb_sync should be the websocket handler and should only:

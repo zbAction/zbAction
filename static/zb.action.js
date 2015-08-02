@@ -5,9 +5,9 @@
 	var SOCKET_URL;
 	var MOD_URL;
 
-	if(location.href.indexOf('localhost:4242') !== -1){
+	if(location.href.indexOf('localhost:') !== -1){
 		SOCKET_URL = 'ws://localhost:4242/sync';
-		MOD_URL = 'http://localhost:4242/mods/list/';
+		MOD_URL = 'http://localhost:4343/mods/list/';
 	}
 	else{
 		SOCKET_URL = 'ws://zbaction.reticent.io/sync';
