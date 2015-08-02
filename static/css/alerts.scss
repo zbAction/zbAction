@@ -19,6 +19,10 @@
 		margin: 0px;
 		padding: 0px;
 	}
+
+	& + & {
+		margin-top: -10px;
+	}
 }
 
 .green {
@@ -36,7 +40,6 @@
 		content: $fa-var-warning;
 		font-family: FontAwesome;
 		margin-right: 6px;
-		position: relative;
 	}
 }
 
@@ -44,4 +47,10 @@
 	color: #a94442;
 	background: #f2dede;
 	border: 1px solid #ebccd1;
+
+	p:before {
+		content: $fa-var-times;
+		font-family: FontAwesome;
+		margin-right: 6px;
+	}
 }

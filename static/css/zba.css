@@ -2205,6 +2205,8 @@ fieldset {
     list-style-type: none;
     margin: 0px;
     padding: 0px; }
+  .alert + .alert {
+    margin-top: -10px; }
 
 .green {
   border: 1px solid #d6e9c6;
@@ -2218,13 +2220,16 @@ fieldset {
   .yellow p:before {
     content: "";
     font-family: FontAwesome;
-    margin-right: 6px;
-    position: relative; }
+    margin-right: 6px; }
 
 .red {
   color: #a94442;
   background: #f2dede;
   border: 1px solid #ebccd1; }
+  .red p:before {
+    content: "";
+    font-family: FontAwesome;
+    margin-right: 6px; }
 
 #slides {
   transition: transform 0.3s;
