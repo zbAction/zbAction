@@ -94,3 +94,9 @@ DB Scheme:
 		source (relates to users table)
 		receiver (relates to users table)
 		seen (boolean defaults to false)
+
+	Mods Table:
+		id (unique primary key)
+		api_key (unique key)
+		author
+		enabled

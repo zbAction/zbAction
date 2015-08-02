@@ -72,10 +72,7 @@
 
 			ws.on(key + '.' + evt, function(resp){
 				resp.event = resp.event.replace(key + '.', '');
-
-				setTimeout(function(){
-					fn.call(that, resp);
-				}, 0);
+				fn.call(that, resp);
 			});
 		};
 
@@ -85,6 +82,12 @@
 		};
 
 		var load_approved = function(data){
+			ws.send({
+				key: 0,
+				type: 'get_unread',
+				data: CURRENT_USER
+			});
+
 			var approved = data.mods || [];
 
 			for(var n = 0; n < that._wait.length; n++){

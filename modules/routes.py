@@ -12,11 +12,18 @@ def list_mods(board_key):
     try:
         with session_factory() as session:
             forum = session.query(Forum.mod_keys).filter(
-                Forum.board_key==board_key
+                Forum.board_key==board_key,
             ).one()
 
+            mods = forum.mod_keys.split(' ')
+
+            mods = session.query(Mod.api_key).filter(
+                Mod.api_key.in_(mods),
+                Mod.enabled==True
+            ).all()
+
             return jsonify({
-                'mods': forum.mod_keys.split(' ')
+                'mods': [mod.api_key for mod in mods]
             })
     except NoResultFound:
         return jsonify({})

@@ -1,5 +1,5 @@
 import json
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Boolean, Integer, String
 from sqlalchemy.orm.exc import NoResultFound
 import uuid
 
@@ -11,6 +11,7 @@ class Mod(Model):
 
     id = Column(Integer, primary_key=True)
     api_key = Column(String)
+    enabled = Column(Boolean)
 
     def save(self):
         with session_factory() as sess:

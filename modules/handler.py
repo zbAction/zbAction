@@ -8,6 +8,7 @@ from shared import *
 from helpers import get_unread
 from logger import log
 from models.action import Action
+from models.forum import Forum
 from models.mod import Mod
 from models.user import User
 
@@ -25,6 +26,12 @@ class SocketHandler(websocket.WebSocketHandler):
         pass
 
     def handshake(self, user, key, mod_key):
+        # Check for disabled boards.
+        board = Forum.from_key(user['board_key'])
+
+        if board is None or board is not None and board.enabled == False:
+            return
+
         # Only one handshake per connection.
         if hasattr(self, 'user'):
             return
@@ -53,19 +60,6 @@ class SocketHandler(websocket.WebSocketHandler):
 
         self.push_action(handshake, self.user.access_key, 0)
 
-        # fetch all missed notifications and send
-        # them to the user. this may take a while
-        # so maybe we should store any missed
-        # notifications inside a separate dict
-        # and fetch from that instead. of course we
-        # should probably prune any notifications
-        # more than a week old so we don't just use
-        # up all our RAM.
-
-        for action in get_unread(self.user):
-            print action
-            self.push_action(action, self.user.access_key, 0)
-
     def push_action(self, action, key, mod_key):
         if not self.user or not self.user.validate_key(key):
             return
@@ -79,11 +73,25 @@ class SocketHandler(websocket.WebSocketHandler):
 
         # Check for cross-board requests
         if self.user.board_key != receiver.board_key:
+            log('Attempted to send cross-board request:', self.user.board_key, receiver.board_key)
             return
 
         action_mutex.acquire()
         action_queue.append(action)
         action_mutex.release()
+
+    def get_unread(self, user, key, mod_key):
+        # fetch all missed notifications and send
+        # them to the user. this may take a while
+        # so maybe we should store any missed
+        # notifications inside a separate dict
+        # and fetch from that instead. of course we
+        # should probably prune any notifications
+        # more than a week old so we don't just use
+        # up all our RAM.
+
+        for action in get_unread(self.user):
+            self.push_action(action, self.user.access_key, 0)
 
     def on_message(self, message):
         try:
@@ -94,6 +102,7 @@ class SocketHandler(websocket.WebSocketHandler):
             # A dict of message handlers.
             handlers = {
                 'handshake': self.handshake,
+                'get_unread': self.get_unread,
                 'action': self.push_action
             }
 
@@ -117,4 +126,4 @@ class SocketHandler(websocket.WebSocketHandler):
             log('Disconnected from user:', self.toKey())
 
     def toKey(self):
-        return self.user.toKey()
+        return self.user.toKey()    
