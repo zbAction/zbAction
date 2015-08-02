@@ -53,12 +53,7 @@
 
 		this._ws.onmessage = function(e){
 			var data = JSON.parse(e.data);
-
-			(function(data){
-				setTimeout(function(){
-					that.emit(data.event, data);
-				}, 0);
-			})(data)
+			that.emit(data.event, data);
 		};
 	};
 

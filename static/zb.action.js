@@ -106,6 +106,9 @@
 
 		var _reserved_keys = {
 			'handshake': function(data){
+				// This caused me a lot of grief with
+				// duplicate everything and tabs seemingly
+				// being able to send stuff through others.
 				if(send !== null) return;
 
 				var USER_KEY = data.details;

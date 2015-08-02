@@ -45,8 +45,8 @@ Other Notes:
 	- on connect, if a user's name has changed then update the db
 	- issue a user list refresh for the board
 
-	- users will be identified by their id. names will be mapped
-	based on id.
+	- users will be identified by their access key. names will be mapped
+	based on access key.
 
 	- send templates will have receive attr but not source
 

@@ -2059,7 +2059,7 @@ main {
   height: 100%;
   overflow-x: hidden; }
 
-.form-input, .form-button, .alert, .literal {
+.form-input, .form-button, .alert, .literal, code, pre {
   border-radius: 3px; }
 
 nav {
