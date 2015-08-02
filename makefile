@@ -32,4 +32,4 @@ deploy:
 	ssh -f zba@zba "killall -s SIGKILL python; python /var/www/zba/zb_sync.py &> output; python /var/www/zba/main.py &> web_output;"
 
 clean:
-	grunt cleanp
+	grunt clean
