@@ -11,6 +11,7 @@ zbAction is a WebSocket based communication API that allows users to engage in r
 - Flask Login
 - Flask SQLAlchemy
 - Flask WTForms
+- BeautifulSoup 4
 - MySQL
 - MySQL Python
 - NodeJS
