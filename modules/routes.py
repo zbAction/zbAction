@@ -21,9 +21,9 @@ def list_mods(board_key):
     except NoResultFound:
         return jsonify({})
 
-@app.route('/')
-def index():
-    return render_template('test.html')
+@app.route('/<uid>')
+def index(uid):
+    return render_template('test.html', uid=uid)
 
 @app.route('/register')
 def register():

@@ -2015,8 +2015,8 @@
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("/static/css/glyphicons-halflings-regular.eot");
-  src: url("/static/css/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/static/css/glyphicons-halflings-regular.woff2") format("woff2"), url("/static/css/glyphicons-halflings-regular.woff") format("woff"), url("/static/css/glyphicons-halflings-regular.ttf") format("truetype"), url("/static/css/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
+  src: url("/static/fonts/glyphicons-halflings-regular.eot");
+  src: url("/static/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/static/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("/static/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/static/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("/static/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 /* Colors */
 /* Others */
 /* Mixins */
@@ -2034,19 +2034,28 @@ html, body {
 a {
   text-decoration: none; }
 
+p {
+  line-height: 28px; }
+
 code, pre, .literal {
   background: #f6f6f6;
   color: #E03232;
   display: inline-block;
   padding: 3px 5px;
-  font-family: Courier New, Menlo, monospace; }
+  font-family: Courier New, Menlo, monospace;
+  line-height: 14px; }
+  p + code, p + pre, p + .literal {
+    margin-top: 8px; }
+
+code, pre {
+  margin-bottom: 4px; }
 
 .wrapper {
   max-width: 720px;
   margin: 0px auto; }
 
 main {
-  padding: 20px 0px;
+  padding: 28px 0px;
   height: 100%;
   overflow-x: hidden; }
 
@@ -2065,7 +2074,7 @@ nav a {
   font-family: Open Sans; }
 
 nav a:hover {
-  background: #3e3e3e; }
+  background: #404040; }
 
 nav a:nth-of-type(1):before {
   font-family: Glyphicons Halflings;
@@ -2104,16 +2113,13 @@ label {
   min-width: 100px;
   display: inline-block;
   text-align: right;
-  margin-right: 6px;
   color: #888;
-  font-size: 14px; }
+  font-size: 14px;
+  box-sizing: border-box; }
 
 fieldset {
   border: none;
-  margin: 20px 0px; }
-
-fieldset + .form-button {
-  margin-top: 0px; }
+  margin: 12px 0px 10px; }
 
 .radio-group {
   margin: 5px 0px; }
@@ -2134,11 +2140,13 @@ fieldset + .form-button {
   .form-input:invalid {
     border: 1px solid #FF9D9D;
     box-shadow: 0px 0px 4px #FFD1D1; }
+  label + .form-input {
+    margin-left: 12px; }
 
 .form-button {
   padding: 8px 12px 12px;
   border: 1px solid #e1e1e1;
-  margin-top: 20px;
+  margin-top: 12px;
   background: linear-gradient(#f5f5f5, #f1f1f1);
   color: #777; }
   .form-button:hover {
@@ -2146,6 +2154,8 @@ fieldset + .form-button {
     border: 1px solid #cacaca;
     cursor: pointer;
     box-shadow: 0px 1px 2px #eee; }
+  fieldset + .form-button {
+    margin-top: 2px; }
 
 .form-button.blue {
   background: linear-gradient(#669EFF, #639CFF);
@@ -2155,10 +2165,19 @@ fieldset + .form-button {
     background: linear-gradient(#4B8DFF, #4182FF);
     color: #fff;
     border: 1px solid #2272FF;
-    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.6); }
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4); }
 
 .form-button + .form-button {
   margin-left: 6px; }
+
+.form-button.red {
+  background: linear-gradient(#E03232, #DC2B2B);
+  color: #fff;
+  border: 1px solid #B91B1B; }
+  .form-button.red:hover {
+    background: linear-gradient(#D61B1B, #C71818);
+    border: 1px solid #B10F0F;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4); }
 
 .alert {
   color: #31708f;
@@ -2167,10 +2186,14 @@ fieldset + .form-button {
   padding: 8px 16px 10px;
   margin: 0px 0px 20px;
   font-size: 12px; }
-
-.alert a {
-  color: #fff;
-  border-bottom: 1px solid #fff !important; }
+  .alert a {
+    border-bottom: 1px solid inherit !important; }
+  .alert p {
+    line-height: 18px; }
+  .alert ul, .alert li {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px; }
 
 .green {
   border: 1px solid #d6e9c6;
@@ -2181,22 +2204,16 @@ fieldset + .form-button {
   color: #8a6d3b;
   background: #fcf8e3;
   border: 1px solid #faebcc; }
+  .yellow p:before {
+    content: "";
+    font-family: FontAwesome;
+    margin-right: 6px;
+    position: relative; }
 
 .red {
   color: #a94442;
   background: #f2dede;
   border: 1px solid #ebccd1; }
-
-.alert ul, .alert li {
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px; }
-
-.yellow p:before {
-  content: "";
-  font-family: FontAwesome;
-  margin-right: 6px;
-  position: relative; }
 
 #slides {
   transition: transform 0.3s;

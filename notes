@@ -1,7 +1,4 @@
 TODO:
-	Send all registered modifications for a board and only
-	load the ones that are registered.
-
 	Write forum scraper to scrape current users/uids on a forum.
 
 	On modification submission automatically check for matching keys
@@ -13,6 +10,19 @@ TODO:
 	and a new version directory (eg: andrew/111-222-333/1.0.0/poke.js) 
 	will be created. The format will be:
 		- {author}/{mod_key}/{version}/{script_file}
+
+	http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+	Use BeautifulSoup for forum scraping
+
+	```
+	import urllib2
+	opener = urllib2.build_opener()
+	opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+	opener.open(some_website).read()
+	```
+	Use to bypass cloudflare no user-agent check.
+
+	Need to setup DB on production server.
 
 	DONE: Need to implement Mod model and API key checks.
 

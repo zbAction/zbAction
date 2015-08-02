@@ -2,8 +2,17 @@
 // $.zb.stat.mid = current logged in UID
 
 (function(window, Socket, undefined){
-	var SOCKET_URL = 'ws://localhost:4242/sync';
-	var MOD_URL = 'http://localhost:4242/mods/list/';
+	var SOCKET_URL;
+	var MOD_URL;
+
+	if(location.href.indexOf('localhost:4242') !== -1){
+		SOCKET_URL = 'ws://localhost:4242/sync';
+		MOD_URL = 'http://localhost:4242/mods/list/';
+	}
+	else{
+		SOCKET_URL = 'ws://zbaction.reticent.io/sync';
+		MOD_URL = 'http://zbaction.reticent.io/mods/list/';
+	}
  
 	var ACTION_TEMPLATE = {
 		event: 'string',
@@ -64,7 +73,9 @@
 			ws.on(key + '.' + evt, function(resp){
 				resp.event = resp.event.replace(key + '.', '');
 
-				fn.call(that, resp);
+				setTimeout(function(){
+					fn.call(that, resp);
+				}, 0);
 			});
 		};
 
@@ -95,6 +106,8 @@
 
 		var _reserved_keys = {
 			'handshake': function(data){
+				if(send !== null) return;
+
 				var USER_KEY = data.details;
 
 				send = function(mod_key, data){

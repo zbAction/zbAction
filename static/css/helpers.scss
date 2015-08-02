@@ -1,11 +1,11 @@
 @font-face {
 	font-family: 'Glyphicons Halflings';
-	src: url('/static/css/glyphicons-halflings-regular.eot');
-	src: url('/static/css/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-		url('/static/css/glyphicons-halflings-regular.woff2') format('woff2'),
-		url('/static/css/glyphicons-halflings-regular.woff') format('woff'),
-		url('/static/css/glyphicons-halflings-regular.ttf') format('truetype'),
-		url('/static/css/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+	src: url('/static/fonts/glyphicons-halflings-regular.eot');
+	src: url('/static/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+		url('/static/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+		url('/static/fonts/glyphicons-halflings-regular.woff') format('woff'),
+		url('/static/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+		url('/static/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 /* Colors */
@@ -23,7 +23,7 @@ $header_color: #888;
 
 $header_background: #f1f1f1;
 $dark_background: #323232;
-$dark_background_hover: #3e3e3e;
+$dark_background_hover: #404040;
 $literal_background: #f6f6f6;
 
 $standard_border: #aaa;
@@ -37,6 +37,9 @@ $invalid_shadow: #FFD1D1;
 /* Others */
 
 $wrap_width: 720px;
+$standard_font_size: 14px;
+$standard_line_height: 28px;
+$standard_input_height: 12px;
 
 /* Mixins */
 

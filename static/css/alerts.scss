@@ -5,11 +5,20 @@
 	padding: 8px 16px 10px;
 	margin: 0px 0px 20px;
 	font-size: 12px;
-}
 
-.alert a {
-	color: #fff;
-	border-bottom: 1px solid #fff !important;
+	a {
+		border-bottom: 1px solid inherit !important;
+	}
+
+	p {
+		line-height: 18px;
+	}
+
+	ul, li {
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+	}
 }
 
 .green {
@@ -22,23 +31,17 @@
 	color: #8a6d3b;
 	background: #fcf8e3;
 	border: 1px solid #faebcc;
+
+	p:before {
+		content: $fa-var-warning;
+		font-family: FontAwesome;
+		margin-right: 6px;
+		position: relative;
+	}
 }
 
 .red {
 	color: #a94442;
 	background: #f2dede;
 	border: 1px solid #ebccd1;
-}	
-
-.alert ul, .alert li {
-	list-style-type: none;
-	margin: 0px;
-	padding: 0px;
-}
-
-.yellow p:before {
-	content: $fa-var-warning;
-	font-family: FontAwesome;
-	margin-right: 6px;
-	position: relative;
 }

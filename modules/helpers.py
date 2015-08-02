@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
+from db import session_factory
 from models.action import Action
-from models.user import User
 
 def serialize(var):
     if isinstance(var, User):
@@ -20,3 +20,16 @@ def within_one_week(timestamp):
     week = timedelta(weeks=1)
 
     return timestamp + week >= now
+
+def get_unread(user):
+    with session_factory() as session:
+        actions = session.query(
+            Action
+        ).filter(
+            Action.receiver==user.access_key,
+            Action.seen==False
+        ).all()
+
+        session.expunge_all()
+
+        return actions

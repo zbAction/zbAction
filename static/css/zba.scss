@@ -9,7 +9,7 @@
 }
 
 html, body {
-	font-size: 14px;
+	font-size: $standard_font_size;
 	min-height: 100%;
 	color: $page-text-color;
 }
@@ -18,12 +18,25 @@ a {
 	text-decoration: none;
 }
 
+p {
+	line-height: $standard_line_height;
+}
+
 code, pre, .literal {
 	background: $literal_background;
 	color: $red;
 	display: inline-block;
 	padding: 3px 5px;
 	font-family: Courier New, Menlo, monospace;
+	line-height: $standard_font_size;
+
+	p + & {
+		margin-top: 8px;
+	}
+}
+
+code, pre {
+	margin-bottom: 4px;
 }
 
 .wrapper {
@@ -32,7 +45,7 @@ code, pre, .literal {
 }
 
 main {
-	padding: 20px 0px;
+	padding: $standard_line_height 0px;
 	height: 100%;
 	overflow-x: hidden;
 }

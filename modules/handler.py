@@ -5,6 +5,7 @@ from tornado import websocket
 
 from shared import *
 
+from helpers import get_unread
 from logger import log
 from models.action import Action
 from models.mod import Mod
@@ -38,7 +39,7 @@ class SocketHandler(websocket.WebSocketHandler):
         setattr(self, 'user', user)
         
         conn_mutex.acquire()
-        connections[self.toKey()] = self
+        connections.append((self.user.toKey(), self))
         conn_mutex.release()
 
         # Send API key.
@@ -46,8 +47,8 @@ class SocketHandler(websocket.WebSocketHandler):
         handshake = Action(
             event='handshake',
             details=self.user.access_key,
-            source=self.user.id,
-            receiver=self.user.id
+            source=self.user.access_key,
+            receiver=self.user.access_key
         )
 
         self.push_action(handshake, self.user.access_key, 0)
@@ -61,6 +62,10 @@ class SocketHandler(websocket.WebSocketHandler):
         # more than a week old so we don't just use
         # up all our RAM.
 
+        for action in get_unread(self.user):
+            print action
+            self.push_action(action, self.user.access_key, 0)
+
     def push_action(self, action, key, mod_key):
         if not self.user or not self.user.validate_key(key):
             return
@@ -69,26 +74,8 @@ class SocketHandler(websocket.WebSocketHandler):
             log('Attempted to use invalid modification key:', mod_key)
             return
 
-        # Action.create_from calls User.create_from
-        # so missing users are already created.
-        if isinstance(action, dict):
-            receiver = action['receiver']
-
         action = Action.create_from(action)
-
-        # Attempted to send to user not in DB.
-        # This should never occur as we crawl the member list
-        # on install and add users to the table as the log in
-        # if they are not already in it. Just in case though,
-        # add them to the table here. This is only called if
-        # the passed action is a dict because of the nature of
-        # Action.create_from.
-        if action.receiver is None:
-            log('User does not exist:', receiver, 'Creating new user.')
-            User.create_from(receiver).save()
-            return
-
-        receiver = User.from_id(action.receiver)
+        receiver = User.from_access_key(action.receiver)
 
         # Check for cross-board requests
         if self.user.board_key != receiver.board_key:
@@ -124,7 +111,7 @@ class SocketHandler(websocket.WebSocketHandler):
     def on_close(self):
         if 'user' in self.__dict__:
             conn_mutex.acquire()
-            del connections[self.toKey()]
+            connections.remove((self.toKey(), self))
             conn_mutex.release()
 
             log('Disconnected from user:', self.toKey())

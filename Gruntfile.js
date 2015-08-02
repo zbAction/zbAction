@@ -2,11 +2,11 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			all: {
-				src: ['*.min.*', '.sass-cache', '*.pyc', '*.map'],
+				src: ['**/*.min.*', '**/*.sass-cache', '**/*.pyc', '**/*.map'],
 			}
 		},
 		jshint: {
-			files: ['Gruntfile.js', '*.js'],
+			files: ['static/*.js', 'static/js/*.js'],
 			options: {
 				globals: {
 					jQuery: true
@@ -25,9 +25,6 @@ module.exports = function(grunt) {
 				files: {
 					'static/css/zba.css': 'static/css/zba.scss'
 				}
-			},
-			options: {
-				cache: false
 			}
 		}
 	});

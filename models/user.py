@@ -62,13 +62,13 @@ class User(Model):
                 return False
 
     @staticmethod
-    def from_id(id):
+    def from_access_key(key):
         with session_factory() as session:
             try:
                 user = session.query(
                     User
                 ).filter(
-                    User.id==id
+                    User.access_key==key
                 ).one()
 
                 session.expunge(user)

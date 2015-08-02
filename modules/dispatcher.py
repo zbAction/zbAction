@@ -4,6 +4,7 @@ from threading import Thread
 from shared import *
 
 from helpers import serialize
+from logger import log
 from models.user import User
 
 class Dispatcher(Thread):
@@ -13,22 +14,29 @@ class Dispatcher(Thread):
 
             while len(action_queue):
                 action = action_queue.pop(0)
-                receiver = User.from_id(action.receiver)
+                receiver = User.from_access_key(action.receiver)
 
-                if receiver.toKey() in connections:
-                    data = {
-                        'timestamp': str(action.timestamp),
-                        'event': action.event,
-                        'details': action.details,
-                        'source': User.from_id(action.source).to_json(),
-                        'seen': action.seen
-                    }
+                data = {
+                    'timestamp': str(action.timestamp),
+                    'event': action.event,
+                    'details': action.details,
+                    'source': User.from_access_key(action.source).to_json(),
+                    'seen': action.seen
+                }
 
-                    connections[receiver.toKey()].write_message(
-                        json.dumps(data)
-                    )
+                seen = False
 
-                    action.seen = True
+                for conn in connections:
+                    if conn[0] == receiver.toKey():
+                        log('Sending', json.dumps(data))
+
+                        conn[1].write_message(
+                            json.dumps(data)
+                        )
+
+                        seen = True
+
+                action.seen = seen
 
                 store_mutex.acquire()
                 store_queue.append(action)

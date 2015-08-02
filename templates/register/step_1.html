@@ -4,11 +4,16 @@
 
 {% block content %}
 <aside class="alert yellow">
-	<p>You will not be able to resume registration if you leave this page.</p>
+	<p>The registration process cannot be resumed if you leave this page.</p>
 </aside>
-<p>Want to use zbAction? Tell us about yourself. Are you a board owner or a developer?</p>
+<p>Want to use zbAction? Tell us about yourself.</p>
 <form>
-	<button value="owner" class="form-button">Board Owner</button>
+	<fieldset>
+		<label>Email Address</label>
+		<input type="email" class="form-input" id="reg-email" />
+	</fieldset>
+	<p>Are you a forum owner or a developer?</p>
+	<button value="owner" class="form-button">Forum Owner</button>
 	<button value="developer" class="form-button">Developer</button>
 </form>
 {% endblock %}

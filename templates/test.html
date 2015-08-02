@@ -2,15 +2,16 @@
 <script>
 $.zb = {
 	stat: {
-		mid: 7
+		mid: {{ uid }}
 	}
 };
 
 var __zbAction = {
-	board_key: 'dev'
+	board_key: 'dev'	
 };
 </script>
-<script src="{{ url_for('static', filename='bin/zb.action.min.js') }}"></script>
+<script src="{{ url_for('static', filename='socket.js') }}"></script>
+<script src="{{ url_for('static', filename='zb.action.js') }}"></script>
 <script>
 function test(zbAction){
 	zbAction.register('testing', function(data){
@@ -22,14 +23,6 @@ function test(zbAction){
 		details: 'test',
 		receiver: {
 			uid: $.zb.stat.mid
-		}
-	});
-
-	zbAction.send({
-		event: 'testing',
-		details: 'test',
-		receiver: {
-			uid: 71
 		}
 	});
 }

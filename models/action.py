@@ -13,8 +13,8 @@ class Action(Model):
     timestamp = Column(DateTime, default=datetime.utcnow())
     event = Column(String)
     details = Column(String)
-    source = Column(Integer)
-    receiver = Column(Integer)
+    source = Column(String)
+    receiver = Column(String)
     seen = Column(Boolean, default=False)
 
     def __init__(self, **kwargs):
@@ -37,8 +37,8 @@ class Action(Model):
             'timestamp': str(self.timestamp),
             'event': self.event,
             'details': self.details,
-            'source': User.from_id(self.source).to_json(),
-            'receiver': User.from_id(self.receiver).to_json(),
+            'source': User.from_access_key(self.source).to_json(),
+            'receiver': User.from_acccess_key(self.receiver).to_json(),
             'seen': self.seen
         })
 
@@ -53,6 +53,6 @@ class Action(Model):
         return Action(
             event=model['event'],
             details=model['details'],
-            source=source.id,
-            receiver=receiver.id,
+            source=source.access_key,
+            receiver=receiver.access_key,
         )

@@ -7,6 +7,6 @@ store_mutex = Lock()
 store_queue = []
 action_queue = []
 
-connections = {}
+connections = []
 
 base_path = os.path.join(os.path.abspath(os.path.dirname(__file__)))

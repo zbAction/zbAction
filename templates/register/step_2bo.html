@@ -4,13 +4,15 @@
 {% set hidden=True %}
 
 {% block content %}
-<p>Please enter your original board URL. We'll start to curate information about your board as soon as you click <span class="literal">Next Step</span> so make sure it's right. Don't know your original board URL? You can find it in the ACP under:</p>
-<code>Account Info -> Rename Board -> Current URL</code>
+<p>
+	Please enter your original forum URL. Make sure it's correct because we'll start to curate information as soon as you click continue. If you don't know your original forum URL you can find it in the ACP under:
+</p>
+<code>Account Info -> Domain Manager -> Active Domain Names -> Default</code>
 <form>
 	<fieldset>
 		<label>Board URL</label>
 		<input type="url" class="form-input" />
 	</fieldset>
-	<button value="next" class="form-button blue">Next Step</button>
+	<button value="continue" class="form-button red">Continue</button>
 </form>
 {% endblock %}
