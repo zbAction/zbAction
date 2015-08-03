@@ -114,7 +114,7 @@ class SocketHandler(websocket.WebSocketHandler):
             # means something wrong happened
             # and we should ignore. log the error
             # anyway in case.
-            traceback.print_exc()
+            log('An unknown error occurred:', traceback.format_exc())
 
     def on_close(self):
         if 'user' in self.__dict__:

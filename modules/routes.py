@@ -20,13 +20,15 @@ def list_mods(board_key):
         with session_factory() as sess:
             forum = sess.query(Forum.mod_keys).filter(
                 Forum.board_key==board_key,
+                Forum.enabled==True
             ).one()
 
             mods = forum.mod_keys.split(' ')
 
             mods = sess.query(Mod.api_key).filter(
                 Mod.api_key.in_(mods),
-                Mod.enabled==True
+                Mod.enabled==True,
+                Mod.root_enabled==True
             ).all()
 
             return jsonify({

@@ -11,18 +11,8 @@ TODO:
 	will be created. The format will be:
 		- {author}/{mod_key}/{version}/{script_file}
 
-	http://www.crummy.com/software/BeautifulSoup/bs4/doc/
-	Use BeautifulSoup for forum scraping
-
-	```
-	import urllib2
-	opener = urllib2.build_opener()
-	opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-	opener.open(some_website).read()
-	```
-	Use to bypass cloudflare no user-agent check.
-
-	Replace urllib2 with http://docs.python-requests.org/en/latest/
+	Use bulk insert mappings for rapid insertion of new user rows:
+		http://docs.sqlalchemy.org/en/latest/_modules/examples/performance/bulk_inserts.html
 
 	Need to setup DB on production server.
 
@@ -36,6 +26,19 @@ TODO:
 				Password
 
 	DONE: Need to implement Mod model and API key checks.
+	DONE: Replace urllib2 with http://docs.python-requests.org/en/latest/
+	DONE: 
+	```
+	import urllib2
+	opener = urllib2.build_opener()
+	opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+	opener.open(some_website).read()
+	```
+	Use to bypass cloudflare no user-agent check.
+	
+	DONE:
+	http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+	Use BeautifulSoup for forum scraping
 
 zb_sync should be the websocket handler and should only:
 	- receive actions
