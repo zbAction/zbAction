@@ -5,19 +5,15 @@ from threading import Thread
 from bs4 import BeautifulSoup
 from sqlalchemy.orm.exc import NoResultFound
 import traceback
-import urllib2
 
+from helpers import get_url
 from models.user import User
 
 class Crawler(object):
-    def __init__(self, url, board_key):
+    def __init__(self, url):
         self.url = url
-        self.board_key = board_key
 
     def crawl(self):
-        opener = urllib2.build_opener()
-        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-
         users = Queue()
         uid_regex = re.compile(r'/profile/(\d+)/$')
 
@@ -29,11 +25,11 @@ class Crawler(object):
                 to_scrape = page.get()
                 page.put(to_scrape + 1)
 
-                print '{}members/{}/?force_ads'.format(self.url, to_scrape)
-
-                data = opener.open(
+                data = get_url(
                     '{}members/{}/?force_ads'.format(self.url, to_scrape)
-                ).read()
+                ).text
+
+                print '{}members/{}/?force_ads'.format(self.url, to_scrape)
 
                 soup = BeautifulSoup(data, 'html.parser')
                 links = soup.select('#member_list_full a')
@@ -52,15 +48,7 @@ class Crawler(object):
                         uid = uid[0]
                         username = link.get_text()
 
-                        data = {
-                            'uid': uid,
-                            'board_key': self.board_key
-                        }
-
-                        user = User.create_from(data)
-                        user.name = username
-
-                        users.put(user)
+                        users.put([uid, username])
 
         workers = []
 
@@ -77,9 +65,7 @@ class Crawler(object):
 
         ret = []
 
-        try:
+        for x in range(users.qsize()):
             ret.append(users.get())
-        except Empty:
-            pass
 
         return ret

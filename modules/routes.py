@@ -1,15 +1,15 @@
 import os, uuid
 
 from flask import jsonify, render_template, request, session, url_for
+from requests import URLRequired, RequestException
 from sqlalchemy.orm.exc import NoResultFound
 import traceback
-import urllib2
-from urllib2 import URLError
 
-from db import session_factory
 from main import app
 
 from crawler import Crawler
+from db import session_factory
+from helpers import get_url
 from logger import log
 from models.forum import Forum
 from models.mod import Mod
@@ -58,25 +58,23 @@ def crawl():
     if url[-1] != '/':
         url += '/'
 
-    opener = urllib2.build_opener()
-    opener.addheaders = [('User-agent', 'zbaBot/1.0 Mozilla/5.0')]
-
     try:
-        data = opener.open(url).read()
+        get_url(url)
+
         board_key = int(uuid.uuid4())
         session['board_key'] = board_key
 
-        crawler = Crawler(url, board_key)
+        crawler = Crawler(url)
         data = crawler.crawl()
 
         return str(len(data))
-    except URLError:
+    except URLRequired:
         log('Invalid URL given to crawl:', traceback.format_exc())
 
         return jsonify({
             'status': 1
         })
-    except:
+    except RequestException:
         log('Unknown error occurred:', traceback.format_exc())
 
         return jsonify({

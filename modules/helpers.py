@@ -1,7 +1,14 @@
 from datetime import datetime, timedelta
+import requests
 
 from db import session_factory
 from models.action import Action
+
+def get_url(url):
+    headers = {'user-agent': 'zbaBot/1.0'}
+    resp = requests.get(url, headers=headers)
+
+    return resp
 
 def serialize(var):
     if isinstance(var, User):
