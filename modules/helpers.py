@@ -3,6 +3,7 @@ import requests
 
 from db import session_factory
 from models.action import Action
+from models.user import User
 
 def get_url(url):
     headers = {'user-agent': 'zbaBot/1.0'}

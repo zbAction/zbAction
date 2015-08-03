@@ -4,10 +4,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'modules
 
 from tornado import web, ioloop
 
-from secrets import secrets
-
 from dispatcher import Dispatcher
 from handler import SocketHandler
+from secrets import secrets
 from store import Store
 
 store = Store()

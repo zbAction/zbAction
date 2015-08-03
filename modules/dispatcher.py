@@ -1,10 +1,11 @@
 import json
 from threading import Thread
-
-from shared import *
+import time
 
 from helpers import serialize
 from logger import log
+from secrets import secrets
+from shared import *
 from models.user import User
 
 class Dispatcher(Thread):
@@ -43,3 +44,5 @@ class Dispatcher(Thread):
                 store_mutex.release()
 
             action_mutex.release()
+
+            time.sleep(secrets.check_delay)

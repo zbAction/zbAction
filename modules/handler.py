@@ -3,13 +3,12 @@ import traceback
 
 from tornado import websocket
 
-from shared import *
-
 from helpers import get_unread
 from logger import log
 from models.action import Action
 from models.forum import Forum
 from models.mod import Mod
+from shared import *
 from models.user import User
 
 class SocketHandler(websocket.WebSocketHandler):
