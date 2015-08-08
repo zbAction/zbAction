@@ -156,12 +156,10 @@ def crawl():
             own_regex(session['board_key'])
         )
 
-        '''
         if len(own_test.findall(test)) == 0:
             return jsonify({
                 'status': NOT_OWNER
             })
-        '''
 
         board_key = session['board_key']
 

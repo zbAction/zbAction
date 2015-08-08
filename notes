@@ -100,7 +100,7 @@ Authentication:
 
 	If the user is not in the system create a key for them.
 
-	Handshakes should use null/None for api keys
+	system level queries should use 0 for api keys
 
 DB Scheme:
 	Forums Table:
