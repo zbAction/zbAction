@@ -2,10 +2,25 @@ import os, sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'modules')))
 
+import redis
+
 from flask import Flask
+from flask.ext.login import LoginManager
+from flask.ext.bcrypt import Bcrypt
+from flask.ext.kvsession import KVSessionExtension
+from simplekv.memory.redisstore import RedisStore
 
 app = Flask(__name__)
 
+store = RedisStore(redis.StrictRedis())
+KVSessionExtension(store, app)
+login_manager = LoginManager()
+bcrypt = Bcrypt(app)
+
+import setup
+from routes import *
+
+import setup
 from routes import *
 
 from secrets import secrets

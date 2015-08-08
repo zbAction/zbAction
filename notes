@@ -1,5 +1,19 @@
 TODO:
-	Write forum scraper to scrape current users/uids on a forum.
+	Need to setup DB on production server.
+
+	Black magic can possibly be fixed by implementing read receipts
+
+	Registration Steps:
+		Category
+			BO:
+				Board URL
+				Scrape
+				Password
+			Dev:
+				Password
+
+	--------------------------------------
+	BACK BURNER:
 
 	On modification submission automatically check for matching keys
 	in manifest.json and whatever JS file they are using.
@@ -10,20 +24,7 @@ TODO:
 	and a new version directory (eg: andrew/111-222-333/1.0.0/poke.js) 
 	will be created. The format will be:
 		- {author}/{mod_key}/{version}/{script_file}
-
-	Use bulk insert mappings for rapid insertion of new user rows:
-		http://docs.sqlalchemy.org/en/latest/_modules/examples/performance/bulk_inserts.html
-
-	Need to setup DB on production server.
-
-	Registration Steps:
-		Category
-			BO:
-				Board URL
-				Scrape
-				Password
-			Dev:
-				Password
+	--------------------------------------
 
 	DONE: Need to implement Mod model and API key checks.
 	DONE: Replace urllib2 with http://docs.python-requests.org/en/latest/
@@ -35,10 +36,25 @@ TODO:
 	opener.open(some_website).read()
 	```
 	Use to bypass cloudflare no user-agent check.
-	
+
 	DONE:
 	http://www.crummy.com/software/BeautifulSoup/bs4/doc/
 	Use BeautifulSoup for forum scraping
+
+	DONE:
+	Write forum scraper to scrape current users/uids on a forum.
+	\$\.zb\.stat={[^}]+bpath:(\d+)[^}]+};
+
+	DONE:
+	http://docs.zetaboards.com/themes/preset_js_variables
+	$.zb.bpath is a unique identifier for a board. We should scrape this
+	too for identification purposes.
+
+	DONE:
+	Use bulk insert mappings for rapid insertion of new user rows:
+		http://docs.sqlalchemy.org/en/latest/_modules/examples/performance/bulk_inserts.html
+	Another possibility is to use SQLAlchemy core and execute raw SQL. If the user exists then
+	we will update their information and if they don't they we will insert.
 
 zb_sync should be the websocket handler and should only:
 	- receive actions

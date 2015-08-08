@@ -28,10 +28,19 @@
 	};
 
 	var CURRENT_USER = {
-		board_key: __zbAction.board_key,
+		board_key: window.__zbAction.board_key,
+		bpath: $.zb.stat.bpath,
 		uid: $.zb.stat.mid,
 		name: 'andrew' // $('#top_info a[href*="/profile/"]').text()
 	};
+
+	// Disallow automated board key viewing. If
+	// somebody wants to view a board key they'll have
+	// to view the source. This prevents malicious users
+	// from stealing keys using scripts. Or at least it
+	// tries to. At the very least this will make zbAction
+	// mods unable to steal board keys.
+	delete window.__zbAction;
 
 	var zbAction = function(){
 		if(!(this instanceof zbAction))
@@ -157,7 +166,7 @@
 					});
 				};
 
-				$.getJSON(MOD_URL + __zbAction.board_key, load_approved);
+				$.getJSON(MOD_URL + CURRENT_USER.board_key, load_approved);
 			}
 		};
 

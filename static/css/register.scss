@@ -1,0 +1,41 @@
+#step_4bo aside:not(#not-owned) {
+	text-align: center;
+	padding-top: 5vw;
+	position: relative;
+	min-height: 20vw;
+}
+
+@keyframes pulse {
+	0% {
+		color: $red;
+	}
+
+	20% {
+		color: $yellow;
+	}
+
+	40% {
+		color: $green;
+	}
+
+	60% {
+		color: $blue;
+	}
+
+	80% {
+		color: $purple;
+	}
+}
+
+#status .glpyhicon {
+	animation: 5s pulse infinite;
+}
+
+#step_4bo .glyphicon, #step_4bo .fa {
+	color: $red;
+}
+
+#step_4bo aside span {
+	display: block;
+	margin-bottom: 36px;
+}

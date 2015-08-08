@@ -26,7 +26,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
     def handshake(self, user, key, mod_key):
         # Check for disabled boards.
-        board = Forum.from_key(user['board_key'])
+        board = Forum.from_key(user['board_key'], user['bpath'])
 
         if board is None or board is not None and board.enabled == False:
             return
@@ -75,21 +75,16 @@ class SocketHandler(websocket.WebSocketHandler):
             log('Attempted to send cross-board request:', self.user.board_key, receiver.board_key)
             return
 
-        action_mutex.acquire()
-        action_queue.append(action)
-        action_mutex.release()
+        action_queue.put(action)
 
     def get_unread(self, user, key, mod_key):
-        # fetch all missed notifications and send
-        # them to the user. this may take a while
-        # so maybe we should store any missed
-        # notifications inside a separate dict
-        # and fetch from that instead. of course we
-        # should probably prune any notifications
-        # more than a week old so we don't just use
-        # up all our RAM.
+        if hasattr(self, 'unread_done'):
+            return
 
+        setattr(self, 'unread_done', True)
+        
         for action in get_unread(self.user):
+            # action
             self.push_action(action, self.user.access_key, 0)
 
     def on_message(self, message):

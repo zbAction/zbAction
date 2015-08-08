@@ -24,7 +24,8 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					'sourcemap': 'none',
-					'noCache': true
+					'noCache': true,
+					'style': 'compressed'
 				},
 				files: {
 					'static/css/zba.css': 'static/css/zba.scss'

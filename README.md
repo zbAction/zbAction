@@ -10,16 +10,20 @@ zbAction is a WebSocket based communication API that allows users to engage in r
 - Flask BCrypt
 - Flask Login
 - Flask SQLAlchemy
-- Flask WTForms
+- Flask KVSession
 - BeautifulSoup 4
+- Redis
 - MySQL
 - MySQL Python
+- Ruby
+- SASS
+- Your Favorite Flavor of UNIX
+
+### Nice to Have
 - NodeJS
 - GruntJS
 - Grunt Clean
 - Grunt JSHint
 - Grunt Uglify
 - Grunt SASS
-- Ruby
-- SASS
-- Your Favorite Flavor of UNIX
+- Grunt Watch

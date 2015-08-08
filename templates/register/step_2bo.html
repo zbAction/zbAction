@@ -6,23 +6,12 @@
 {% set hidden=True %}
 
 {% block content %}
-<aside class="alert red">
-	<p>
-		Your forum must be fully accessible by guests during this step.
-	</p>
-</aside>
-<aside class="alert yellow">
-	<p>
-		This step may take several minutes depending on the size of your forum.
-	</p>
-</aside>
 <p>
-	Please enter your original forum URL. Make sure it's correct because we'll start to curate information as soon as you click continue. Don't know your original forum URL? You can find it in the ACP under:
+	In preparation for the next step, you need to prove ownership of your forum. Please add the following code to your board template's <span class="literal">Javascripts</span> section.
 </p>
-<code>Account Info -> Domain Manager -> Active Domain Names -> Default</code>
 <form>
 	<fieldset>
-		{{ forms.input(placeholder='http://sx.zetaboards.com/example', type='text', id='reg-board-url', required=True) }}
+		{{ forms.input(value=gen_key_script, type='text', id="reg-board-key", select=True) }}
 	</fieldset>
 	{{ forms.button(name='step_3bo', color='red', text='Continue', type='submit') }}
 </form>

@@ -1,4 +1,5 @@
 @import 'fa/font-awesome.scss';
+@import 'glyphicon.css';
 @import 'helpers';
 
 * {
@@ -6,12 +7,24 @@
 	padding: 0px;
 	outline: none;
 	font-family: Roboto;
+	-webkit-font-smoothing: antialiased;
+	-webkit-perspective: 1000;
 }
 
 html, body {
 	font-size: $standard_font_size;
-	min-height: 100%;
+	height: 100%;
 	color: $page-text-color;
+}
+
+body {
+	display: flex;
+	flex-flow: column;
+}
+
+h2, h3 {
+	font-weight: 400;
+	font-family: Open Sans;
 }
 
 a {
@@ -47,7 +60,9 @@ code, pre {
 main {
 	padding: $standard_line_height 0px;
 	height: 100%;
+	position: relative;
 	overflow-x: hidden;
+	flex: 2;
 }
 
 .form-input, .form-button, .alert, .literal, code, pre {
@@ -58,3 +73,4 @@ main {
 @import 'form';
 @import 'alerts';
 @import 'slides';
+@import 'register';

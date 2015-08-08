@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from contextlib import contextmanager
 from secrets import secrets
 
-eng = 'mysql://{username}:{password}@{host}:3306/{name}'.format(**secrets.db.__dict__)
+eng = 'mysql://{username}:{password}@{host}:3306/{name}?charset=utf8'.format(**secrets.db.__dict__)
 engine = create_engine(
 	eng, pool_recycle=1800
 )

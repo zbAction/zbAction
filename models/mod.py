@@ -11,8 +11,8 @@ class Mod(Model):
 
     id = Column(Integer, primary_key=True)
     api_key = Column(String)
-    enabled = Column(Boolean)
-    root_enabled = Column(Boolean)
+    enabled = Column(Boolean, default=True)
+    root_enabled = Column(Boolean, default=True)
 
     def save(self):
         with session_factory() as sess:

@@ -8,13 +8,13 @@
 	{% endif %}
 {% endmacro %}
 
-{% macro input(placeholder='', name='', type='text', id='', label='', required=False) %}
+{% macro input(placeholder='', name='', type='text', id='', label='', value='', select=False, required=False) %}
 	{% if label|trim|length %}
 		<label>{{ label }}</label>
 	{% endif %}
 	{% if type == 'textarea' %}
-		<textarea name="{{ name }}" class="form-input" id="{{ id }}" placeholder="{{ placeholder }}" required="{{ required }}"></textarea>
+		<textarea name="{{ name }}" class="form-input" id="{{ id }}" placeholder="{{ placeholder }}" required="{{ required }}">{{ value }}</textarea>
 	{% else %}
-		<input type="{{ type }}" name="{{ name }}" class="form-input" id="{{ id }}" placeholder="{{ placeholder }}" required="{{ required }}" autocomplete="off" />
+		<input type="{{ type }}" name="{{ name }}" class="{% if select %}select{% endif %} form-input" id="{{ id }}" placeholder="{{ placeholder }}" required="{{ required }}" value="{{ value }}" autocomplete="off" />
 	{% endif %}
 {% endmacro %}

@@ -9,9 +9,16 @@ Register for zbAction
 	{% include 'register/step_1.html' %}
 	{% include 'register/step_2bo.html' %}
 	{% include 'register/step_2d.html' %}
+	{% include 'register/step_3bo.html' %}
+	{% include 'register/step_4bo.html' %}
+	{% include 'register/step_5bo.html' %}
 </section>
 {% endblock %}
 
 {% block scripts %}
+<script>
+var crawl_ep = {{ url_for('crawl', __form_key=get_form_key()) | tojson | safe }};
+var finalize_ep = {{ url_for('finalize', __form_key=get_form_key()) | tojson | safe }};
+</script>
 <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'register/step.html' %}
+
+{% import '_forms.html' as forms %}
+
+{% set slide_id='step_5bo' %}
+{% set hidden=False %}
+
+{% block content %}
+<p>You're almost done! All you need to do now is choose a password to use with your account and you'll be ready to go.</p>
+<form>
+	<fieldset>
+		{{ forms.input(label='Password', type='password', id='reg-password', required=True) }}
+	</fieldset>
+	<fieldset>
+		{{ forms.input(label='Confirm Password', type='password', id='reg-conf-password', required=True) }}
+	</fieldset>
+	{{ forms.button(color='red', id='reg-finalize', text='Finish Registration', type='submit') }}
+</form>
+{% endblock %}

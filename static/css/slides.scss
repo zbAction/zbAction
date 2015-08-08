@@ -1,11 +1,13 @@
 #slides {
 	transition: transform 0.3s;
-	width: 300vw;
+	width: 10000vw;
 }
 
 .slide {
 	width: 100vw;
 	display: table-cell;
+	min-height: 300px;
+	vertical-align: top;
 }
 
 .hidden {

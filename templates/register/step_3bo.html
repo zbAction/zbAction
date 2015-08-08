@@ -1,0 +1,24 @@
+{% extends 'register/step.html' %}
+
+{% import '_forms.html' as forms %}
+
+{% set slide_id='step_3bo' %}
+{% set hidden=True %}
+
+{% block content %}
+<aside class="alert yellow">
+	<p>
+		This step may take several minutes depending on the size of your forum.
+	</p>
+</aside>
+<p>
+	zbAction needs to know more about your forum so it can work properly. For this step, make sure your forum is accessible by guests and then enter its default URL. Make sure it's correct because we'll start to curate information as soon as you click continue. Don't know your forum's default URL? You can find it in the ACP under:
+</p>
+<code>Account Info -> Domain Manager -> Active Domain Names -> Default</code>
+<form>
+	<fieldset>
+		{{ forms.input(placeholder='http://sx.zetaboards.com/example', type='text', id='reg-board-url', required=True) }}
+	</fieldset>
+	{{ forms.button(name='step_4bo', color='red', text='Continue', type='submit') }}
+</form>
+{% endblock %}

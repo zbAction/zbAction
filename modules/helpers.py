@@ -41,3 +41,12 @@ def get_unread(user):
         session.expunge_all()
 
         return actions
+
+def normalize_url(url):
+    if url.find('http://') != 0:
+        url = 'http://' + url
+
+    if url[-1] != '/':
+        url += '/'
+
+    return url
