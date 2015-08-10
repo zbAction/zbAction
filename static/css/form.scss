@@ -40,7 +40,6 @@ fieldset {
 	padding: 8px 13px;
 	width: 300px;
 	border: 1px solid #ccc;
-	box-sizing: content-box;
 	transition: border 0.3s, box-shadow 0.3s;
 	
 	&:focus {

@@ -41,6 +41,8 @@ $standard_font_size: 14px;
 $standard_line_height: 28px;
 $standard_input_height: 12px;
 
+$code_font_family: Consolas, 'Source Code Pro', Courier New, Menlo, monospace;
+
 /* Mixins */
 
 @mixin nav_item($color: $red) {

@@ -23,6 +23,20 @@ class Forum(Model):
             sess.delete(self)
 
     @staticmethod
+    def from_id(id):
+        with session_factory() as session:
+            try:
+                forum = session.query(Forum).filter(
+                    Forum.id==id
+                ).one()
+
+                session.expunge(forum)
+
+                return forum
+            except NoResultFound:
+                return None
+
+    @staticmethod
     def from_key(key, bpath):
         with session_factory() as session:
             try:

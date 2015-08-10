@@ -1,6 +1,7 @@
 {% extends 'register/step.html' %}
 
 {% import '_forms.html' as forms %}
+{% import '_code.html' as code %}
 
 {% set slide_id='step_3bo' %}
 {% set hidden=True %}
@@ -12,9 +13,8 @@
 	</p>
 </aside>
 <p>
-	zbAction needs to know more about your forum so it can work properly. For this step, make sure your forum is accessible by guests and then enter its default URL. Make sure it's correct because we'll start to curate information as soon as you click continue. Don't know your forum's default URL? You can find it in the ACP under:
+	zbAction needs to know more about your forum so it can work properly. For this step, make sure your forum is accessible by guests and then enter its default URL. Don't know your forum's default URL? You can find it in the ACP under: <span class="literal">Account Info -> Domain Manager -> Active Domain Names -> Default</span>.
 </p>
-<code>Account Info -> Domain Manager -> Active Domain Names -> Default</code>
 <form>
 	<fieldset>
 		{{ forms.input(placeholder='http://sx.zetaboards.com/example', type='text', id='reg-board-url', required=True) }}

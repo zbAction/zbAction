@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+
+{% import '_code.html' as code with context %}
+
+{% block title %}
+Registration Completed
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+	<aside>
+		<p>You are now registered for zbAction. Add the following code to your board template's <span class="literal">Below the Board</span> section and you'll be ready to go.</p>
+		{{ code.literal('<script src="' + url_for('static', filename='bin/zb.action.min.js', _external=True) + '"></script>') }}
+	</aside>
+	<aside>
+		<header>
+			<h3>zbAction Quickstart Guide</h3>
+		</header>
+	</aside>
+</div>
+{% endblock %}

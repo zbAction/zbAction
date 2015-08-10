@@ -1,6 +1,7 @@
-import re, textwrap, uuid
+import re, uuid
 
-from flask import jsonify, render_template, request, session, url_for
+from flask import abort, jsonify, render_template, request, session, url_for
+from jinja2.exceptions import TemplateNotFound
 from requests import ConnectionError, URLRequired, RequestException
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import bindparam
@@ -11,7 +12,7 @@ from main import app, bcrypt
 from crawler import Crawler
 from db import engine, session_factory
 from errors import *
-from helpers import get_url, normalize_url
+from helpers import gen_key_script, get_url, normalize_url
 from logger import log
 from models.forum import Forum
 from models.mod import Mod
@@ -19,45 +20,19 @@ from models.user import User
 from secure import form_key_required, get_form_key
 from shared import own_regex
 
-'''
-        # Upsert user data
-        conn.execute(addresses.insert(), [ 
-           {'user_id': 1, 'email_address' : 'jack@yahoo.com'},
-           {'user_id': 1, 'email_address' : 'jack@msn.com'},
-           {'user_id': 2, 'email_address' : 'www@www.org'},
-           {'user_id': 2, 'email_address' : 'wendy@aol.com'},
-        ])
-
-from sqlalchemy.sql.expression import bindparam
-stmt = addresses.update().\
-    where(addresses.c.id == bindparam('_id')).\
-    values({
-        'user_id': bindparam('user_id'),
-        'email_address': bindparam('email_address'),
-    })
-
-conn.execute(stmt, [
-    {'user_id': 1, 'email_address' : 'jack@yahoo.com', '_id':1},
-    {'user_id': 1, 'email_address' : 'jack@msn.com', '_id':2},
-    {'user_id': 2, 'email_address' : 'www@www.org', '_id':3},
-    {'user_id': 2, 'email_address' : 'wendy@aol.com', '_id':4},
-])
-'''
-
 # Routes
 
-def gen_key_script():
-    key = session['board_key']
+@app.errorhandler(404)
+@app.errorhandler(500)
+@app.route('/error')
+@app.route('/error/<err>')
+def oops(err):
+    try:
+        return render_template('errors/{}.html'.format(err)), err
+    except TemplateNotFound:
+        return render_template('errors/404.html'), 404
 
-    script = '''
-    <script>window.__zbAction = {{board_key: '{}'}};</script>
-    '''
-
-    script = textwrap.dedent(script).strip().format(key)
-
-    return script
-
-@app.route('/mods/list/<board_key>')
+@app.route('/mods/list/<board_key>', methods=['GET'])
 def list_mods(board_key):
     try:
         with session_factory() as sess:
@@ -80,7 +55,7 @@ def list_mods(board_key):
     except NoResultFound:
         return jsonify({})
 
-@app.route('/register')
+@app.route('/register', methods=['GET'])
 def register():
     session['board_key'] = str(uuid.uuid4())
 
@@ -100,30 +75,43 @@ def finalize():
 
     password = bcrypt.generate_password_hash(request.form['password'])
 
-    print session
-
     forum = session['forum']
     forum = Forum(password=password, **forum)
     user_data = session['user_data']
 
-    session.clear()
+    del session['forum']
+    del session['user_data']
+    del session['board_key']
 
-    forum.save()
+    try:
+        forum.save()
 
-    users = [
-        {
-            'access_key': str(uuid.uuid4()),
-            'board_key': forum.board_key,
-            'uid': user[0],
-            'name': user[1]
-        }
+        users = [
+            {
+                'access_key': str(uuid.uuid4()),
+                'board_key': forum.board_key,
+                'uid': user[0],
+                'name': user[1]
+            }
 
-        for user in user_data
-    ]
+            for user in user_data
+        ]
 
-    engine.execute(User.__table__.insert(), users)
+        engine.execute(User.__table__.insert(), users)
+    except:
+        log('Unknown error occurred:', traceback.format_exc())
 
-    return jsonify(dict(good='Good'))
+        return jsonify({
+            'status': UNKNOWN_EXCEPTION 
+        })
+
+    return jsonify({
+        'status': 0
+    })
+
+@app.route('/registered', methods=['GET'])
+def registered():
+    return render_template('registered.html', gen_key_script=gen_key_script)
 
 @app.route('/crawl', methods=['POST'])
 @form_key_required
@@ -167,9 +155,7 @@ def crawl():
         data = crawler.crawl()
 
         session['forum'] = dict(board_key=board_key, bpath=bpath, bare_location=url)
-        print session['forum']
         session['user_data'] = data
-        print session['forum']
 
         return jsonify({
             'status': 0
@@ -187,6 +173,27 @@ def crawl():
             'status': UNKNOWN_EXCEPTION
         })
 
-@app.route('/<uid>')
+@app.route('/add-api-key')
+@form_key_required
+def add_api_key():
+    with session_factory() as sess:
+        mod = Mod(api_key=session['board_key'])
+        sess.add(mod)
+
+    del session['board_key']
+
+    return jsonify({
+        'status': 0
+    })
+
+@app.route('/docs/<category>', methods=['GET'], defaults={'page': 'index'})
+@app.route('/docs/<category>/<page>', methods=['GET'])
+def docs(category, page):
+    try:
+        return render_template('docs/{}/{}.html'.format(category, page))
+    except TemplateNotFound:
+        abort(404)
+
+@app.route('/<int:uid>')
 def index(uid):
     return render_template('test.html', uid=uid)

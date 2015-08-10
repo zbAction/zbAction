@@ -1,5 +1,6 @@
 @import 'fa/font-awesome.scss';
 @import 'glyphicon.css';
+@import 'github-gist.css';
 @import 'helpers';
 
 * {
@@ -9,6 +10,7 @@
 	font-family: Roboto;
 	-webkit-font-smoothing: antialiased;
 	-webkit-perspective: 1000;
+	box-sizing: border-box;
 }
 
 html, body {
@@ -24,11 +26,30 @@ body {
 
 h2, h3 {
 	font-weight: 400;
-	font-family: Open Sans;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 6px;
+}
+
+h3 {
+	font-family: 24px;
+	color: #888;
+}
+
+hr {
+	background: #ccc;
+	border: none;
+	height: 1px;
+	padding: 0px;
+	margin: 24px 0px;
 }
 
 a {
 	text-decoration: none;
+	color: $red;	
+}
+
+a:hover {
+	color: darken($red, 30%);
 }
 
 p {
@@ -37,19 +58,6 @@ p {
 
 p + p {
 	margin-top: $standard_line_height;
-}
-
-code, pre, .literal {
-	background: $literal_background;
-	color: $red;
-	display: inline-block;
-	padding: 3px 5px;
-	font-family: Courier New, Menlo, monospace;
-	line-height: $standard_font_size;
-}
-
-code, pre {
-	margin: 12px 0px;
 }
 
 .wrapper {
@@ -69,8 +77,9 @@ main {
 	border-radius: 3px;
 }
 
-@import 'header';
+@import 'code';
 @import 'form';
 @import 'alerts';
+@import 'header';
 @import 'slides';
 @import 'register';

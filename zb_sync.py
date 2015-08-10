@@ -1,5 +1,6 @@
 import os, sys
 
+sys.dont_write_bytecode = True
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'modules')))
 
 from tornado import web, ioloop

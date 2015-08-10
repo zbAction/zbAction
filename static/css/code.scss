@@ -1,0 +1,49 @@
+.literal {
+	text-decoration: underline;
+	display: inline-block;
+}
+
+code {
+	margin: 12px 0px;
+	width: 100%;
+	font-size: 12px;
+	display: block;
+    background: white;
+    padding: 7px !important;
+    color: #333333;
+    overflow-x: auto;
+}
+
+pre {
+	margin: 12px 0px 14px;
+
+	code {
+		margin: 0px;
+		border: 1px solid #ccc;
+		font-family: $code_font_family;
+
+		* {
+			font-family: $code_font_family;
+		}
+	}
+}
+
+.select-all {
+	position: absolute;
+    z-index: 999;
+    right: 0px;
+    padding: 3px 5px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    border-radius: 0px 3px 0px 3px;
+    color: #999;
+    font-size: 12px;
+
+    &:active {
+    	box-shadow: 0px 0px 3px #c0c0c0 inset;
+    }
+
+    &:hover {
+    	cursor: pointer;
+    }
+}

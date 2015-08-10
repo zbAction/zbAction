@@ -77,7 +77,7 @@
 			else if(resp.status === 5)
 				$('#not-a-board').show();
 			else if(resp.status === 4)
-				$('#unknown-error').show();
+				location.redirect('/error/500');
 			else if(resp.status === 3)
 				$('#not-a-url').show();
 			else if(resp.status === 2)
@@ -85,7 +85,7 @@
 			else if(resp.status === 0)
 				slide_to($('#step_5bo'));
 		}).fail(function(){
-			$('#unknown-error').show();
+			location.redirect('/error/500');
 		}).always(function(){
 			$('#status').hide();
 		});
@@ -96,7 +96,7 @@
 	
 	$('#step_5bo form').submit(function(){
 		if($('#reg-password').val() !== $('#reg-conf-password').val()){
-			$('#reg-conf-password').addClass('invalid')
+			$('#reg-conf-password').addClass('invalid');
 			return;
 		}
 
@@ -104,10 +104,17 @@
 
 		$.post(finalize_ep, {
 			password: $('#reg-password').val()
-		}).success(function(){
-			location.replace('/');
+		}).success(function(resp){
+			if(!resp.hasOwnProperty('status') || resp.status !== 0)
+				location.redirect('/error/500');
+			else
+				location.replace('/registered');
 		}).fail(function(){
-			$('#step_5bo').html($('#unknown-error').show());
+			location.redirect('/error/500');
 		});
 	});
-})()
+
+	$('input[name=step_2d]').click(function(){
+		$.get(api_key_ep);
+	});
+})();

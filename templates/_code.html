@@ -1,0 +1,7 @@
+{% macro source(filename, lang='') %}
+<pre><code class="{{ lang }}">{{ include_source(filename) | escape }}</code></pre>
+{% endmacro %}
+
+{% macro literal(contents, lang='') %}
+<pre><code class="{{ lang }}">{{ contents | escape }}</code></pre>
+{% endmacro %}

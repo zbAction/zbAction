@@ -1,18 +1,15 @@
 {% extends 'register/step.html' %}
 
 {% import '_forms.html' as forms %}
+{% import '_code.html' as code %}
 
 {% set slide_id='step_2bo' %}
 {% set hidden=True %}
 
 {% block content %}
 <p>
-	In preparation for the next step, you need to prove ownership of your forum. Please add the following code to your board template's <span class="literal">Javascripts</span> section.
+	In preparation for the next step, you need to prove ownership of your forum. Please add the following code to your board template's <span class="literal">Below the Board</span> section.
 </p>
-<form>
-	<fieldset>
-		{{ forms.input(value=gen_key_script, type='text', id="reg-board-key", select=True) }}
-	</fieldset>
-	{{ forms.button(name='step_3bo', color='red', text='Continue', type='submit') }}
-</form>
+{{ code.literal(gen_key_script) }}
+{{ forms.button(name='step_3bo', color='red', text='Continue', type='submit') }}
 {% endblock %}

@@ -1,5 +1,8 @@
 from datetime import datetime, timedelta
+import textwrap
 import requests
+
+from flask import session
 
 from db import session_factory
 from models.action import Action
@@ -28,6 +31,17 @@ def within_one_week(timestamp):
     week = timedelta(weeks=1)
 
     return timestamp + week >= now
+
+def gen_key_script():
+    key = session['board_key']
+
+    script = '''
+    <script>window.__zbAction = {{board_key: '{}'}};</script>
+    '''
+
+    script = textwrap.dedent(script).strip().format(key)
+
+    return script
 
 def get_unread(user):
     with session_factory() as session:

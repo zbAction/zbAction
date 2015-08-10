@@ -29,7 +29,7 @@ copy:
 	scp /zba/secrets.json zba@zba:/zba/secrets.json
 
 deploy:
-	ssh -f zba@zba "killall -s SIGKILL python; python /var/www/zba/zb_sync.py &> output; python /var/www/zba/main.py &> web_output;"
+	ssh -f zba@zba "killall -s SIGKILL python; python /var/www/zba/zb_sync.py &>> socket_output; python /var/www/zba/main.py &>> web_output;"
 
 clean:
 	grunt clean

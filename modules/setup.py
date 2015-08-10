@@ -1,9 +1,19 @@
 import os
 
 from flask import request, session, url_for
+from jinja2 import PackageLoader
 
-from main import app
+from main import app, loader, login_manager
+
+from models.user import User
 from secure import get_form_key
+
+login_manager.refresh_view = 'login'
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.from_id(int(userid))
 
 def cache_bust(ep, **kwargs):
     if ep == 'static' and 'filename' in kwargs:
@@ -21,9 +31,13 @@ def setup():
     session.pop('form_key', None)
     session['form_key'] = get_form_key()
 
+def include_source(f):
+    return loader.get_source(app.jinja_env, f)[0]
+
 @app.context_processor
 def injections():
     return {
         'url_for': cache_bust,
-        'get_form_key': get_form_key
+        'get_form_key': get_form_key,
+        'include_source': include_source
     }
