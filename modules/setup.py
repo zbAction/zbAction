@@ -5,6 +5,7 @@ from jinja2 import PackageLoader
 
 from main import app, loader, login_manager
 
+from helpers import check_server
 from models.user import User
 from secure import get_form_key
 
@@ -36,8 +37,11 @@ def include_source(f):
 
 @app.context_processor
 def injections():
+    server_online = check_server()
+
     return {
         'url_for': cache_bust,
         'get_form_key': get_form_key,
-        'include_source': include_source
+        'include_source': include_source,
+        'server_online': server_online
     }

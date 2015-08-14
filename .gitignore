@@ -2,6 +2,8 @@
 secrets.json
 *.sass-cache
 *.map
+*.exe
+*.gif
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

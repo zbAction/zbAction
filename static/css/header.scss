@@ -44,3 +44,10 @@ nav a:nth-of-type(1):before {
 	display: inline-block;
 	font-family: Roboto Slab;
 }
+
+#server-offline {
+	background: lighten($dark_background, 10%);
+	color: #fff;
+	padding: 7px 0px;
+	font-size: 12px;
+}

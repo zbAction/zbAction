@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import textwrap
+import traceback
 import requests
 
 from flask import session
@@ -7,12 +8,22 @@ from flask import session
 from db import session_factory
 from models.action import Action
 from models.user import User
+from secrets import secrets
 
 def get_url(url):
     headers = {'user-agent': 'zbaBot/1.0'}
     resp = requests.get(url, headers=headers)
 
     return resp
+
+def check_server():
+    try:
+        # 50ms timeout
+        requests.get(secrets.websocket_url, timeout=0.05)
+        return True
+    except:
+        traceback.print_exc()
+        return False
 
 def serialize(var):
     if isinstance(var, User):
