@@ -2,33 +2,38 @@ import os
 import json
 
 class secret:
-	pass
+    pass
 
 def parse_val(var):
-	if isinstance(var, dict):
-		placeholder = secret()
+    if isinstance(var, dict):
+        placeholder = secret()
 
-		for key in var:
-			if isinstance(var[key], dict):
-				setattr(placeholder, key, parse_val(var[key]))
-			else:
-				setattr(placeholder, key, var[key])
+        for key in var:
+            if isinstance(var[key], dict):
+                setattr(placeholder, key, parse_val(var[key]))
+            elif isinstance(var[key], list):
+                setattr(placeholder, key, [])
 
-		return placeholder
+                for x in var[key]:
+                    placeholder[key].push(parse_val(x))
+            else:
+                setattr(placeholder, key, var[key])
 
-	return var
+        return placeholder
+
+    return var
 
 secrets = secret()
 
 path = os.path.abspath(os.path.join('/zba', 'secrets.json'))
 
 with open(path) as f:
-	lines = ''.join(f.readlines())
+    lines = ''.join(f.readlines())
 
-	s = json.loads(lines)
+    s = json.loads(lines)
 
-	for key in s:
-		setattr(secrets, key, parse_val(s[key]))
+    for key in s:
+        setattr(secrets, key, parse_val(s[key]))
 
 del secret
 del parse_val

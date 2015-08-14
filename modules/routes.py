@@ -102,7 +102,7 @@ def finalize():
         log('Unknown error occurred:', traceback.format_exc())
 
         return jsonify({
-            'status': UNKNOWN_EXCEPTION 
+            'status': UNKNOWN_EXCEPTION
         })
 
     return jsonify({
