@@ -13,7 +13,7 @@
 		SOCKET_URL = 'ws://zbaction.reticent.io/sync';
 		MOD_URL = 'http://zbaction.reticent.io/mods/list/';
 	}
- 
+
 	var ACTION_TEMPLATE = {
 		event: 'string',
 		details: 'OBJECT',
@@ -99,7 +99,7 @@
 				if(approved.indexOf(fn.key) !== -1)
 					fn.fn.call(null, new ModWrapper(send, fn.key));
 			}
-			
+
 			ws.send({
 				key: 0,
 				type: 'get_unread',

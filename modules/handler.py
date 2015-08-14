@@ -43,7 +43,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
         # if the above passes this is a handshake
         setattr(self, 'user', user)
-        
+
         conn_mutex.acquire()
         connections.append((self.user.toKey(), self))
         conn_mutex.release()
@@ -82,7 +82,7 @@ class SocketHandler(websocket.WebSocketHandler):
             return
 
         setattr(self, 'unread_done', True)
-        
+
         for action in get_unread(self.user):
             # action
             self.push_action(action, self.user.access_key, 0)
@@ -120,4 +120,4 @@ class SocketHandler(websocket.WebSocketHandler):
             log('Disconnected from user:', self.toKey())
 
     def toKey(self):
-        return self.user.toKey()    
+        return self.user.toKey()
