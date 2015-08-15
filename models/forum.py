@@ -13,6 +13,7 @@ class Forum(Model):
     enabled = Column(Boolean, default=True)
     bare_location = Column(String)
     mod_keys = Column(String, default='')
+    is_auth = None
 
     def save(self):
         with session_factory() as sess:
@@ -21,6 +22,32 @@ class Forum(Model):
     def delete(self):
         with session_factory() as sess:
             sess.delete(self)
+
+	def is_authenticated(self):
+		if self.is_auth is not None:
+			return self.is_auth
+
+		with session_factory() as sess:
+			try:
+				sess.query(Forum).filter(
+					Forum.board_key==self.board_key,
+					Forum.password==self.password
+				).one()
+
+				self.is_auth = True
+				return True
+			except:
+				self.is_auth = False
+				return False
+
+	def is_active(self):
+		return self.enabled
+
+	def is_anonymous(self):
+		return False
+
+	def get_id(self):
+		return unicode(self.id)
 
     @staticmethod
     def from_id(id):
@@ -37,7 +64,21 @@ class Forum(Model):
                 return None
 
     @staticmethod
-    def from_key(key, bpath):
+    def from_key(key):
+        with session_factory() as session:
+            try:
+                forum = session.query(Forum).filter(
+                    Forum.board_key==key
+                ).one()
+
+                session.expunge(forum)
+
+                return forum
+            except NoResultFound:
+                return None
+
+    @staticmethod
+    def from_key_and_bpath(key, bpath):
         with session_factory() as session:
             try:
                 forum = session.query(Forum).filter(

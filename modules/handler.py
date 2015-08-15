@@ -26,7 +26,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
     def handshake(self, user, key, mod_key):
         # Check for disabled boards.
-        board = Forum.from_key(user['board_key'], user['bpath'])
+        board = Forum.from_key_and_bpath(user['board_key'], user['bpath'])
 
         if board is None or board is not None and board.enabled == False:
             return

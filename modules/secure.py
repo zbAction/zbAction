@@ -4,6 +4,7 @@ import hashlib
 import time
 
 from flask import abort, request, session
+from flask.ext.login import current_user
 
 from logger import log
 
@@ -51,5 +52,15 @@ def form_key_required(ep):
             abort(404)
 
         return ep(**kwargs)
+
+    return func
+
+def not_logged_in(ep):
+    @wraps(ep)
+    def func(**kwargs):
+        if current_user.is_authenticated():
+            return redirect(url_for('index'))
+        else:
+            return ep(**kwargs)
 
     return func
