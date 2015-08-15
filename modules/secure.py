@@ -33,8 +33,6 @@ def form_key_required(ep):
         else:
             form_key = request.args['__form_key']
 
-        print 'key in request'
-
         if form_key != session['form_key']:
             abort(404)
 

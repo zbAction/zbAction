@@ -39,7 +39,7 @@
 			var $slides = $(container).find('> .slide:visible');
 			var dest = $slides.index(ele);
 			var offset = '-' + dest * 100 + 'vw';
-			
+
 			$(container).css('transform', 'translateX(' + offset + ')');
 		}
 
@@ -93,7 +93,7 @@
 
 	$('input[name=step_4bo]').click(reset);
 	$('#reg-retry').click(reset);
-	
+
 	$('#step_5bo form').submit(function(){
 		if($('#reg-password').val() !== $('#reg-conf-password').val()){
 			$('#reg-conf-password').addClass('invalid');
@@ -108,7 +108,7 @@
 			if(!resp.hasOwnProperty('status') || resp.status !== 0)
 				location.replace('/error/500');
 			else
-				location.replace('/registered');
+				location.replace('/meta/registered');
 		}).fail(function(){
 			location.replace('/error/500');
 		});

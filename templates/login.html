@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+
+{% block title %}
+Login to zbAction
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <form action="{{ url_for('meta.try_login', form_key=form_key) }}">
+        Placeholder.
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

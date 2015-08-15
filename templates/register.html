@@ -17,9 +17,9 @@ Register for zbAction
 
 {% block scripts %}
 <script>
-var crawl_ep = {{ url_for('crawl', __form_key=get_form_key()) | tojson | safe }};
-var finalize_ep = {{ url_for('finalize', __form_key=get_form_key()) | tojson | safe }};
-var api_key_ep = {{ url_for('add_api_key', __form_key=get_form_key()) | tojson | safe }};
+var crawl_ep = {{ url_for('jobs.crawl', __form_key=get_form_key()) | tojson | safe }};
+var finalize_ep = {{ url_for('meta.finalize', __form_key=get_form_key()) | tojson | safe }};
+var api_key_ep = {{ url_for('jobs.add_api_key', __form_key=get_form_key()) | tojson | safe }};
 </script>
 <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}
