@@ -2,7 +2,6 @@ from datetime import datetime
 from fcntl import lockf, LOCK_EX, LOCK_UN
 from textwrap import dedent
 
-from helpers import log_mutex
 from secrets import secrets
 
 def log(*args):
@@ -23,5 +22,5 @@ def log(*args):
 
         print template
         f.write(template)
-        
+
         lockf(f, LOCK_UN)
