@@ -42,7 +42,7 @@ def include_source(f):
 
 @app.context_processor
 def injections():
-    server_online = check_server() is not None
+    server_online = check_server()
 
     return {
         'url_for': cache_bust,
