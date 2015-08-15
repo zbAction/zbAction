@@ -1,9 +1,9 @@
 from Queue import Queue
 import os
-from threading import Lock
+from threading import RLock
 
 conn_mutex = Lock()
-log_mutex = Lock()
+log_mutex = RLock()
 store_queue = Queue()
 action_queue = Queue()
 
