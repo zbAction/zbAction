@@ -1,7 +1,8 @@
 from datetime import datetime
+from fcntl import lockf, LOCK_EX, LOCK_UN
 from textwrap import dedent
 
-from shared import log_mutex
+from helpers import log_mutex
 from secrets import secrets
 
 def log(*args):
@@ -17,11 +18,10 @@ def log(*args):
         message='\t' + '\n\t'.join(map(lambda x: str(x), args))
     )
 
-    log_mutex.acquire()
-
-    print template
-
     with open(secrets.output_log, 'a') as f:
-        f.write(template)
+        lockf(f, LOCK_EX)
 
-    log_mutex.release()
+        print template
+        f.write(template)
+        
+        lockf(f, LOCK_UN)
