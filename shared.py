@@ -3,6 +3,7 @@ import os
 from threading import Lock
 
 conn_mutex = Lock()
+log_mutex = Lock()
 store_queue = Queue()
 action_queue = Queue()
 
