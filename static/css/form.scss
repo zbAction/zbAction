@@ -1,5 +1,5 @@
 label {
-	min-width: 10em;
+	min-width: 9em;
 	display: inline-block;
 	text-align: right;
 	color: #888;
@@ -41,7 +41,7 @@ fieldset {
 	width: 300px;
 	border: 1px solid #ccc;
 	transition: border 0.3s, box-shadow 0.3s;
-	
+
 	&:focus {
 		border: 1px solid $focus_border;
 		box-shadow: 0px 0px 4px $focus_shadow;

@@ -15,15 +15,17 @@
 			</div>
 		</aside>
 		{% endif %}
-		<nav>
+		<aside id="header">
 			<div class="wrapper">
-				<a href="{{ url_for('index', uid=0) }}"></a>
-				<a href="#">Documentation</a>
-				<a href="#">Support</a>
-				<a href="{{ url_for('meta.login') }}">Log In</a>
-				<a href="{{ url_for('meta.register') }}">Register</a>
+				<nav>
+					<a href="{{ url_for('index', uid=0) }}"></a>
+					<a href="#">Documentation</a>
+					<a href="#">Support</a>
+					<a href="{{ url_for('meta.login') }}">Log In</a>
+					<a href="{{ url_for('meta.register') }}">Register</a>
+				</nav>
 			</div>
-		</nav>
+		</aside>
 		<header id="top">
 			<div class="wrapper">
 				<h1>{{ self.title() or 'zbAction' }}</h1>

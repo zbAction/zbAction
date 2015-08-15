@@ -1,5 +1,7 @@
 {% extends 'template.html' %}
 
+{% import '_forms.html' as forms %}
+
 {% block title %}
 Login to zbAction
 {% endblock %}
@@ -7,7 +9,13 @@ Login to zbAction
 {% block content %}
 <div class="wrapper">
     <form action="{{ url_for('meta.try_login', form_key=form_key) }}">
-        Placeholder.
+        <fieldset class="top-down">
+            {{ forms.input(label='Board Key', name='board-key', required=True) }}
+        </fieldset>
+        <fieldset class="top-down">
+            {{ forms.input(type='password', label='Password', name='password', required=True) }}
+        </fieldset>
+        {{ forms.button(type='submit', text='Log In', color='red') }}
     </form>
 </div>
 {% endblock %}

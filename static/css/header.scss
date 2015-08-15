@@ -1,8 +1,16 @@
-nav {
+#header {
 	background: $dark-background;
 }
 
-nav a {
+#header .wrapper {
+	display: flex;
+}
+
+#header nav {
+	flex: 1;
+}
+
+#header nav a {
 	color: #fff;
 	padding: 10px 12px 18px;
 	font-size: 12px;
@@ -11,12 +19,12 @@ nav a {
 	font-family: Open Sans;
 }
 
-nav a:hover {
+#header nav a:hover {
 	background: $dark_background_hover;
 	color: #fff;
 }
 
-nav a:nth-of-type(1):before {
+#header nav a:nth-of-type(1):before {
 	font-family: Glyphicons Halflings;
 	position: relative;
 	top: 3px;
@@ -27,7 +35,7 @@ nav a:nth-of-type(1):before {
 @each $color in $color-list {
 	$index: index($color-list, $color);
 
-	nav a:nth-of-type(#{$index}){
+	#header nav a:nth-of-type(#{$index}){
 		@include nav_item($color);
 	}
 }
