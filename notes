@@ -1,16 +1,11 @@
 TODO:
+	User login.
+	Modification management.
+	Write docs.
+
 	Need to setup DB on production server.
 
 	Black magic can possibly be fixed by implementing read receipts
-
-	Registration Steps:
-		Category
-			BO:
-				Board URL
-				Scrape
-				Password
-			Dev:
-				Password
 
 	ICON FONTS: http://fontello.com/
 
@@ -57,6 +52,16 @@ TODO:
 		http://docs.sqlalchemy.org/en/latest/_modules/examples/performance/bulk_inserts.html
 	Another possibility is to use SQLAlchemy core and execute raw SQL. If the user exists then
 	we will update their information and if they don't they we will insert.
+
+	DONE:
+	Registration Steps:
+		Category
+			BO:
+				Board URL
+				Scrape
+				Password
+			Dev:
+				Password
 
 zb_sync should be the websocket handler and should only:
 	- receive actions
