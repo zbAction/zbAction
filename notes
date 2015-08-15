@@ -12,6 +12,8 @@ TODO:
 			Dev:
 				Password
 
+	ICON FONTS: http://fontello.com/
+
 	--------------------------------------
 	BACK BURNER:
 
@@ -21,14 +23,14 @@ TODO:
 	Need to add more rows to the mods table (author, directory)
 
 	Each time a modification is submitted the manifest will be read
-	and a new version directory (eg: andrew/111-222-333/1.0.0/poke.js) 
+	and a new version directory (eg: andrew/111-222-333/1.0.0/poke.js)
 	will be created. The format will be:
 		- {author}/{mod_key}/{version}/{script_file}
 	--------------------------------------
 
 	DONE: Need to implement Mod model and API key checks.
 	DONE: Replace urllib2 with http://docs.python-requests.org/en/latest/
-	DONE: 
+	DONE:
 	```
 	import urllib2
 	opener = urllib2.build_opener()
@@ -87,7 +89,7 @@ Other Notes:
 
 User Action Relationships:
 	Actions have a corresponding source and receiver.
-	
+
 	The receiver will be enqueued with an action whose
 	receiver attribute is him/herself.
 
