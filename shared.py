@@ -1,6 +1,6 @@
 from Queue import Queue
 import os
-from threading import RLock
+from threading import Lock, RLock
 
 conn_mutex = Lock()
 log_mutex = RLock()

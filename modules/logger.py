@@ -1,7 +1,7 @@
 from datetime import datetime
 from textwrap import dedent
 
-from helpers import log_mutex
+from shared import log_mutex
 from secrets import secrets
 
 def log(*args):
