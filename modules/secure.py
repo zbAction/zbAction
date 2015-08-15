@@ -5,6 +5,8 @@ import time
 
 from flask import abort, request, session
 
+from logger import log
+
 def get_ip():
     if 'X-Forwarded-For' in request.headers:
         return '|'.join(request.headers.getlist('X-Forwarded-For'))
@@ -21,6 +23,8 @@ def get_form_key():
     hashed = hashlib.sha512(string).hexdigest()
 
     # retire form keys after 30 minutes
+    # should be enough time to crawl a board and
+    # insert into db
     session['expires_at'] = now + timedelta(minutes=30)
     session['form_key'] = hashed
 
@@ -30,10 +34,12 @@ def form_key_required(ep):
     @wraps(ep)
     def func(**kwargs):
         if 'form_key' not in session:
+            log('No form key for IP:', get_ip())
             abort(404)
 
         if '__form_key' not in request.form:
             if '__form_key' not in request.args:
+                log('No form key for IP:', get_ip())
                 abort(404)
             else:
                 form_key = request.args['__form_key']
@@ -41,6 +47,7 @@ def form_key_required(ep):
             form_key = request.args['__form_key']
 
         if form_key != session['form_key']:
+            log('No form key for IP:', get_ip())
             abort(404)
 
         return ep(**kwargs)
