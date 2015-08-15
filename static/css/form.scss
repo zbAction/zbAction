@@ -12,6 +12,10 @@ fieldset {
 	margin: $standard_input_height 0px $standard_input_height - 2;
 }
 
+main > .wrapper > form:first-child > fieldset:nth-of-type(1) {
+	margin-top: 0px;
+}
+
 .top-down label {
 	display: block;
 	text-align: left;
@@ -77,6 +81,10 @@ fieldset {
 
 	fieldset + & {
 		margin-top: 12px;
+	}
+
+	& + a, & + span {
+		margin-left: 14px;
 	}
 }
 

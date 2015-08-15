@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from functools import wraps
 import hashlib
 import time
@@ -11,11 +12,17 @@ def get_ip():
     return request.remote_addr
 
 def get_form_key():
-    if 'form_key' in session:
+    now = datetime.utcnow()
+
+    if 'form_key' in session and 'expires_at' in session and session['expires_at'] > now:
         return session['form_key']
 
-    string = request.endpoint + str(time.time()) + get_ip()
+    string = request.url + str(time.time()) + get_ip()
     hashed = hashlib.sha512(string).hexdigest()
+
+    # retire form keys after 30 minutes
+    session['expires_at'] = now + timedelta(minutes=30)
+    session['form_key'] = hashed
 
     return hashed
 

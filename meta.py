@@ -78,4 +78,4 @@ def login():
 @meta.route('/try-login', methods=['POST'])
 @form_key_required
 def try_login():
-    pass
+    return 'lorem ipsum'

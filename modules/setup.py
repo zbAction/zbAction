@@ -26,21 +26,23 @@ def cache_bust(ep, **kwargs):
 
     return url_for(ep, **kwargs)
 
+'''
 @app.before_first_request
 def setup():
-    # Refresh form key.
     session.pop('form_key', None)
     session['form_key'] = get_form_key()
+'''
+
+@app.before_request
+def setup2():
+    get_form_key()
 
 def include_source(f):
     return loader.get_source(app.jinja_env, f)[0]
 
 @app.context_processor
 def injections():
-    try:
-        server_online = check_server()
-    except:
-        server_online = False
+    server_online = check_server() is not None
 
     return {
         'url_for': cache_bust,

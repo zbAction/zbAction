@@ -56,6 +56,10 @@ def docs(category, page):
     except TemplateNotFound:
         abort(404)
 
+@app.route('/support')
+def support():
+    pass
+
 @app.route('/<int:uid>')
 def index(uid):
     return render_template('test.html', uid=uid)

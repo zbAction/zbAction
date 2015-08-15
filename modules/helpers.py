@@ -22,7 +22,6 @@ def check_server():
         requests.get(secrets.websocket_url, timeout=0.05)
         return True
     except:
-        traceback.print_exc()
         return False
 
 def serialize(var):
