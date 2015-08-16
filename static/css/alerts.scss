@@ -12,6 +12,7 @@
 
 	p {
 		line-height: 18px;
+		margin: 0px;
 	}
 
 	ul, li {
@@ -57,20 +58,4 @@
 		font-family: FontAwesome;
 		margin-right: 6px;
 	}
-}
-
-.status {
-	text-align: center;
-	padding-top: 5vw;
-	position: relative;
-	min-height: 20vw;
-}
-
-.status .glyphicon, .status .fa {
-	color: $red;
-}
-
-.status > span {
-	display: block;
-	margin-bottom: 36px;
 }

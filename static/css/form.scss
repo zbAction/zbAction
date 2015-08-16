@@ -9,25 +9,19 @@ label {
 
 fieldset {
 	border: none;
-	margin: $standard_input_height 0px;
+	margin: 0px 0px $standard_input_height;
 }
 
-main > .wrapper > form:first-child > fieldset:nth-of-type(1) {
-	margin-top: 0px;
-}
+.top-down {
+	label {
+		display: block;
+		text-align: left;
+	}
 
-.top-down label {
-	display: block;
-	text-align: left;
-}
-
-.top-down input {
-	margin-left: 0px !important;
-	margin-top: 3px !important;
-}
-
-.top-down + .top-down {
-	margin-top: 12px;
+	input {
+		margin-left: 0px !important;
+		margin-top: 5px !important;
+	}
 }
 
 .radio-group {
@@ -57,7 +51,7 @@ main > .wrapper > form:first-child > fieldset:nth-of-type(1) {
 	}
 
 	label + & {
-		margin-left: 12px;
+		margin-left: $standard_input_height;
 	}
 
 	&:only-child {
@@ -68,7 +62,6 @@ main > .wrapper > form:first-child > fieldset:nth-of-type(1) {
 .form-button {
 	padding: 8px 12px 10px;
 	border: 1px solid #e1e1e1;
-	margin-top: $standard_input_height;
 	background: linear-gradient(#f5f5f5, #f1f1f1);
 	color: #777;
 
@@ -80,11 +73,11 @@ main > .wrapper > form:first-child > fieldset:nth-of-type(1) {
 	}
 
 	fieldset + & {
-		margin-top: 12px;
+		margin-top: $standard_font_size;
 	}
 
 	& + a, & + span {
-		margin-left: 14px;
+		margin-left: $standard_font_size;
 	}
 }
 

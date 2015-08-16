@@ -3,13 +3,13 @@
 {% import '_forms.html' as forms %}
 
 {% block title %}
-Login to zbAction
+Log In to zbAction
 {% endblock %}
 
 {% block content %}
 <div class="wrapper">
     <form action="{{ url_for('meta.try_login', __form_key=form_key) }}" method="POST">
-        <fieldset class="top-down">
+            <fieldset class="top-down">
             {{ forms.input(label='Board Key', name='board-key', required=True) }}
         </fieldset>
         <fieldset class="top-down">
