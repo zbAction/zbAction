@@ -78,9 +78,24 @@ main {
 	border-radius: 3px;
 }
 
+.status {
+	text-align: center;
+	padding-top: 5vw;
+	position: relative;
+	min-height: 20vw;
+}
+
+.status .glyphicon, .status .fa {
+	color: $red;
+}
+
+.status > span {
+	display: block;
+	margin-bottom: 36px;
+}
+
 @import 'code';
 @import 'form';
 @import 'alerts';
 @import 'header';
 @import 'slides';
-@import 'register';

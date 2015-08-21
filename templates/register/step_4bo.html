@@ -1,6 +1,7 @@
 {% extends 'register/step.html' %}
 
 {% import '_forms.html' as forms %}
+{% import '_code.html' as code %}
 
 {% set slide_id='step_4bo' %}
 {% set hidden=True %}
@@ -10,19 +11,15 @@
 	<span class="glyphicon glyphicon-fire fa-5x"></span>
 	<span>Please wait. We're preparing zbAction.</span>
 </aside>
-<aside id="not-a-board" class="hidden">
+<aside id="not-a-board" class="hidden status">
 	<span class="fa fa-times fa-5x"></span>
 	<span>The forum URL you entered is not valid.</span>
 	{{ forms.button(name='step_3bo', color='red', text='Go Back', type='button') }}
 </aside>
-<aside id="not-owned" class="hidden status">
+<aside id="not-owned" class="hidden">
 	<p>You must prove ownership of this forum. Place the code below in your board template's <span class="literal">Javascripts</span> section.</p>
-	<form>
-		<fieldset>
-			{{ forms.input(value=gen_key_script, type='text', select=True) }}
-		</fieldset>
-		{{ forms.button(id='reg-retry', color='red', text='Retry', type='button') }}
-	</form>
+	{{ code.literal(gen_key_script) }}
+	{{ forms.button(id='reg-retry', color='red', text='Retry', type='button') }}
 </aside>
 <aside id="board-in-use" class="hidden status">
 	<span class="fa fa-times fa-5x"></span>

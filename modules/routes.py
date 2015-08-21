@@ -58,7 +58,7 @@ def docs(category, page):
 
 @app.route('/support')
 def support():
-    pass
+    abort(404)
 
 @app.route('/<int:uid>')
 def index(uid):

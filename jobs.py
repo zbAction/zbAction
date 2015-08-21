@@ -1,4 +1,5 @@
 import re
+import traceback
 
 from flask import Blueprint, jsonify, request, session
 from crawler import Crawler
