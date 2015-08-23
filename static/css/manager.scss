@@ -23,9 +23,9 @@
         }
 
         .mod {
-            vertical-align: middle;
             width: 100%;
             margin-bottom: $standard_font_size / 2;
+            position: relative;
 
             &.enabled {
                 border-left: 0.25em solid $green;
@@ -42,6 +42,16 @@
 
             .name {
                 min-width: 9.75em;
+            }
+
+            &.working:before {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                content: '';
+                background: rgba(255, 255, 255, 0.5);
             }
         }
     }

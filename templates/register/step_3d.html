@@ -1,0 +1,16 @@
+{% extends 'register/step.html' %}
+
+{% import '_code.html' as code with context %}
+
+{% set slide_id='step_3d' %}
+{% set hidden=True %}
+
+{% block content %}
+<aside class="alert yellow">
+	<p>We can only show you this key once so keep it somewhere safe.</p>
+</aside>
+<p>
+	Below you will find your unique zbAction API key. With this key, you will be able to use zbAction as a developer and access it's underlying architecture. To start developing right away, check out the <a href="{{ url_for('docs', category='dev', page='quickstart') }}">developer quickstart guide</a>. For a more in depth look at how zbAction works and how to develop for it, check out the <a href="{{ url_for('docs', category='dev') }}">full developer documentation</a>.
+</p>
+{{ code.literal(board_key, lang='nohighlight') }}
+{% endblock %}

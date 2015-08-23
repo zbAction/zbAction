@@ -56,16 +56,13 @@ def list_mods(board_key):
 @login_required
 def manage():
     with session_factory() as sess:
-        forum = sess.query(Forum).filter(
-            Forum.board_key==current_user.board_key
-        ).one()
-
-        mods = forum.mod_keys.split(' ')
+        mods = current_user.mod_keys.split(' ')
 
         mods = sess.query(
             Mod.api_key,
             Mod.enabled,
             Mod.root_enabled,
+            Mod.name,
             count(Action.id).label('count')
         ).filter(
             # if for some reason somebody has the master key added.
@@ -76,11 +73,21 @@ def manage():
             Action.event.like(concat(Mod.api_key, '.', '%'))
         ).group_by(
             Mod.api_key
+        ).order_by(
+            # Apparently False < True in SQL.
+            #
+            # Order by:
+            # Enabled
+            # Has Name
+            # Name
+            (Mod.enabled and Mod.root_enabled)==False,
+            Mod.name==None,
+            Mod.name
         )
 
         sess.expunge_all()
 
-    return render_template('manager.html', forum=forum, mods=mods)
+    return render_template('manager.html', forum=current_user, mods=mods)
 
 @app.route('/docs/<category>', methods=['GET'], defaults={'page': 'index'})
 @app.route('/docs/<category>/<page>', methods=['GET'])

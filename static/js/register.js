@@ -114,7 +114,9 @@
 		});
 	});
 
-	$('button[name=step_2d]').click(function(){
-		$.get(api_key_ep);
+	$('input[name=step_3d]').parents('form').submit(function(){
+		$.post(api_key_ep, {
+			name: $('#mod-name').val()
+		});
 	});
 })();

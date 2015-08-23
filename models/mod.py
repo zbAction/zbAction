@@ -13,6 +13,7 @@ class Mod(Model):
     api_key = Column(String)
     enabled = Column(Boolean, default=True)
     root_enabled = Column(Boolean, default=True)
+    name = Column(String)
 
     def save(self):
         with session_factory() as sess:

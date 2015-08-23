@@ -2,6 +2,7 @@ import re
 import traceback
 
 from flask import Blueprint, jsonify, request, session
+from flask.ext.login import current_user
 from crawler import Crawler
 from requests import ConnectionError, URLRequired, RequestException
 
@@ -76,11 +77,11 @@ def crawl():
             'status': UNKNOWN_EXCEPTION
         })
 
-@jobs.route('/add-api-key')
+@jobs.route('/add-api-key', methods=['POST'])
 @form_key_required
 def add_api_key():
     with session_factory() as sess:
-        mod = Mod(api_key=session['board_key'])
+        mod = Mod(api_key=session['board_key'], name=request.form['name'])
         sess.add(mod)
 
     del session['board_key']
@@ -88,3 +89,26 @@ def add_api_key():
     return jsonify({
         'status': 0
     })
+
+@jobs.route('/update-mod-keys', methods=['POST'])
+@form_key_required
+def update_mod_keys():
+    try:
+        key = request.form['key']
+        keys = current_user.mod_keys.split(' ')
+
+        keys.remove(unicode(key))
+
+        current_user.mod_keys = ' '.join(keys)
+
+        current_user.save()
+
+        return jsonify({
+            'status': 0
+        })
+    except:
+        log('Unknown error occurred:', traceback.format_exc())
+
+        return jsonify({
+            'status': UNKNOWN_EXCEPTION
+        })

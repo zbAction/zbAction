@@ -83,22 +83,23 @@ main {
 	padding-top: 5vw;
 	position: relative;
 	min-height: 20vw;
-}
 
-.status .glyphicon, .status .fa {
-	color: $red;
-}
+	& > span {
+		display: block;
+		margin-bottom: 36px;
+	}
 
-.status > span {
-	display: block;
-	margin-bottom: 36px;
+	&.glyphicon, &.fa {
+		color: $red;
+	}
 }
 
 .badge {
 	padding: 3px 5px;
 	font-size: 12px;
-	border: none !important;
-	color: #fff !important;
+	color: #fff;
+	position: relative;
+	bottom: 1px;
 
 	&.green {
 		background: $green;

@@ -18,7 +18,7 @@
 		<aside id="header">
 			<div class="wrapper">
 				<nav>
-					<a href="{{ url_for('index', uid=0) }}"></a>
+					<a href="{{ url_for('index') }}"></a>
 					<a href="#">Documentation</a>
 					<a href="#">Support</a>
 					{% if not current_user.is_authenticated() %}

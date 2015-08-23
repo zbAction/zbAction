@@ -107,9 +107,7 @@ def try_login():
 
     login_user(forum)
 
-    flash('You have been logged in.', category='green')
-
-    return redirect(url_for('index'))
+    return redirect(url_for('manage'))
 
 @meta.route('/logout', methods=['GET'])
 @login_required
