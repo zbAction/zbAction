@@ -51,8 +51,8 @@ class Action(Model):
         receiver = User.create_from(model['receiver'])
 
         return Action(
-            event=model['event'],
-            details=model['details'],
+            event=model['event'][0:256],
+            details=model['details'][0:10000],
             source=source.access_key,
             receiver=receiver.access_key,
         )

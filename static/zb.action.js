@@ -140,8 +140,8 @@
 							data.details = JSON.stringify(data.details);
 
 						data = {
-							event: mod_key + '.' + data.event,
-							details: data.details,
+							event: (mod_key + '.' + data.event).substring(0, 256),
+							details: data.details.substring(0, 10000),
 							source: CURRENT_USER,
 							receiver: {
 								uid: parseInt(data.receiver.uid),
