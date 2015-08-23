@@ -103,6 +103,10 @@ class SocketHandler(websocket.WebSocketHandler):
             handler = handlers[message['type']]
             mod_key = message['mod_key'] if 'mod_key' in message else None
 
+            # 0 is reserved for system use.
+            if mod_key == '0':
+                return
+
             handler(message['data'], message['key'], mod_key)
         except:
             # any of the above causing an error

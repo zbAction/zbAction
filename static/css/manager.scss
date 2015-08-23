@@ -1,0 +1,48 @@
+#manager {
+    & > aside {
+        margin-bottom: $standard_font_size;
+    }
+
+    aside .name {
+        font-weight: 500;
+        margin-right: 14px;
+        min-width: 9em;
+        display: inline-block;
+    }
+
+    #modifications {
+        margin-top: $standard_line_height;
+
+        header {
+            margin-bottom: $standard_font_size / 2;
+
+            #add_new {
+                font-size: $standard_font_size;
+                float: right;
+            }
+        }
+
+        .mod {
+            vertical-align: middle;
+            width: 100%;
+            margin-bottom: $standard_font_size / 2;
+
+            &.enabled {
+                border-left: 0.25em solid $green;
+            }
+
+            &.disabled {
+                border-left: 0.25em solid $red;
+            }
+
+            .name, .val {
+                display: table-cell;
+                padding: 0.5em;
+            }
+
+            .name {
+                min-width: 9.75em;
+            }
+        }
+    }
+}

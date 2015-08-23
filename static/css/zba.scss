@@ -9,7 +9,7 @@
 	outline: none;
 	font-family: Roboto;
 	-webkit-font-smoothing: antialiased;
-	-webkit-perspective: 1000;
+	-webkit-perspective: 0;
 	box-sizing: border-box;
 }
 
@@ -27,7 +27,7 @@ body {
 h2, h3 {
 	font-weight: 400;
 	border-bottom: 1px solid #ccc;
-	padding-bottom: 6px;
+	padding-bottom: $standard_font_size / 2;
 }
 
 h3 {
@@ -74,7 +74,7 @@ main {
 	flex: 2;
 }
 
-.form-input, .form-button, .alert, .literal, code, pre {
+.form-input, .form-button, .alert, .literal, .badge, code, pre {
 	border-radius: 3px;
 }
 
@@ -94,8 +94,24 @@ main {
 	margin-bottom: 36px;
 }
 
+.badge {
+	padding: 3px 5px;
+	font-size: 12px;
+	border: none !important;
+	color: #fff !important;
+
+	&.green {
+		background: $green;
+	}
+
+	&.red {
+		background: $red;
+	}
+}
+
 @import 'code';
 @import 'form';
 @import 'alerts';
 @import 'header';
 @import 'slides';
+@import 'manager';
