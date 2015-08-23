@@ -36,7 +36,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
         # Returning without sending an access key
         # basically cripples the front-end script
-        # since access keys are required to Send
+        # since access keys are required to send
         # messages.
         if board is None:
             return
