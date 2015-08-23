@@ -37,7 +37,7 @@
 
 		function slide_to(ele){
 			ele.css('display', 'table-cell');
-			
+
 			var $slides = $(container).find('> .slide:visible');
 			var dest = $slides.index(ele);
 			var offset = '-' + dest * 100 + 'vw';
@@ -78,7 +78,7 @@
 			else if(resp.status === 5)
 				$('#not-a-board').show();
 			else if(resp.status === 4)
-				location.replace('/error/500');
+				location.assign('/error/500');
 			else if(resp.status === 3)
 				$('#not-a-url').show();
 			else if(resp.status === 2)
@@ -86,7 +86,7 @@
 			else if(resp.status === 0)
 				slide_to($('#step_5bo'));
 		}).fail(function(){
-			location.replace('/error/500');
+			location.assign('/error/500');
 		}).always(function(){
 			$('#status').hide();
 		});
@@ -107,11 +107,11 @@
 			password: $('#reg-password').val()
 		}).success(function(resp){
 			if(!resp.hasOwnProperty('status') || resp.status !== 0)
-				location.replace('/error/500');
+				location.assign('/error/500');
 			else
 				location.replace('/meta/registered');
 		}).fail(function(){
-			location.replace('/error/500');
+			location.assign('/error/500');
 		});
 	});
 

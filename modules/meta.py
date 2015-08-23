@@ -96,7 +96,6 @@ def try_login():
         return redirect(url_for('meta.login'))
 
     forum = Forum.from_key(request.form['board-key'])
-    print dir(forum)
 
     if forum is None:
         flash('The board key specified does not exist.', category='red')
@@ -109,7 +108,7 @@ def try_login():
 
     login_user(forum)
 
-    return redirect(url_for('manage'))
+    return redirect(url_for('manager.manage'))
 
 @meta.route('/logout', methods=['GET'])
 @login_required

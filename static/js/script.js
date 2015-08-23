@@ -1,4 +1,4 @@
-(function(){
+(function(window){
 	$('.select').focus(function(){
 		$(this).select();
 	});

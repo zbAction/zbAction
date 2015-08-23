@@ -8,11 +8,11 @@ Account Manager
 
 {% block content %}
 <div class="wrapper" id="manager">
-    <aside>
+    <aside class="info">
         <span class="name">Board Key</span>
         <span class="val">{{ forum.board_key }}</span>
     </aside>
-    <aside>
+    <aside class="info">
         <span class="name">Status</span>
         <span class="val">
             {% if forum.enabled %}
@@ -26,7 +26,7 @@ Account Manager
             {% endif %}
         </span>
     </aside>
-    <aside>
+    <aside class="info">
         <span class="name">Current Board URL</span>
         <span class="val">
             <a href="{{ forum.bare_location }}">
@@ -34,7 +34,7 @@ Account Manager
             </a>
         </span>
     </aside>
-    <aside>
+    <aside class="info">
         <span class="name">Default Board URL</span>
         <span class="val">
             <a href="{{ forum.bare_location }}">
@@ -44,17 +44,20 @@ Account Manager
     </aside>
     <aside id="modifications">
         <header>
-            <h3>Modifications <a href="javascript:void(0)" id="add_new">Add</a></h3>
+            <h3>
+                Modifications
+                <a href="{{ url_for('manager.add_mod') }}" id="add-new">Add New Modifcation</a>
+            </h3>
         </header>
         {% for mod in mods %}
             <div class="mod {% if mod.enabled and mod.root_enabled %}enabled{% else %}disabled{% endif %}" id="{{ mod.api_key }}">
                 <aside>
                     <span class="name">Modification Name</span>
-                    <span class="val api_key">{{ mod.name if mod.name else 'N/A' }}</span>
+                    <span class="val">{{ mod.name if mod.name else 'N/A' }}</span>
                 </aside>
                 <aside>
                     <span class="name">Modification Key</span>
-                    <span class="val api_key">{{ mod.api_key }}</span>
+                    <span class="val">{{ mod.api_key }}</span>
                 </aside>
                 <aside>
                     <span class="name">Responsible For</span>

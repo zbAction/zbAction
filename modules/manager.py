@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask.ext.login import current_user, login_required
 from sqlalchemy.sql.functions import concat, count
 
@@ -44,3 +44,8 @@ def manage():
         sess.expunge_all()
 
     return render_template('manager.html', forum=current_user, mods=mods)
+
+@manager.route('/add-mod', methods=['GET'])
+@login_required
+def add_mod():
+    return render_template('add_mod.html', mods=current_user.mod_keys.split('\r\n'))

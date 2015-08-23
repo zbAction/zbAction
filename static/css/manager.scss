@@ -1,5 +1,5 @@
 #manager {
-    & > aside {
+    & > aside.info {
         margin-bottom: $standard_font_size;
     }
 
@@ -11,16 +11,15 @@
     }
 
     #modifications {
-        margin-top: $standard_line_height;
-
         header {
             margin-bottom: $standard_font_size / 2;
 
-            #add_new {
-                font-size: $standard_font_size;
-                float: right;
+            #add-new {
+                font-size: 12px;
             }
         }
+
+        margin-top: $standard_line_height;
 
         .mod {
             width: 100%;

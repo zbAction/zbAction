@@ -121,3 +121,21 @@ def update_mod_keys():
         return jsonify({
             'status': UNKNOWN_EXCEPTION
         })
+
+@jobs.route('/get-mod-info', methods=['POST'])
+@form_key_required
+def get_mod_info():
+    with session_factory() as sess:
+        mod = Mod.from_key(request.form['key'])
+
+        if mod is None:
+            return jsonify({
+                'status': MOD_DOES_NOT_EXIST
+            })
+        else:
+            return jsonify({
+                'status': 0,
+                'name': mod.name,
+                'key': mod.api_key,
+                'enabled': mod.enabled and mod.root_enabled
+            })

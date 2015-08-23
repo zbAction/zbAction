@@ -27,11 +27,15 @@ class Mod(Model):
     def from_key(key):
         with session_factory() as session:
             try:
-                return session.query(
-                    Mod.api_key
+                mod = session.query(
+                    Mod
                 ).filter(
                     Mod.api_key==key
                 ).one()
+
+                session.expunge(mod)
+
+                return mod
             except:
                 return None
 
