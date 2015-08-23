@@ -1,4 +1,5 @@
 from flask import abort, jsonify, render_template
+from flask.ext.login import login_required
 from jinja2.exceptions import TemplateNotFound
 from sqlalchemy.orm.exc import NoResultFound
 import traceback
@@ -48,6 +49,11 @@ def list_mods(board_key):
     except NoResultFound:
         return jsonify({})
 
+@app.route('/manager', methods=['GET'])
+@login_required
+def manage():
+    return render_template('manager.html')
+
 @app.route('/docs/<category>', methods=['GET'], defaults={'page': 'index'})
 @app.route('/docs/<category>/<page>', methods=['GET'])
 def docs(category, page):
@@ -60,6 +66,10 @@ def docs(category, page):
 def support():
     abort(404)
 
+@app.route('/index')
+def index():
+    abort(404)
+
 @app.route('/<int:uid>')
-def index(uid):
+def test(uid):
     return render_template('test.html', uid=uid)

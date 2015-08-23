@@ -2,7 +2,7 @@ import traceback
 import uuid
 
 from flask import abort, Blueprint, flash, jsonify, redirect, render_template, request, session, url_for
-from flask.ext.login import login_user
+from flask.ext.login import login_required, login_user, logout_user
 
 from main import bcrypt
 
@@ -94,6 +94,7 @@ def try_login():
         return redirect(url_for('meta.login'))
 
     forum = Forum.from_key(request.form['board-key'])
+    print dir(forum)
 
     if forum is None:
         flash('The board key specified does not exist.', category='red')
@@ -106,4 +107,14 @@ def try_login():
 
     login_user(forum)
 
+    flash('You have been logged in.', category='green')
+
+    return redirect(url_for('index'))
+
+@meta.route('/logout', methods=['GET'])
+@login_required
+@form_key_required
+def logout():
+    session.clear()
+    logout_user()
     return redirect(url_for('index'))

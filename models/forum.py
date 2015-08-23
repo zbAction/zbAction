@@ -23,31 +23,31 @@ class Forum(Model):
         with session_factory() as sess:
             sess.delete(self)
 
-	def is_authenticated(self):
-		if self.is_auth is not None:
-			return self.is_auth
+    def is_authenticated(self):
+        if self.is_auth is not None:
+            return self.is_auth
 
-		with session_factory() as sess:
-			try:
-				sess.query(Forum).filter(
-					Forum.board_key==self.board_key,
-					Forum.password==self.password
-				).one()
+        with session_factory() as sess:
+            try:
+                sess.query(Forum).filter(
+                    Forum.board_key==self.board_key,
+                    Forum.password==self.password
+                ).one()
 
-				self.is_auth = True
-				return True
-			except:
-				self.is_auth = False
-				return False
+                self.is_auth = True
+                return True
+            except:
+                self.is_auth = False
+                return False
 
-	def is_active(self):
-		return self.enabled
+    def is_anonymous(self):
+        return False
 
-	def is_anonymous(self):
-		return False
+    def is_active(self):
+        return self.enabled
 
-	def get_id(self):
-		return unicode(self.id)
+    def get_id(self):
+        return unicode(self.id)
 
     @staticmethod
     def from_id(id):
@@ -94,15 +94,7 @@ class Forum(Model):
 
     @staticmethod
     def key_exists(key):
-        with session_factory() as session:
-            try:
-                session.query(Forum.board_key).filter(
-                    Forum.board_key==key
-                ).one()
-
-                return False
-            except NoResultFound:
-                return True
+        return Forum.from_key(key) is not None
 
     @staticmethod
     def bpath_exists(bpath):

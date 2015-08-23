@@ -6,15 +6,18 @@ from jinja2 import PackageLoader
 from main import app, loader, login_manager
 
 from helpers import check_server
-from models.user import User
+from models.forum import Forum
+from models.mod import Mod
 from secure import get_form_key
 
-login_manager.refresh_view = 'login'
+login_manager.login_message_category = 'red'
+login_manager.login_view = 'meta.login'
+login_manager.refresh_view = 'meta.login'
 login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.from_id(int(userid))
+    return Forum.from_id(int(userid))
 
 def cache_bust(ep, **kwargs):
     if ep == 'static' and 'filename' in kwargs:

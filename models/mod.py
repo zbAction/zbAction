@@ -23,17 +23,19 @@ class Mod(Model):
             sess.delete(self)
 
     @staticmethod
-    def key_exists(key):
-        if key == 0: return True
-
+    def from_key(key):
         with session_factory() as session:
             try:
-                session.query(
+                return session.query(
                     Mod.api_key
                 ).filter(
                     Mod.api_key==key
                 ).one()
+            except:
+                return None
 
-                return True
-            except NoResultFound:
-                return False
+    @staticmethod
+    def key_exists(key):
+        if key == 0: return True
+
+        return Mod.from_key(key) is not None
