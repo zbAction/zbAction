@@ -11,6 +11,7 @@ class Forum(Model):
     bpath = Column(String)
     password = Column(String)
     enabled = Column(Boolean, default=True)
+    real_location = Column(String)
     bare_location = Column(String)
     mod_keys = Column(String, default='')
     is_auth = None

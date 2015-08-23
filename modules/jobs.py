@@ -29,8 +29,8 @@ def crawl():
     url = normalize_url(url)
 
     try:
-        test = get_url(url).text
-        bpath = re.findall(r'\$\.zb\.stat={[^}]+bpath:(\d+)[^}]+};', test)
+        test = get_url(url)
+        bpath = re.findall(r'\$\.zb\.stat={[^}]+bpath:(\d+)[^}]+};', test.text)
 
         if not len(bpath):
             return jsonify({
@@ -48,7 +48,7 @@ def crawl():
             own_regex(session['board_key'])
         )
 
-        if len(own_test.findall(test)) == 0:
+        if len(own_test.findall(test.text)) == 0:
             return jsonify({
                 'status': NOT_OWNER
             })
@@ -58,7 +58,13 @@ def crawl():
         crawler = Crawler(url)
         data = crawler.crawl()
 
-        session['forum'] = dict(board_key=board_key, bpath=bpath, bare_location=url)
+        session['forum'] = dict(
+            board_key=board_key,
+            bpath=bpath,
+            bare_location=url,
+            real_location=normalize_url(test.url)
+        )
+
         session['user_data'] = data
 
         return jsonify({

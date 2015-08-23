@@ -16,6 +16,7 @@ code {
 
 pre {
 	margin-bottom: $standard_line_height - $standard_font_size + 8px;
+	position: relative;
 
 	code {
 		margin: 0px;

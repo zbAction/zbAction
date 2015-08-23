@@ -36,6 +36,8 @@
 		var container = this;
 
 		function slide_to(ele){
+			ele.css('display', 'table-cell');
+			
 			var $slides = $(container).find('> .slide:visible');
 			var dest = $slides.index(ele);
 			var offset = '-' + dest * 100 + 'vw';
@@ -51,7 +53,6 @@
 					return;
 
 				var $target = $('#' + this.name);
-				$target.css('display', 'table-cell');
 
 				slide_to($target);
 			});

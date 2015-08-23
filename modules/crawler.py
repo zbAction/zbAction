@@ -35,7 +35,7 @@ class Crawler(object):
                     links = soup.select('#member_list_full a')
 
                     if len(links) == 0:
-                        retursn
+                        return
 
                     for link in links:
                         if not link.has_attr('href'):

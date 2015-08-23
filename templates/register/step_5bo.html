@@ -6,8 +6,11 @@
 {% set hidden=True %}
 
 {% block content %}
-<p>You're almost done! All you need to do now is choose a password to use with your account and you'll be ready to go.</p>
+<p>You're almost done! All you need to do now is choose a password to use with your account and you'll be ready to go. Take note of your board key and remember your password because they will be used to log in to the zbAction account manager.</p>
 <form>
+	<fieldset>
+		{{ forms.input(label='Board Key', value=board_key, readonly=True) }}
+	</fieldset>
 	<fieldset>
 		{{ forms.input(label='Password', type='password', id='reg-password', required=True) }}
 	</fieldset>

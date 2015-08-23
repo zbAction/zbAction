@@ -13,6 +13,7 @@ from models.user import User
 
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
+        setattr(self, 'origin', origin)
         return True
 
     def open(self):
@@ -28,7 +29,14 @@ class SocketHandler(websocket.WebSocketHandler):
         # Check for disabled boards.
         board = Forum.from_key_and_bpath(user['board_key'], user['bpath'])
 
-        if board is None or board is not None and board.enabled == False:
+        # Returning without sending an access key
+        # basically cripples the front-end script
+        # since access keys are required to Send
+        # messages.
+        if board is None:
+            return
+
+        if board.enabled == False or board.real_location != self.origin:
             return
 
         # Only one handshake per connection.

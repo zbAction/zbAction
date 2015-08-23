@@ -73,4 +73,7 @@ def normalize_url(url):
     if url[-1] != '/':
         url += '/'
 
+    if url.endswith('/index/'):
+        url = url.replace('index/', '')
+
     return url

@@ -9,7 +9,6 @@
 	outline: none;
 	font-family: Roboto;
 	-webkit-font-smoothing: antialiased;
-	-webkit-perspective: 0;
 	box-sizing: border-box;
 }
 
@@ -89,7 +88,7 @@ main {
 		margin-bottom: 36px;
 	}
 
-	&.glyphicon, &.fa {
+	& .glyphicon, & .fa {
 		color: $red;
 	}
 }
