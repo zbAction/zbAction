@@ -9,7 +9,7 @@ label {
 
 fieldset {
 	border: none;
-	margin: 0px 0px $standard_input_height;
+	margin: 0px 0px $standard_line_height;
 }
 
 .top-down {
@@ -72,8 +72,12 @@ fieldset {
 		box-shadow: 0px 1px 2px #eee;
 	}
 
-	fieldset + &, aside + & {
-		margin-top: $standard_font_size;
+	.fa-spin {
+		display: none;
+	}
+
+	aside + & {
+		margin-top: $standard_font_size - 2;
 	}
 
 	& + a, & + span {

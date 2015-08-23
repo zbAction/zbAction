@@ -16,18 +16,19 @@ Add New Modification
             <fieldset class="top-down">
                 {{ forms.input(id='new-mod-key', required=True) }}
             </fieldset>
-            {{ forms.button(type='submit', text='Continue', id='add-key-continue', color='red') }}
+            {{ forms.button(type='button', text='Continue', id='add-key-continue', color='red') }}
+            <span id="add-mod-status"></span>
         </form>
     </aside>
     <aside class="hidden" id="confirm-panel">
         <p>
             Are you sure you want to add this modification?
         </p>
-        <aside>
+        <aside class="info">
             <span class="name">Modification Name</span>
             <span class="val" id="mod-name"></span>
         </aside>
-        <aside>
+        <aside class="info">
             <span class="name">Modification Key</span>
             <span class="val" id="mod-key"></span>
         </aside>

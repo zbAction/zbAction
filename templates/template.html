@@ -39,15 +39,15 @@
 		<main>
 			{% with messages = get_flashed_messages(with_categories=True) %}
 				{% if messages %}
-				<div class="wrapper">
-					{% for category, message in messages %}
-					<aside class="alert {{ category }}">
-						<p>
-							{{ message }}
-						</p>
-					</aside>
-					{% endfor %}
-				</div>
+					<div class="wrapper">
+						{% for category, message in messages %}
+						<aside class="alert {{ category }}">
+							<p>
+								{{ message }}
+							</p>
+						</aside>
+						{% endfor %}
+					</div>
 				{% endif %}
 			{% endwith %}
 			{% block content %}{% endblock %}

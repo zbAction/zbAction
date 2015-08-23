@@ -14,13 +14,7 @@
 
 html, body {
 	font-size: $standard_font_size;
-	height: 100%;
 	color: $page-text-color;
-}
-
-body {
-	display: flex;
-	flex-flow: column;
 }
 
 h2, h3 {
@@ -57,7 +51,6 @@ a:hover {
 
 p {
 	line-height: $standard_line_height;
-	margin-bottom: $standard_input_height;
 }
 
 p + p {
@@ -71,10 +64,13 @@ p + p {
 
 main {
 	padding: $standard_line_height 0px;
-	height: 100%;
 	position: relative;
 	overflow-x: hidden;
-	flex: 2;
+
+	p {
+		margin-top: -($standard_line_height - $standard_font_size) / 2;
+		margin-bottom: ($standard_line_height - $standard_font_size);
+	}
 }
 
 .form-input, .form-button, .alert, .literal, .badge, code, pre {
