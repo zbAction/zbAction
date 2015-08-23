@@ -17,6 +17,7 @@ zbAction is a WebSocket based communication API that allows users to engage in r
 - MySQL Python
 - Ruby
 - SASS
+- LXML
 - Your Favorite Flavor of UNIX
 
 ### Nice to Have
