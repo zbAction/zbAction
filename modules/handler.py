@@ -27,6 +27,10 @@ class SocketHandler(websocket.WebSocketHandler):
         pass
 
     def handshake(self, user, key, mod_key):
+        # Only one handshake per connection.
+        if hasattr(self, 'user'):
+            return
+
         # Check for disabled boards.
         board = Forum.from_key_and_bpath(user['board_key'], user['bpath'])
 
@@ -38,10 +42,6 @@ class SocketHandler(websocket.WebSocketHandler):
             return
 
         if board.enabled == False or board.real_location != self.origin:
-            return
-
-        # Only one handshake per connection.
-        if hasattr(self, 'user'):
             return
 
         name = user['name']
@@ -113,7 +113,7 @@ class SocketHandler(websocket.WebSocketHandler):
             mod_key = message['mod_key'] if 'mod_key' in message else None
 
             # 0 is reserved for system use.
-            if mod_key == '0':
+            if mod_key == '0' and message['type'] == 'action':
                 return
 
             handler(message['data'], message['key'], mod_key)
