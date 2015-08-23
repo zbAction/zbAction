@@ -31,7 +31,12 @@ $(function(){
             $.post(get_mod_info_ep, {
                 key: key
             }).done(function(resp){
-                if(resp.status === 0 && resp.enabled){
+                if(resp.status === 0){
+                    if(!resp.enabled){
+                        $('#add-mod-status').text('This modification is currently suspended.');
+                        return;
+                    }
+
                     $('#mod-name').text(resp.name || 'N/A');
                     $('#mod-key').text(resp.key);
                     $('#add-mod-status').text('');
