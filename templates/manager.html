@@ -49,25 +49,25 @@ Account Manager
                 <a href="{{ url_for('manager.add_mod') }}" id="add-new">Add New Modifcation</a>
             </h3>
         </header>
-            {% for mod in mods %}
-                <div class="mod {% if mod.enabled and mod.root_enabled %}enabled{% else %}disabled{% endif %}" id="{{ mod.api_key }}">
-                    <aside>
-                        <span class="name">Modification Name</span>
-                        <span class="val">{{ mod.name if mod.name else 'N/A' }}</span>
-                    </aside>
-                    <aside>
-                        <span class="name">Modification Key</span>
-                        <span class="val">{{ mod.api_key }}</span>
-                    </aside>
-                    <aside>
-                        <span class="name">Responsible For</span>
-                        <span class="val">{{ mod.count }} Action(s)</span>
-                    </aside>
-                    <aside>
-                        <a href="javascript:void(0);" class="val remove">Remove</a>
-                    </aside>
-                </div>
-            {% endfor %}
+        {% for mod in mods %}
+            <div class="mod {% if mod.enabled and mod.root_enabled %}enabled{% else %}disabled{% endif %}" id="{{ mod.api_key }}">
+                <aside>
+                    <span class="name">Modification Name</span>
+                    <span class="val">{{ mod.name if mod.name else 'N/A' }}</span>
+                </aside>
+                <aside>
+                    <span class="name">Modification Key</span>
+                    <span class="val">{{ mod.api_key }}</span>
+                </aside>
+                <aside>
+                    <span class="name">Responsible For</span>
+                    <span class="val">{{ mod.count }} Action(s)</span>
+                </aside>
+                <aside>
+                    <a href="javascript:void(0);" class="val remove">Remove</a>
+                </aside>
+            </div>
+        {% endfor %}
     </aside>
 </div>
 {% endblock %}
