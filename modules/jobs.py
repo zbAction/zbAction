@@ -94,12 +94,15 @@ def add_api_key():
 @form_key_required
 def update_mod_keys():
     try:
-        key = request.form['key']
-        keys = current_user.mod_keys.split(' ')
+        key = unicode(request.form['key'])
+        keys = current_user.mod_keys.split('\r\n')
 
-        keys.remove(unicode(key))
+        if key in keys:
+            keys.remove(key)
+        else:
+            keys.append(key)
 
-        current_user.mod_keys = ' '.join(keys)
+        current_user.mod_keys = '\r\n'.join(keys)
 
         current_user.save()
 

@@ -35,6 +35,10 @@
                 border-left: 0.25em solid $red;
             }
 
+            &.pending {
+                border-left: 0.25em solid $yellow;
+            }
+
             .name, .val {
                 display: table-cell;
                 padding: 0.5em;

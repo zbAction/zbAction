@@ -38,7 +38,7 @@ def list_mods(board_key):
                 Forum.enabled==True
             ).one()
 
-            mods = forum.mod_keys.split(' ')
+            mods = forum.mod_keys.split('\r\n')
 
             mods = sess.query(Mod.api_key).filter(
                 Mod.api_key.in_(mods),
@@ -56,7 +56,7 @@ def list_mods(board_key):
 @login_required
 def manage():
     with session_factory() as sess:
-        mods = current_user.mod_keys.split(' ')
+        mods = current_user.mod_keys.split('\r\n')
 
         mods = sess.query(
             Mod.api_key,
