@@ -25,7 +25,7 @@
 						<a href="{{ url_for('meta.login') }}">Log In</a>
 						<a href="{{ url_for('meta.register') }}">Register</a>
 					{% else %}
-						<a href="{{ url_for('manage') }}">Account Manager</a>
+						<a href="{{ url_for('manager.manage') }}">Account Manager</a>
 						<a href="{{ url_for('meta.logout', __form_key=get_form_key()) }}">Log Out</a>
 					{% endif %}
 				</nav>
