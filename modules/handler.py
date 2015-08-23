@@ -13,7 +13,8 @@ from models.user import User
 
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
-        setattr(self, 'origin', origin)
+        # Origin URLs do not have a trailing slash.
+        setattr(self, 'origin', origin + '/')
         return True
 
     def open(self):
