@@ -15,7 +15,7 @@ blueprints = ['meta', 'jobs', 'manager']
 
 for bp in blueprints:
     module = __import__(bp, globals(), locals(), [bp], -1)
-    app.register_blueprint(getattr(module, bp))
+    app.register_blueprint(getattr(module, bp), url_prefix='/' + bp)
 
 @app.errorhandler(404)
 @app.errorhandler(500)
