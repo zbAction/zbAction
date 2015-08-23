@@ -13,7 +13,7 @@ from models.forum import Forum
 from models.user import User
 from secure import form_key_required, get_form_key, not_logged_in
 
-meta = Blueprint('meta')
+meta = Blueprint('meta', __name__)
 
 @meta.route('/register', methods=['GET'])
 @not_logged_in

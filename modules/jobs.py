@@ -15,7 +15,7 @@ from models.mod import Mod
 from secure import form_key_required
 from shared import own_regex
 
-jobs = Blueprint('jobs')
+jobs = Blueprint('jobs', __name__)
 
 @jobs.route('/crawl', methods=['POST'])
 @form_key_required

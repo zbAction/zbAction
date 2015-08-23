@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template
 from flask.ext.login import current_user, login_required
 from sqlalchemy.sql.functions import concat, count
-y
+
 from db import session_factory
 from models.action import Action
 from models.mod import Mod
 
-manager = Blueprint('manager')
+manager = Blueprint('manager', __name__)
 
 @manager.route('/', methods=['GET'])
 @login_required
