@@ -20,6 +20,11 @@ jobs = Blueprint('jobs', __name__)
 @jobs.route('/1', methods=['POST'])
 @form_key_required
 def crawl():
+    if 'crawling' in session and session['crawling']:
+        return
+
+    session['crawling'] = True
+
     if 'url' not in request.form or not request.form['url'].strip():
         return jsonify({
             'status': NO_DATA
@@ -82,6 +87,8 @@ def crawl():
         return jsonify({
             'status': UNKNOWN_EXCEPTION
         })
+    finally:
+        session['crawling'] = False
 
 @jobs.route('/2', methods=['POST'])
 @form_key_required
