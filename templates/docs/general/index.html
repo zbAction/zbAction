@@ -1,0 +1,59 @@
+{% extends 'template.html' %}
+
+{% block title %}zbAction Official Documentation{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <aside class="split">
+        <header>
+            <h3>Board Owners</h3>
+        </header>
+        <p>
+            <ul>
+                <li>
+                    <a href="{{ url_for('docs', category='bo', page='quickstart') }}">Quickstart Guide</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='bo', page='managing-mods') }}">Managing Modifications</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='bo', page='security')}}">Security Best Practices</a>
+                </li>
+            </ul>
+        </p>
+    </aside>
+    <aside class="split">
+        <header>
+            <h3>Developers</h3>
+        </header>
+        <p>
+            <ul>
+                <li>
+                    <a href="{{ url_for('docs', category='dev', page='quickstart') }}">Quickstart Guide</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='dev', page='api') }}">JavaScript SDK Overview</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='dev', page='restrictions') }}">Resource Restrictions</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='dev', page='keeping-track') }}">Keeping Track of Actions</a>
+                </li>
+                <li>
+                    <!--
+                    <a href="{{ url_for('docs', category='dev', page='rest') }}">REST API Overview</a>
+                    -->
+                    REST API Overview
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='dev', page='advanced') }}">Advanced Usage</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs', category='dev', page='internals') }}">A look at zbAction Internals</a>
+                </li>
+            </ul>
+        </p>
+    </aside>
+</div>
+{% endblock %}

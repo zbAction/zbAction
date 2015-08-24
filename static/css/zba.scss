@@ -18,18 +18,22 @@ html, body {
 }
 
 h2, h3 {
-	font-weight: 400;
+	font-weight: 500;
+	color: #888;
 	border-bottom: 1px solid #ccc;
 	padding-bottom: $standard_font_size / 2;
 }
 
 h3 {
 	font-family: 24px;
-	color: #888;
+
+	* {
+		font-weight: 400;
+	}
 }
 
 header + p {
-	margin-top: $standard_input_height;
+	margin-top: $standard_input_height !important;
 }
 
 hr {
@@ -38,6 +42,23 @@ hr {
 	height: 1px;
 	padding: 0px;
 	margin: 24px 0px;
+}
+
+ul, ol {
+	padding-left: $standard_line_height;
+
+	li {
+		line-height: $standard_line_height;
+	}
+}
+
+img {
+	margin-top: $standard_font_size;
+	border: 1px solid #ccc;
+}
+
+b {
+	font-weight: 500;
 }
 
 a {
@@ -73,7 +94,7 @@ main {
 	}
 }
 
-.form-input, .form-button, .alert, .literal, .badge, code, pre {
+.form-input, .form-button, .alert, .literal, .badge, code, pre, img {
 	border-radius: 3px;
 }
 
@@ -95,6 +116,8 @@ main {
 
 .badge {
 	padding: 3px 5px;
+	height: $standard_font_size;
+	box-sizing: border-box;
 	font-size: 12px;
 	color: #fff;
 	position: relative;
@@ -115,3 +138,4 @@ main {
 @import 'header';
 @import 'slides';
 @import 'manager';
+@import 'docs';

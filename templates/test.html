@@ -8,7 +8,7 @@ $.zb = {
 };
 
 window.__zbAction = {
-	board_key: 'dev'	
+	board_key: 'dev'
 };
 </script>
 <script src="{{ url_for('static', filename='socket.js') }}"></script>
@@ -28,5 +28,5 @@ function test(zbAction){
 	});
 }
 
-zbAction.ready('0', test);
+zbAction.ready('9a1bb521-83d3-4d1b-93b7-6535697c54d0', test);
 </script>

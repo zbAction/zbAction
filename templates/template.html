@@ -19,8 +19,8 @@
 			<div class="wrapper">
 				<nav>
 					<a href="{{ url_for('index') }}"></a>
-					<a href="#">Documentation</a>
-					<a href="#">Support</a>
+					<a href="{{ url_for('docs') }}">Documentation</a>
+					<a href="http://s15.zetaboards.com/zba/">Support</a>
 					{% if not current_user.is_authenticated() %}
 						<a href="{{ url_for('meta.login') }}">Log In</a>
 						<a href="{{ url_for('meta.register') }}">Register</a>

@@ -139,3 +139,14 @@ def get_mod_info():
                 'key': mod.api_key,
                 'enabled': mod.enabled and mod.root_enabled
             })
+
+@jobs.route('/edit-board-url', methods=['POST'])
+@form_key_required
+def update_board_url():
+    url = normalize_url(request.form['url'])
+    current_user.real_location = url
+    current_user.save()
+
+    return jsonify({
+        'url': url
+    })

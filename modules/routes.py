@@ -50,6 +50,7 @@ def list_mods(board_key):
     except NoResultFound:
         return jsonify({})
 
+@app.route('/docs', methods=['GET'], defaults={'category': 'general', 'page': 'index'})
 @app.route('/docs/<category>', methods=['GET'], defaults={'page': 'index'})
 @app.route('/docs/<category>/<page>', methods=['GET'])
 def docs(category, page):

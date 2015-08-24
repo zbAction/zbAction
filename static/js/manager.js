@@ -83,4 +83,22 @@ $(function(){
             location.assign('/error/500');
         });
     });
+
+    $('#edit-board-url').click(function(){
+        var url = prompt('Enter a new board URL:');
+
+        if(!url) return;
+
+        var that = this;
+
+        $.post(update_board_url_ep, {
+            url: url
+        }).done(function(resp){
+            $(that).prev()
+                .attr('href', resp.url)
+                .text(resp.url);
+        }).fail(function(){
+            location.assign('/error/500')
+        });
+    });
 });

@@ -1,0 +1,50 @@
+{% extends 'template.html' %}
+
+{% block title %}Board Owner Quickstart Guide{% endblock %}
+
+{% block content %}
+<div class="wrapper" id="doc">
+    <aside>
+        <header>
+            <h3>Step 1</h3>
+        </header>
+        <p>
+            Find a modification you want to add. Make sure the modification is safe to use as some modifications may cause harm to your board.
+        </p>
+    </aside>
+    <aside>
+        <header>
+            <h3>Step 2</h3>
+        </header>
+        <p>
+            Log in to zbAction and then go to the account manager. You can go to the account manager by clicking the link at the top of the page or by clicking <a href="{{ url_for('manager.manage') }}">here</a>.
+        </p>
+    </aside>
+    <aside>
+        <header>
+            <h3>Step 3</h3>
+        </header>
+        <p>
+            Click the "Add New Modification" link and follow the instructions.
+            <img src="http://somoe.moe/fetch/fe24c3aeca9a165fb2db7e5293ed319a5087432705eb1f109283fac75067b32e" />
+        </p>
+    </aside>
+    <aside>
+        <header>
+            <h3>Step 4</h3>
+        </header>
+        <p>
+            Add the modification's code to your board template. <b>We highly recommend you put the code for any modification directly below the zbAction code.</b>
+            <img src="http://somoe.moe/fetch/1e0ecd6afab90c3e568b0cb643247583f3e9e3d0ec8598a5b700ae8459b63ed7" />
+        </p>
+    </aside>
+    <aside>
+        <header>
+            <h3>Step 5</h3>
+        </header>
+        <p>
+            There is no step 5. Congratulations! You have just added a zbAction modification to your board.
+        </p>
+    </aside>
+</div>
+{% endblock %}

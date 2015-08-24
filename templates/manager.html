@@ -29,9 +29,10 @@ Account Manager
     <aside class="info">
         <span class="name">Current Board URL</span>
         <span class="val">
-            <a href="{{ forum.bare_location }}">
+            <a href="{{ forum.real_location }}">
                 {{ forum.real_location }}
             </a>
+            <a href="javascript: void(0);" id="edit-board-url">(Edit)</a>
         </span>
     </aside>
     <aside class="info">
@@ -75,6 +76,7 @@ Account Manager
 {% block scripts %}
 <script>
 var update_mod_keys_ep = {{ url_for('jobs.update_mod_keys', __form_key=get_form_key()) | tojson | safe }};
+var update_board_url_ep = {{ url_for('jobs.update_board_url', __form_key=get_form_key()) | tojson | safe }};
 </script>
 <script src="{{ url_for('static', filename='js/manager.js') }}"></script>
 {% endblock %}

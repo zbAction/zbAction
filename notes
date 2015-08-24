@@ -1,5 +1,5 @@
 TODO:
-	Modification management.
+	Edit board URL.
 	Write docs.
 
 	Need to setup DB on production server.
@@ -63,6 +63,7 @@ TODO:
 				Password
 
 	DONE: User login.
+	DONE: Modification management.
 
 zb_sync should be the websocket handler and should only:
 	- receive actions
