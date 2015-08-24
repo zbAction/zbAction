@@ -76,6 +76,11 @@ class SocketHandler(websocket.WebSocketHandler):
             log('Attempted to use invalid modification key:', mod_key)
             return
 
+        forum = Forum.from_key(self.user.board_key)
+
+        if mod_key not in forum.mod_keys:
+            return
+
         action = Action.create_from(action)
         receiver = User.from_access_key(action.receiver)
 
