@@ -6,6 +6,28 @@ from db import session_factory
 from models.action import Action
 from models.mod import Mod
 
+from sqlalchemy import event
+from sqlalchemy.engine import Engine
+import time
+import logging
+
+logging.basicConfig()
+logger = logging.getLogger("myapp.sqltime")
+logger.setLevel(logging.DEBUG)
+
+@event.listens_for(Engine, "before_cursor_execute")
+def before_cursor_execute(conn, cursor, statement,
+                        parameters, context, executemany):
+    conn.info.setdefault('query_start_time', []).append(time.time())
+    logger.debug("Start Query: %s", statement)
+
+@event.listens_for(Engine, "after_cursor_execute")
+def after_cursor_execute(conn, cursor, statement,
+                        parameters, context, executemany):
+    total = time.time() - conn.info['query_start_time'].pop(-1)
+    logger.debug("Query Complete!")
+    logger.debug("Total Time: %f", total)
+
 manager = Blueprint('manager', __name__)
 
 @manager.route('/', methods=['GET'])
@@ -26,7 +48,7 @@ def manage():
             Mod.api_key.in_(mods)
         ).outerjoin(
             Action,
-            Action.event.like(concat(Mod.api_key, '.', '%'))
+            Action.event.like(Mod.api_key + '.%')
         ).group_by(
             Mod.api_key
         ).order_by(
