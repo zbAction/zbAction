@@ -17,7 +17,7 @@ from shared import own_regex
 
 jobs = Blueprint('jobs', __name__)
 
-@jobs.route('/crawl', methods=['POST'])
+@jobs.route('/1', methods=['POST'])
 @form_key_required
 def crawl():
     if 'url' not in request.form or not request.form['url'].strip():
@@ -83,7 +83,7 @@ def crawl():
             'status': UNKNOWN_EXCEPTION
         })
 
-@jobs.route('/add-api-key', methods=['POST'])
+@jobs.route('/2', methods=['POST'])
 @form_key_required
 def add_api_key():
     with session_factory() as sess:
@@ -96,7 +96,7 @@ def add_api_key():
         'status': 0
     })
 
-@jobs.route('/update-mod-keys', methods=['POST'])
+@jobs.route('/3', methods=['POST'])
 @form_key_required
 def update_mod_keys():
     try:
@@ -122,7 +122,7 @@ def update_mod_keys():
             'status': UNKNOWN_EXCEPTION
         })
 
-@jobs.route('/get-mod-info', methods=['POST'])
+@jobs.route('/4', methods=['POST'])
 @form_key_required
 def get_mod_info():
     with session_factory() as sess:
@@ -140,7 +140,7 @@ def get_mod_info():
                 'enabled': mod.enabled and mod.root_enabled
             })
 
-@jobs.route('/edit-board-url', methods=['POST'])
+@jobs.route('/5', methods=['POST'])
 @form_key_required
 def update_board_url():
     url = normalize_url(request.form['url'])
