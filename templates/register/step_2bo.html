@@ -10,6 +10,7 @@
 <p>
 	In preparation for the next step, you need to prove ownership of your board. Please add the following code to your board template's <span class="literal">Below the Board</span> section.
 </p>
-{{ code.literal(gen_key_script) }}
+{{ code.literal(gen_key_script + '
+<script src="' + url_for('static', filename='bin/zb.action.min.js', _external=True) + '"></script>') }}
 {{ forms.button(name='step_3bo', color='red', text='Continue', type='submit') }}
 {% endblock %}
