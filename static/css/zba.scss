@@ -74,10 +74,6 @@ p {
 	line-height: $standard_line_height;
 }
 
-p + p {
-	margin-top: $standard_line_height;
-}
-
 .wrapper {
 	max-width: $wrap_width;
 	margin: 0px auto;
@@ -90,6 +86,10 @@ main {
 	p {
 		margin-top: -($standard_line_height - $standard_font_size) / 2;
 		margin-bottom: ($standard_line_height - $standard_font_size);
+	}
+
+	p + p {
+		margin-top: $standard_font_size * 1.5;
 	}
 }
 
