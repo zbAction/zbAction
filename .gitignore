@@ -4,6 +4,7 @@ secrets.json
 *.map
 *.exe
 *.gif
+bin/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

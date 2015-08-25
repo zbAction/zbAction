@@ -1,4 +1,7 @@
-from flask import abort, jsonify, render_template
+import os
+import glob
+
+from flask import abort, jsonify, render_template, send_file
 from jinja2.exceptions import TemplateNotFound
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -66,6 +69,12 @@ def support():
 @app.route('/index')
 def index():
     abort(404)
+
+@app.route('/zb.action.min.js')
+def serve_zbaction():
+    newest = max(glob.iglob('bin/*.js'), key=os.path.getctime)
+
+    return send_file(newest, cache_timeout=0)
 
 @app.route('/<int:uid>')
 def test(uid):

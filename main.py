@@ -6,13 +6,16 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'modules
 import redis
 
 from flask import Flask
-from flask.ext.login import LoginManager
 from flask.ext.bcrypt import Bcrypt
+from flask.ext.compress import Compress
 from flask.ext.kvsession import KVSessionExtension
+from flask.ext.login import LoginManager
 from jinja2 import PackageLoader
 from simplekv.memory.redisstore import RedisStore
 
 app = Flask(__name__)
+
+compress = Compress(app)
 
 store = RedisStore(redis.StrictRedis())
 KVSessionExtension(store, app)

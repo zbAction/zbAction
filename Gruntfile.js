@@ -1,8 +1,11 @@
 module.exports = function(grunt) {
-	grunt.initConfig({
+	var now = 1 * new Date;
+	var latest_bin = 'bin/zb.action.min.' + 1 * new Date + '.js';
+
+	var grunt_options = {
 		clean: {
 			all: {
-				src: ['**/*.min.*', '**/.sass-cache', '**/*.pyc', '**/*.map'],
+				src: ['**/.sass-cache', '**/*.pyc', '**/*.map'],
 			}
 		},
 		jshint: {
@@ -16,7 +19,6 @@ module.exports = function(grunt) {
 		uglify: {
 			everything: {
 				files: {
-					'static/bin/zb.action.min.js': ['static/socket.js', 'static/zb.action.js']
 				}
 			}
 		},
@@ -38,7 +40,11 @@ module.exports = function(grunt) {
 				tasks: ['sass']
 			}
 		}
-	});
+	};
+
+	grunt_options.uglify.everything.files[latest_bin] = ['static/socket.js', 'static/zb.action.js'];
+
+	grunt.initConfig(grunt_options);
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');

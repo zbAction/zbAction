@@ -48,7 +48,7 @@ $(function(){
                     $('#add-mod-status').text('This modification does not exist.');
                 }
             }).fail(function(){
-                location.assign('/error/500')
+                location.assign('/error/500');
             }).always(function(){
                 $('#add-new-panel button .fa-spinner').hide();
                 $('#add-new-panel button .content').show();
@@ -98,7 +98,7 @@ $(function(){
                 .attr('href', resp.url)
                 .text(resp.url);
         }).fail(function(){
-            location.assign('/error/500')
+            location.assign('/error/500');
         });
     });
 });
