@@ -1,10 +1,21 @@
 {% extends 'template.html' %}
 
-{% block title %}Security Best Practices{% endblock %}
+{% block title %}A Word On Security{% endblock %}
 
 {% block content %}
 <div class="wrapper" id="doc">
     <aside>
+        <header>
+            <h3>Board URLs and Modifications</h3>
+        </header>
+        <p>
+            zbAction validates the legitimacy of an action in many ways. One of these ways is through your board's current URL. If the URL shown in the account manager does not match your board's current URL be sure to change it as no modifications will work until you do so.
+        </p>
+    </aside>
+    <aside>
+        <header>
+            <h3>Recommended Practices</h3>
+        </header>
         <p>
             In order to keep your zbAction installation as secure as possible. We recommend that you follow the following guidelines:
             <ul>

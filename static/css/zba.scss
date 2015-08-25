@@ -46,6 +46,7 @@ hr {
 
 ul, ol {
 	padding-left: $standard_line_height;
+	margin-bottom: $standard_font_size * 1.5;
 
 	li {
 		line-height: $standard_line_height;
