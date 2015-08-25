@@ -17,7 +17,7 @@
             <h3>Modification Permissions</h3>
         </header>
         <p>
-            zbAction utilizes a modification whitelist to prevent the unauthorized sending and receiving of actions on your board. When you add a modification through the MMP you are putting it on your board's modification whitelist and giving it permission to access zbAction through your board. If you add a modification to your board template and it doesn't work then you should check to make it's added in the MMP.
+            zbAction utilizes a modification whitelist to prevent the unauthorized sending and receiving of actions on your board. When you add a modification through the MMP you are putting it on your board's modification whitelist and giving it permission to use zbAction through your board. If you add a modification to your board template and it doesn't work then you should check to make it's added in the MMP.
         </p>
     </aside>
     <aside>
@@ -28,7 +28,7 @@
             Modification overviews are bite-sized pieces of information about the modifications you have added to your board. Modification overviews show you the name and key of a modification as well as the total number of actions a modification is responsible for.
         </p>
         <p>
-            Modification overviews also show you the status of a modification. A green left-border means a modification is currently enabled and in good standing with zbAction. A red left-border means a modification is currently suspended and is not in good standing with zbAction. Suspended modifications are denied access to zbAction meaning they will not be able to utilize zbAction if you give them permission to do so.
+            Modification overviews also show you the status of a modification. A green left-border means a modification is currently enabled and in good standing with zbAction. A red left-border means a modification is currently suspended and is not in good standing with zbAction. Suspended modifications are denied access to zbAction. This means they will not be able to utilize zbAction even if you give them permission to do so.
             <img src="http://somoe.moe/fetch/75ba1c3e25f142d1bbac66a44da9f706a20613bee52d385c129aeb65d264cdf4" />
             Bonus: Modification analytics are on our roadmap meaning you will soon be able to view fancy graphs of modification activity over a period of time.
         </p>
@@ -48,9 +48,10 @@
             <h3>Removing Modifications</h3>
         </header>
         <p>
-            To add a modification, click the "Add Modification button" and then enter a modification key. You will then be presented with a prompt that looks like this:
-            <img src="http://somoe.moe/fetch/2f14c731a920731b93a1751c9bd876dd8b57de1ca086b2294dd215e1109bf3b4" />
-            If you trust the modification and are sure you want to add it then click "Confirm". Otherwise, click "Cancel".
+            To remove a modification, simply find its entry in the MMP and then click "Remove".
+        </p>
+        <p>
+            For damage control purposes, removing a modification will <b>immediately</b> prevent it from <b>sending new</b> actions. Any actions sent by a removed modification that are in the process of being sent will still be sent. Removing a modification <b>will not</b> prevent it from receiving actions if a user already has it loaded. For example: Let's say <i>User A</i> has <i>Modification X</i> loaded in his or her browser. If <i>Modification X</i> is disabled in the MMP then <i>Modification X</i> will no longer be able to send new actions. However, <i>Modification X</i> will still be able to receive actions until <i>User A</i> reloads the page or goes to a different page.
         </p>
     </aside>
 </div>
