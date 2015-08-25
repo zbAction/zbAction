@@ -1,7 +1,7 @@
 import os
 import glob
 
-from flask import abort, jsonify, render_template, send_file
+from flask import abort, jsonify, redirect, render_template, send_file
 from jinja2.exceptions import TemplateNotFound
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -64,7 +64,7 @@ def docs(category, page):
 
 @app.route('/support')
 def support():
-    abort(404)
+    return redirect('http://s15.zetaboards.com/zba/index/')
 
 @app.route('/index')
 def index():
