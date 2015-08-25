@@ -41,7 +41,7 @@ def setup2():
     get_form_key()
 
 def include_source(f):
-    return loader.get_source(app.jinja_env, f)[0]
+    return open(f).read()
 
 @app.context_processor
 def injections():
