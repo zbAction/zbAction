@@ -1,7 +1,6 @@
 import os
 
 from flask import request, session, url_for
-from jinja2 import PackageLoader
 
 from main import app, loader, login_manager
 
