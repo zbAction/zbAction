@@ -1,0 +1,30 @@
+{% extends 'template.html' %}
+
+{% block title %}Security Best Practices{% endblock %}
+
+{% block content %}
+<div class="wrapper" id="doc">
+    <aside>
+        <p>
+            In order to keep your zbAction installation as secure as possible. We recommend that you follow the following guidelines:
+            <ul>
+                <li>
+                    Never share your zbAction password with anybody.
+                </li>
+                <li>
+                    Only add modifications you trust.
+                </li>
+                <li>
+                    Keep all zbAction modification code below the zbAction code.
+                </li>
+                <li>
+                    Don't touch the zbAction code unless you know what you are doing.
+                </li>
+                <li>
+                    If you feel an added modification is not safe, remove it from your zbAction account <b>first</b>. After that, remove it from your board template. Removing a modification from your account results in an immediate change. Removing a modification from your board template does not&mdash;a page reload is required in order for the change to take effect.
+                </li>
+            </ul>
+        </p>
+    </aside>
+</div>
+{% endblock %}
