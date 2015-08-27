@@ -39,10 +39,6 @@
 
 	var USER_LIST = {};
 
-	$.getJSON(USER_LIST + CURRENT_USER.board_key, function(resp){
-		USER_LIST = resp.users;
-	});
-
 	var USER = {
 		by_uid: function(uid){
 			uid = '' + uid;
@@ -193,7 +189,11 @@
 					});
 				};
 
-				$.getJSON(MOD_URL + CURRENT_USER.board_key, load_approved);
+				$.getJSON(USER_URL + CURRENT_USER.board_key, function(resp){
+					USER_LIST = resp.users;
+				}).done(function(){
+					$.getJSON(MOD_URL + CURRENT_USER.board_key, load_approved);
+				});
 			}
 		};
 
