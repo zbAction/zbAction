@@ -43,7 +43,7 @@
 		USER_LIST = resp.users;
 	});
 
-	var user = {
+	var USER = {
 		by_uid: function(uid){
 			uid = '' + uid;
 
@@ -54,7 +54,7 @@
 			for(var test in USER_LIST)
 				if(USER_LIST[test] === name)
 					return test;
-			
+
 			return null;
 		}
 	};
@@ -113,6 +113,7 @@
 		var ModWrapper = function(send, key){
 			this.send = send.bind(null, key);
 			this.register = register.bind(this, key);
+			this.user = USER;
 		};
 
 		var load_approved = function(data){
