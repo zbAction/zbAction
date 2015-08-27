@@ -56,7 +56,7 @@ class Action(Model):
             model['timestamp'] = datetime.utcnow()
 
         return Action(
-            timestamp=model['timestamp']
+            timestamp=model['timestamp'],
             event=model['event'][0:256],
             details=model['details'][0:10000],
             source=source.access_key,

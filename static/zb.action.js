@@ -7,11 +7,11 @@
 
 	if(location.href.indexOf('localhost:') !== -1){
 		SOCKET_URL = 'ws://localhost:4242/sync';
-		MOD_URL = 'http://localhost:4343/mods/list/';
+		MOD_URL = 'http://localhost:4343/api/mods/list/';
 	}
 	else{
 		SOCKET_URL = 'ws://zbaction.reticent.io/sync';
-		MOD_URL = 'http://zbaction.reticent.io/mods/list/';
+		MOD_URL = 'http://zbaction.reticent.io/api/mods/list/';
 	}
 
 	var ACTION_TEMPLATE = {

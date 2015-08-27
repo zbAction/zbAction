@@ -79,7 +79,9 @@ class SocketHandler(websocket.WebSocketHandler):
 
         forum = Forum.from_key(self.user.board_key)
 
-        if mod_key not in forum.mod_keys:
+        mod_keys = forum.mod_keys.split('\r\n')
+
+        if str(mod_key) not in mod_keys:
             return
 
         action = Action.create_from(action)
