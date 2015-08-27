@@ -28,9 +28,25 @@
             Before we go any further, we should write the code to place a poke button on user profiles. Let's modify the previous example to do that.
         </p>
         {{ code.source('example/docs/quickstart_place_button.js') }}
+        <hr />
         <p>
-            Now that we have that done, we can start interfacing with zbAction. zbAction provides two standard functions for interfacing with it. These functions are: <span class="literal">zbAction.register</span> and <span class="literal">zbAction.send</span>. <span class="literal">zbAction.register</span> allows you to register action event handlers specific to your modification while <span class="literal">zbAction.send</span> allows you to send actions to be received by your modification. Here's an example:
+            Now that we have that done, we can start interfacing with zbAction. zbAction provides two standard methods for interfacing with it. These functions are: <span class="literal">zbAction.register</span> and <span class="literal">zbAction.send</span>. <span class="literal">zbAction.register</span> allows you to register action event handlers specific to your modification while <span class="literal">zbAction.send</span> allows you to send actions to be received by your modification.
         </p>
+        {{ code.literal('zbAction.register(event_name, function(action_template));') }}
+        {{ code.literal('zbAction.send(action_template);', lang='javascript') }}
+        <p>
+            Action events handled similarly to standard DOM events. <span class="literal">zbAction.register</span> is roughly equivalent to <span class="literal">document.addEventListener</span> in terms of purpose and functionality while <span class="literal">zbAction.send</span> is roughly equivalent to <span class="literal">ele.dispatchEvent</span> where <span class="literal">ele</span> is some arbitrary HTML DOM element.
+        </p>
+        <hr />
+        <p>
+            Below is an example usage of these two methods.
+        </p>
+        {{ code.source('example/docs/quickstart_send_register.js') }}
+        <p>
+            The code above will register an action event handler for the action "example" and then immediately send the action "example" to the user with uid <span class="literal">example_uid</span>. When the user with uid <span class="literal">example_uid</span> receives the action "example", an alert saying "Received an actin through event 'example'" will appear.
+        </p>
+        <p>
+            Actions are sent and received as action templates. Action templates require three fields: an event name, any event details, and a receiver/sender; everything else is optional. Therefore, the example above utilizes the most basic form of action template as it only sends the bare necessities.
     </aside>
 </div>
 {% endblock %}
