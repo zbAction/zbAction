@@ -2,3 +2,32 @@
     display: table-cell;
     width: $wrap_width / 2;
 }
+
+#api {
+    .literal {
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .property {
+        + .property {
+            margin-top: $standard_font_size * 1.5;
+        }
+
+        .param {
+            font-weight: 500;
+        }
+
+        > p, > span {
+            margin-left: $standard_line_height;
+        }
+
+        .arg {
+            margin-left: $standard_line_height * 2;
+        }
+
+        .arg + .arg {
+            margin-top: -7px;
+        }
+    }
+}

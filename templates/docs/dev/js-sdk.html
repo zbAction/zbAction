@@ -1,0 +1,110 @@
+{% extends 'template.html' %}
+
+{% import '_code.html' as code with context %}
+
+{% block title %}JavaScript SDK Overview{% endblock %}
+
+{% block content %}
+<div class="wrapper" id="api">
+    <aside id="class.zbaction">
+        <header>
+            <h3><i>class</i> zbAction</h3>
+        </header>
+        <p>
+            This class is used by modifications to hook into zbAction. In most cases, <span class="literal">zbAction.ready</span> should be used. Very rarely, should <span class="literal">zbAction._wait</span> be used.
+        </p>
+        <aside class="property" id="class.zbaction.ready">
+            <header>
+                <b>ready(mod_api_key, exec_func)</b>
+            </header>
+            <p>
+                Registers an execution function to run when zbAction is done loading.
+            </p>
+            <span class="param">Parameters:</span>
+            <p class="arg">
+                <b>mod_api_key</b> (string) - The unique modification API key to run the execution function with. This API key is used to identify your execution function at runtime and ensures actions sent by your modification can only be received by your modification.
+            </p>
+            <p class="arg">
+                <b>exec_func</b> (function) - The execution function to run when zbAction is loaded. This function is passed a single argument: an <a href="#object.zbaction">instance of zbAction</a>.
+            </p>
+        </aside>
+        <aside class="property" id="class.zbaction._wait">
+            <header>
+                <b>_wait[]</b>
+            </header>
+            <p>
+                An array that holds every single registered modification to be loaded. This should not be used unless certain circumstances arise. <span class="literal"><a href="#class.zbaction.ready">zbAction.ready</a></span> should be used instead.
+                <br />
+                Array items are of the form <span class="literal">{key: mod_api_key, fn: exec_func}</span>.
+            </p>
+        </aside>
+    </aside>
+    <aside id="object.zbaction">
+        <header>
+            <h3><i>object</i> zbAction</h3>
+        </header>
+        <p>
+            This is passed to all execution functions bound through <span class="literal"><a href="#class.zbaction.ready">zbAction.ready</a></span>.
+        </p>
+        <aside class="property" id="object.zbaction.register">
+            <header>
+                <b>register(action_event, exec_func)</b>
+            </header>
+            <p>
+                Registers an action event handler for the event <span class="literal">action_event</span>. When the event <span class="literal">action_event</span> is received, the function <span class="literal">exec_func</span> will be called.
+            </p>
+            <span class="param">Parameters:</span>
+            <p class="arg">
+                <b>action_event</b> (string) -The name of an event to listen for. This can be anything as long as it is <a href="{{ url_for('docs', category='dev', page='restrictions') }}">within reason</a>.
+            </p>
+            <p class="arg">
+                <b>exec_func</b> (function) - The execution function to run when the event <span class="literal">action_event</span> is received. This function is passed a single argument: an <a href="#object.action_template">action template</a> with the event's information.
+            </p>
+        </aside>
+        <aside class="property" id="object.zbaction.send">
+            <header>
+                <b>send(action_template)</b>
+            </header>
+            <p>
+                Sends the action template <span class="literal">action_template</span> to the zbAction for forwarding.
+            </p>
+            <span class="param">Parameters:</span>
+            <p class="arg">
+                <b>action_template</b> (object) - An <a href="#object.action_template">action template</a> with the event's information.
+            </p>
+        </aside>
+        <aside class="property" id="object.zbaction.users">
+            <header>
+                <b>users</b>
+            </header>
+            <p>
+                This is nothing more than an object containing the functions <span class="literal"><a href="#object.zbaction.users.by_uid">by_uid</a></span> and <span class="literal"><a href="#object.zbaction.users.by_name">by_name</a></span>.
+            </p>
+        </aside>
+        <aside class="property" id="object.zbaction.users.by_uid">
+            <header>
+                <b>users.by_uid(uid)</b>
+            </header>
+            <p>
+                Returns the name of the user with uid <span class="literal">uid</span> as a string. Returns <span class="literal">null</span> if the uid is not found. This function is not real-time. This means a page reload is required for new users to be found.
+            </p>
+            <span class="param">Parameters:</span>
+            <p class="arg">
+                <b>uid</b> (string | number) - The uid to search for.
+            </p>
+        </aside>
+        <aside class="property" id="object.zbaction.users.by_name">
+            <header>
+                <b>users.by_name(name)</b>
+            </header>
+            <p>
+                Returns the uid of the user with name <span class="literal">name</span> as a string. Returns <span class="literal">null</span> if the name is not found. This function is not real-time. This means a page reload is required for new users to be found.
+            </p>
+            <span class="param">Parameters:</span>
+            <p class="arg">
+                <b>name</b> (string) - The name to search for.
+            </p>
+        </aside>
+    </aside>
+</div>
+{% endblock %}
