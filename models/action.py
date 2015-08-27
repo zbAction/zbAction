@@ -50,7 +50,13 @@ class Action(Model):
         source = User.create_from(model['source'])
         receiver = User.create_from(model['receiver'])
 
+        try:
+            model['timestamp'] = datetime.fromtimestamp(model['timestamp'] / 1000.0)
+        except:
+            model['timestamp'] = datetime.utcnow()
+
         return Action(
+            timestamp=model['timestamp']
             event=model['event'][0:256],
             details=model['details'][0:10000],
             source=source.access_key,

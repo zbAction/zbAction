@@ -1,20 +1,16 @@
 import os
 import glob
 
-from flask import abort, jsonify, redirect, render_template, send_file
+from flask import abort, redirect, render_template, send_file
 from jinja2.exceptions import TemplateNotFound
-from sqlalchemy.orm.exc import NoResultFound
 
 from main import app
 
 from db import session_factory
-from models.action import Action
-from models.forum import Forum
-from models.mod import Mod
 
 # Routes
 
-blueprints = ['meta', 'jobs', 'manager']
+blueprints = ['api', 'meta', 'jobs', 'manager']
 
 for bp in blueprints:
     module = __import__(bp, globals(), locals(), [bp], -1)
@@ -29,29 +25,6 @@ def oops(err):
         return render_template('errors/{}.html'.format(err)), err
     except TemplateNotFound:
         return render_template('errors/404.html'), 404
-
-@app.route('/mods/list/<board_key>', methods=['GET'])
-def list_mods(board_key):
-    try:
-        with session_factory() as sess:
-            forum = sess.query(Forum.mod_keys).filter(
-                Forum.board_key==board_key,
-                Forum.enabled==True
-            ).one()
-
-            mods = forum.mod_keys.split('\r\n')
-
-            mods = sess.query(Mod.api_key).filter(
-                Mod.api_key.in_(mods),
-                Mod.enabled==True,
-                Mod.root_enabled==True
-            ).all()
-
-            return jsonify({
-                'mods': [mod.api_key for mod in mods]
-            })
-    except NoResultFound:
-        return jsonify({})
 
 @app.route('/docs', methods=['GET'], defaults={'category': 'general', 'page': 'index'})
 @app.route('/docs/<category>', methods=['GET'], defaults={'page': 'index'})

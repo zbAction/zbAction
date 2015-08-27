@@ -6,8 +6,31 @@
 
 {% block content %}
 <div class="wrapper" id="doc">
+    <aside class="alert yellow">
+        <p>
+            This guide assumes you have a working knowledge of JavaScript and jQuery.
+        </p>
+    </aside>
     <aside>
-        {{ code.source('example/poke/zb.action.poke.example.js') }}
+        <p>
+            Creating a zbAction modification is straightforward and easy. In this quickstart guide, we'll be creating a minimalistic poke modification similar to Facebook's poke feature. The first thing we need to do is hook into zbAction. We can do that by calling <span class="literal">zbAction.ready</span>.
+        </p>
+        {{ code.literal('zbAction.ready(api_key, function);', lang='javascript') }}
+        <p>
+            <span class="literal">zbAction.ready</span> takes two arguments: an API key and an execution function. When zbAction is done loading, execution functions are called and passed an instance of <span class="literal">zbAction</span>. Let's say we have some code like this:
+        </p>
+        {{ code.source('example/docs/quickstart_hello_world.js') }}
+        <p>
+            In the above example, when zbAction is finished loading, the execution function will automatically be called and an alert with the text "Hello World!" will appear.
+        </p>
+        <hr />
+        <p>
+            Before we go any further, we should write the code to place a poke button on user profiles. Let's modify the previous example to do that.
+        </p>
+        {{ code.source('example/docs/quickstart_place_button.js') }}
+        <p>
+            Now that we have that done, we can start interfacing with zbAction. zbAction provides two standard functions for interfacing with it. These functions are: <span class="literal">zbAction.register</span> and <span class="literal">zbAction.send</span>. <span class="literal">zbAction.register</span> allows you to register action event handlers specific to your modification while <span class="literal">zbAction.send</span> allows you to send actions to be received by your modification. Here's an example:
+        </p>
     </aside>
 </div>
 {% endblock %}

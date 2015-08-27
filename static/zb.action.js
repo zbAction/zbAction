@@ -143,6 +143,7 @@
 							event: (mod_key + '.' + data.event).substring(0, 256),
 							details: data.details.substring(0, 10000),
 							source: CURRENT_USER,
+							timestamp: data.timestamp,
 							receiver: {
 								uid: parseInt(data.receiver.uid),
 								// Cross-board is currently disabled but this is here

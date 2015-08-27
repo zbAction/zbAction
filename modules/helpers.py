@@ -59,7 +59,8 @@ def get_unread(user):
             Action
         ).filter(
             Action.receiver==user.access_key,
-            Action.seen==False
+            Action.seen==False,
+            Action.timestamp <= datetime.utcnow()
         ).all()
 
         session.expunge_all()

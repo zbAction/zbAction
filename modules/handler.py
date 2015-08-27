@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import traceback
 
@@ -89,7 +90,10 @@ class SocketHandler(websocket.WebSocketHandler):
             log('Attempted to send cross-board request:', self.user.board_key, receiver.board_key)
             return
 
-        action_queue.put(action)
+        if action.timestamp > datetime.utcnow():
+            store_queue.put(action)
+        else:
+            action_queue.put(action)
 
     def get_unread(self, user, key, mod_key):
         if hasattr(self, 'unread_done'):
