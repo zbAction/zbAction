@@ -13,7 +13,7 @@
     </aside>
     <aside>
         <p>
-            Creating a zbAction modification is straightforward and easy. In this quickstart guide, we'll be creating a minimalistic poke modification similar to Facebook's poke feature. The first thing we need to do is hook into zbAction. We can do that by calling <span class="literal">zbAction.ready</span>.
+            Creating a zbAction modification is straightforward and easy. In this quickstart guide, we'll be diving head first into the basics of developing for zbAction and creating a minimalistic poke modification similar to Facebook's poke feature. Before we can do anything, however, we need to hook into into zbAction. We can do that by calling <span class="literal">zbAction.ready</span>.
         </p>
         {{ code.literal('zbAction.ready(api_key, function);', lang='javascript') }}
         <p>
@@ -43,10 +43,30 @@
         </p>
         {{ code.source('example/docs/quickstart_send_register.js') }}
         <p>
-            The code above will register an action event handler for the action "example" and then immediately send the action "example" to the user with uid <span class="literal">example_uid</span>. When the user with uid <span class="literal">example_uid</span> receives the action "example", an alert saying "Received an actin through event 'example'" will appear.
+            The code above will register an action event handler for the action "example" and then immediately send the action "example" to the user with uid <span class="literal">example_uid</span>. When the user with uid <span class="literal">example_uid</span> receives the action "example", an alert saying "Received an action through event 'example'" will appear. The user will also see a second alert with the action event's details.
         </p>
         <p>
-            Actions are sent and received as action templates. Action templates require three fields: an event name, any event details, and a receiver/sender; everything else is optional. Therefore, the example above utilizes the most basic form of action template as it only sends the bare necessities.
+            Actions are sent and received as action templates. Action templates require three fields: an event name, any event details, and information about the sender/receiver; everything else is optional. Therefore, the example above utilizes the most basic form of action template as it only sends the bare necessities.
+        </p>
+        <hr />
+        <p>
+            We now know how to send and receive actions which means we can finish our poke system modification. The first thing we'll want to do is register an action event handler so we can handle pokes from other users.
+        </p>
+        {{ code.source('example/docs/quickstart_register.js') }}
+        <p>
+            Remembering that action templates <b>must</b> contain information about either the source or the receiver, we can use the <span class="literal">name</span> property of <span class="literal">action.source</span> to get the name of the person who poked us. By registering an event handler on "zba-poke-example", our specified execution function will run every time the current user receives the action "zba-poke-example". This means whenever current user is poked, they will receive an alert saying "You have been poked by {{ '<insert username here>' }}".
+        </p>
+        <hr />
+        <p>
+            Let's finish up this modification by putting in the code to actually poke somebody.
+        </p>
+        {{ code.source('example/docs/quickstart_finish.js') }}
+        <p>
+            In this step, we register a click event handler on the profile menu item we inserted previously. We then pass to the event handler a function that calls <span class="literal">zbAction.send</span> where an action template with the event name "zba-poke-example" is passed. Our modification is now complete and fully functional.
+        </p>
+        <hr />
+        <p>
+            You should now be armed with a basic knowledge of zbAction and should be able to create your own modifications. If you want a more in-depth look at how to create zbAction modifications, check out the rest of the <a href="{{ url_for('docs') }}">developer documentation</a>.
         </p>
     </aside>
 </div>
