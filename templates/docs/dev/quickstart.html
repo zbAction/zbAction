@@ -46,7 +46,7 @@
             The code above will register an action event handler for the action "example" and then immediately send the action "example" to the user with uid <span class="literal">example_uid</span>. When the user with uid <span class="literal">example_uid</span> receives the action "example", an alert saying "Received an action through event 'example'" will appear. The user will also see a second alert with the action event's details.
         </p>
         <p>
-            Actions are sent and received as action templates. Action templates are represented as objects and require three fields: an event name, any event details, and information about the sender/receiver; everything else is optional. Therefore, the example above utilizes the most basic form of action template as it only sends the bare necessities.
+            Actions are sent and received as action templates. Action templates are represented as objects and have three required properties: an event name, any event details, and information about the sender/receiver; everything else is optional. Therefore, the example above utilizes the most basic form of action template as it only sends the bare necessities.
         </p>
         <hr />
         <p>

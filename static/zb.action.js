@@ -4,14 +4,17 @@
 (function(window, Socket, undefined){
 	var SOCKET_URL;
 	var MOD_URL;
+	var USER_URL;
 
 	if(location.href.indexOf('localhost:') !== -1){
 		SOCKET_URL = 'ws://localhost:4242/sync';
 		MOD_URL = 'http://localhost:4343/api/mods/list/';
+		USER_URL = 'http://localhost:4343/api/users/list/';
 	}
 	else{
 		SOCKET_URL = 'ws://zbaction.reticent.io/sync';
 		MOD_URL = 'http://zbaction.reticent.io/api/mods/list/';
+		USER_URL = 'http://zbaction.reticent.io/api/users/list/';
 	}
 
 	var ACTION_TEMPLATE = {
@@ -32,6 +35,28 @@
 		bpath: $.zb.stat.bpath,
 		uid: $.zb.stat.mid,
 		name: 'andrew' // $('#top_info a[href*="/profile/"]').text()
+	};
+
+	var USER_LIST = {};
+
+	$.getJSON(USER_LIST + CURRENT_USER.board_key, function(resp){
+		USER_LIST = resp.users;
+	});
+
+	var user = {
+		by_uid: function(uid){
+			uid = '' + uid;
+
+			return USER_LIST[uid] || null;
+		},
+
+		by_name: function(name){
+			for(var test in USER_LIST)
+				if(USER_LIST[test] === name)
+					return test;
+			
+			return null;
+		}
 	};
 
 	// Disallow automated board key viewing. If

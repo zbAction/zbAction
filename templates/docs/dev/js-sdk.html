@@ -55,7 +55,7 @@
             </p>
             <span class="param">Parameters:</span>
             <p class="arg">
-                <b>action_event</b> (string) -The name of an event to listen for. This can be anything as long as it is <a href="{{ url_for('docs', category='dev', page='restrictions') }}">within reason</a>.
+                <b>action_event</b> (string) -The name of an event to listen for.
             </p>
             <p class="arg">
                 <b>exec_func</b> (function) - The execution function to run when the event <span class="literal">action_event</span> is received. This function is passed a single argument: an <a href="#object.action_template">action template</a> with the event's information.
@@ -103,6 +103,38 @@
             <span class="param">Parameters:</span>
             <p class="arg">
                 <b>name</b> (string) - The name to search for.
+            </p>
+        </aside>
+    </aside>
+    <aside id="object.action_template">
+        <header>
+            <h3><i>object</i> Action Template</h3>
+        </header>
+        <p>
+            Action templates are regular JavaScript objects with properties pertaining to action events. Action templates have three required properties: an event name, any details, and information about the source/receiver.
+        </p>
+        <aside class="property">
+            <span class="param">Properties:</span>
+            <p class="arg">
+                <b>event</b> (string) - An event name used to identify an action.
+            </p>
+            <p class="arg">
+                <b>details</b> (object | string | number | boolean) - Any data that works with <span class="literal"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a></span>.
+            </p>
+            <p class="arg">
+                <b>timestamp</b> (string | number, optional) - If this property is used when sending an action, it must be a number representing a timestamp in UTC. If this property is used when handling a received action, it will be a string representing an ISO 8601 timestamp in UTC (the offset from UTC will be omitted).
+            </p>
+            <p class="arg">
+                <b>receiver.uid</b> (number | string) - The uid of the receiver user.
+            </p>
+            <p class="arg">
+                <b>source.name</b> (string, optional) - The name of the source user.
+            </p>
+            <p class="arg">
+                <b>source.uid</b> (number) - The uid of the source user.
+            </p>
+            <p class="arg">
+                <b>seen</b> (boolean, optional) - A flag representing whether or not this action has already been seen. After an action is forwarded by the zbAction server, it is marked as seen. Newly forwarded actions will have this flag set to <span class="literal">false</span>. Any subsequent forwards will have this flag set to <span class="literal">true</span>. This functionality is subject to change and may be removed without notice.
             </p>
         </aside>
     </aside>
