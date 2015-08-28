@@ -1,5 +1,5 @@
 /*
-Error: Undefined variable: "$page-text-color".
+Error: Undefined variable: "$page_text_color".
         on line 14 of static/css/zba.scss
 
 9: 	outline: none;
@@ -7,7 +7,7 @@ Error: Undefined variable: "$page-text-color".
 11: }
 12: 
 13: html, body {
-14: 	color: $page-text-color;
+14: 	color: $page_text_color;
 15: 	font-size: $standard_font_size;
 16: }
 17: 
@@ -61,4 +61,4 @@ C:/Ruby22-x64/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$page-text-color\".\A         on line 14 of static/css/zba.scss\A \A 9: 	outline: none;\A 10: 	padding: 0px;\A 11: }\A 12: \A 13: html, body {\A 14: 	color: $page-text-color;\A 15: 	font-size: $standard_font_size;\A 16: }\A 17: \A 18: h2, h3 {\A 19: 	border-bottom: 1px solid #ccc;"; }
+  content: "Error: Undefined variable: \"$page_text_color\".\A         on line 14 of static/css/zba.scss\A \A 9: 	outline: none;\A 10: 	padding: 0px;\A 11: }\A 12: \A 13: html, body {\A 14: 	color: $page_text_color;\A 15: 	font-size: $standard_font_size;\A 16: }\A 17: \A 18: h2, h3 {\A 19: 	border-bottom: 1px solid #ccc;"; }
