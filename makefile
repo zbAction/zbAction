@@ -29,7 +29,7 @@ copy:
 
 	scp -r example zba@zba:/var/www/zba/
 
-	scp /zba/secrets.json zba@zba:/zba/secrets.json
+	# scp /zba/secrets.json zba@zba:/zba/secrets.json
 
 deploy:
 	ssh -f zba@zba "killall -s SIGKILL python; python /var/www/zba/zb_sync.py &>> socket_output; restart zba"

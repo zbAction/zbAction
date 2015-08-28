@@ -70,6 +70,8 @@ def crawl():
             real_location=normalize_url(test.url)
         )
 
+        return jsonify(session['forum'])
+
         session['user_data'] = data
 
         return jsonify({
