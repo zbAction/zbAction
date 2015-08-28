@@ -94,8 +94,8 @@ Other Notes:
 	- Mod key "0" is the dev mod key and should only be used
 	for official system communication (such as handshakes)
 
-	- Action events are restricted to be 256 characters long
-	INCLUDING THE MOD KEY PLUS THE SEPARATING PERIOD so 255
+	- Action events are restricted to be 255 characters long
+	INCLUDING THE MOD KEY PLUS THE SEPARATING PERIOD so 254
 	characters excluding the separator but including the mod key
 
 	- Action details are restricted to 10,000 characters long

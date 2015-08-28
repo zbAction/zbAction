@@ -57,7 +57,7 @@ class Action(Model):
 
         return Action(
             timestamp=model['timestamp'],
-            event=model['event'][0:256],
+            event=model['event'][0:255],
             details=model['details'][0:10000],
             source=source.access_key,
             receiver=receiver.access_key,

@@ -162,7 +162,7 @@
 							data.details = JSON.stringify(data.details);
 
 						data = {
-							event: (mod_key + '.' + data.event).substring(0, 256),
+							event: (mod_key + '.' + data.event).substring(0, 255),
 							details: data.details.substring(0, 10000),
 							source: CURRENT_USER,
 							timestamp: data.timestamp,

@@ -4,5 +4,15 @@
 
 {% block content %}
 <div class="wrapper">
+    <p>
+        In an effort to reduce load on the zbAction servers, we set limits on certain resources.
+    </p>
+    <hr />
+    <p>
+        <b>Action Event Names</b> - Action event names are restricted to 255 characters <b>minus</b> the length of your modification API key.
+    </p>
+    <p>
+        <b>Action Event Details</b> - Action event details are restricted to 10,000 characters when <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">stringified</a>.
+    </p>
 </div>
 {% endblock %}
