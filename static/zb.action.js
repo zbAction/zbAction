@@ -115,12 +115,9 @@
 		var load_approved = function(data){
 			var approved = data.mods || [];
 
-			for(var n = 0; n < that._wait.length; n++){
-				var fn = that._wait[n];
-
-				if(approved.indexOf(fn.key) !== -1)
-					fn.fn.call(null, new ModWrapper(send, fn.key));
-			}
+			for(var key in that._wait)
+				if(approved.indexOf(key) !== -1)
+					that._wait[key].call(null, new ModWrapper(send, key));
 
 			ws.send({
 				key: 0,
@@ -208,7 +205,7 @@
 		if(typeof fn !== 'function')
 			throw 'You must specify a function.';
 
-		this._wait.push({key: key, fn: fn});
+		this._wait[key] = fn;
 	};
 
 	window.zbAction = new zbAction();
