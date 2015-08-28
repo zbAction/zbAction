@@ -1,5 +1,7 @@
 {% extends 'template.html' %}
 
+{% import '_code.html' as code with context %}
+
 {% block title %}Keeping Track of Actions{% endblock %}
 
 {% block content %}
@@ -7,5 +9,12 @@
     <p>
         Because actions are meant to be one-time use, zbAction does not offer a way to keep track of actions besides the <span class="literal">seen</span> flag in <a href="{{ url_for('docs', category='dev', page='js-sdk', _anchor='object.action_template') }}">action templates</a>. Therefore, if your modification uses actions more than once, it is necessary for you to implement your own action tracking. One way for you to keep track of actions is to store them as strings inside a database. Even something simple such as a NoSQL database will get the job done.
     </p>
+    <p>
+        We understand that sometimes you will need to perform an action lookup to find a particular action from the past. To help with this, zbAction exposes a single REST API endpoint (the remainder of the API is still in the works).
+    </p>
+    {{ code.literal(
+'GET: ' + url_for('api.get_action_by_id', action_id='action_id') + '\n'
+'Cache Time: 60 minutes\n'
++ url_for('api.get_action_by_id', action_id='action_id', _external=True), lang='nohighlight') }}
 </div>
 {% endblock %}
