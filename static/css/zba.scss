@@ -44,6 +44,7 @@ hr {
 ul, ol {
 	margin-bottom: $standard_font_size * 1.5;
 	padding-left: $standard_line_height;
+	
 	li {
 		line-height: $standard_line_height;
 	}
@@ -99,10 +100,12 @@ main {
 	padding-top: 5vw;
 	position: relative;
 	text-align: center;
+
 	& > span {
 		display: block;
 		margin-bottom: 36px;
 	}
+
 	& .glyphicon, & .fa {
 		color: $red;
 	}
@@ -116,9 +119,11 @@ main {
 	height: $standard_font_size;
 	padding: 3px 5px;
 	position: relative;
+
 	&.green {
 		background: $green;
 	}
+
 	&.red {
 		background: $red;
 	}
