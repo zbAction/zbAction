@@ -13,18 +13,18 @@
 </aside>
 <aside id="not-a-board" class="hidden status">
 	<span class="fa fa-times fa-5x"></span>
-	<span>The forum URL you entered is not valid.</span>
+	<span>The borum URL you entered is not valid.</span>
 	{{ forms.button(name='step_3bo', color='red', text='Go Back', type='button') }}
 </aside>
 <aside id="not-owned" class="hidden">
-	<p>You must prove ownership of this forum. Place the code below in your board template's <span class="literal">Javascripts</span> section.</p>
+	<p>You must prove ownership of this board. Place the code below in your board template's <span class="literal">Below the Board</span> section.</p>
 	{{ code.literal(gen_key_script + '
 <script src="' + url_for('serve_zbaction', _external=True) + '"></script>') }}
 	{{ forms.button(id='reg-retry', color='red', text='Retry', type='button') }}
 </aside>
 <aside id="board-in-use" class="hidden status">
 	<span class="fa fa-times fa-5x"></span>
-	<span>This forum is already registered with zbAction. Log in to manage its settings.</span>
+	<span>This borum is already registered with zbAction. Log in to manage its settings.</span>
 </aside>
 <aside id="not-a-url" class="hidden status">
 	<span class="fa fa-times fa-5x"></span>
