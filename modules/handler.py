@@ -42,7 +42,13 @@ class SocketHandler(websocket.WebSocketHandler):
         if board is None:
             return
 
-        if board.enabled == False or board.real_location != self.origin:
+        if board.enabled == False:
+            return
+
+        if '.zetaboards.com/' in self.origin:
+            if self.origin != board.bare_location:
+                return
+        elif self.origin != board.real_location:
             return
 
         name = user['name']
