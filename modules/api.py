@@ -69,4 +69,6 @@ def get_action_by_id(action_id):
         if not action:
             return jsonify({})
 
-        return jsonify(json.loads(action.to_json()))
+        sess.expunge(action)
+
+    return jsonify(json.loads(action.to_json()))
