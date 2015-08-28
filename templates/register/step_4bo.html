@@ -19,7 +19,7 @@
 <aside id="not-owned" class="hidden">
 	<p>You must prove ownership of this board. Place the code below in your board template's <span class="literal">Below the Board</span> section.</p>
 	{{ code.literal(gen_key_script + '
-<script src="' + url_for('serve_zbaction', _external=True) + '"></script>') }}
+<script src="' + url_for('static', filename='bin/zb.action.min.js', _external=True) + '"></script>') }}
 	{{ forms.button(id='reg-retry', color='red', text='Retry', type='button') }}
 </aside>
 <aside id="board-in-use" class="hidden status">
