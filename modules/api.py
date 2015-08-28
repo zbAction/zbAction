@@ -1,6 +1,7 @@
 import json
 
 from flask import Blueprint, jsonify
+from flask.ext.cors import CORS
 from sqlalchemy.orm.exc import NoResultFound
 
 from main import cache
@@ -12,6 +13,7 @@ from models.mod import Mod
 from models.user import User
 
 api = Blueprint('api', __name__)
+CORS(API)
 
 @api.route('/mods/list/<board_key>', methods=['GET'])
 def list_mods(board_key):

@@ -85,7 +85,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
         mod_keys = forum.mod_keys.split('\r\n')
 
-        if str(mod_key) not in mod_keys:
+        if mod_key != 0 and str(mod_key) not in mod_keys:
             log('Attempted to use invalid modification key:', mod_key)
             return
 
