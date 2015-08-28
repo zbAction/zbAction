@@ -1,7 +1,4 @@
 module.exports = function(grunt) {
-	var now = 1 * new Date;
-	var latest_bin = 'bin/zb.action.min.' + 1 * new Date + '.js';
-
 	var grunt_options = {
 		clean: {
 			all: {
@@ -19,6 +16,7 @@ module.exports = function(grunt) {
 		uglify: {
 			everything: {
 				files: {
+					'static/bin/zb.action.min.js': ['static/socket.js', 'static/zb.action.js']
 				}
 			}
 		},
@@ -41,8 +39,6 @@ module.exports = function(grunt) {
 			}
 		}
 	};
-
-	grunt_options.uglify.everything.files[latest_bin] = ['static/socket.js', 'static/zb.action.js'];
 
 	grunt.initConfig(grunt_options);
 
