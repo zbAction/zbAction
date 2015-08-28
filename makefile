@@ -16,8 +16,6 @@ copy:
 		chmod -R 777 /var/www/zba; \
 	"
 
-	scp -r bin zba@zba:/var/www/zba/
-
 	scp *.py zba@zba:/var/www/zba/.
 	scp -r modules zba@zba:/var/www/zba/
 	scp -r models zba@zba:/var/www/zba/
