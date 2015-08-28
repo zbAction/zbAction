@@ -7,6 +7,7 @@ import redis
 
 from flask import Flask
 from flask.ext.bcrypt import Bcrypt
+from flask.ext.cache import Cache
 from flask.ext.compress import Compress
 from flask.ext.kvsession import KVSessionExtension
 from flask.ext.login import LoginManager
@@ -15,6 +16,7 @@ from simplekv.memory.redisstore import RedisStore
 
 app = Flask(__name__)
 
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 compress = Compress(app)
 
 store = RedisStore(redis.StrictRedis())

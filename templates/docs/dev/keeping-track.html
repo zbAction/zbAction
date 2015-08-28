@@ -1,0 +1,11 @@
+{% extends 'template.html' %}
+
+{% block title %}Keeping Track of Actions{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <p>
+        Because actions are meant to be one-time use, zbAction does not offer a way to keep track of actions besides the <span class="literal">seen</span> flag in <a href="{{ url_for('docs', category='dev', page='js-sdk', _anchor='object.action_template') }}">action templates</a>. Therefore, if your modification uses actions more than once, it is necessary for you to implement your own action tracking. One way for you to keep track of actions is to store them as strings inside a database. Even something simple such as a NoSQL database will get the job done.
+    </p>
+</div>
+{% endblock %}

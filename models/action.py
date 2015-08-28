@@ -38,7 +38,7 @@ class Action(Model):
             'event': self.event,
             'details': self.details,
             'source': User.from_access_key(self.source).to_json(),
-            'receiver': User.from_acccess_key(self.receiver).to_json(),
+            'receiver': User.from_access_key(self.receiver).to_json(),
             'seen': self.seen
         })
 

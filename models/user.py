@@ -63,15 +63,15 @@ class User(Model):
 
     @staticmethod
     def from_access_key(key):
-        with session_factory() as session:
+        with session_factory() as sess:
             try:
-                user = session.query(
+                user = sess.query(
                     User
                 ).filter(
                     User.access_key==key
                 ).one()
 
-                session.expunge(user)
+                sess.expunge(user)
 
                 return user
             except NoResultFound:
@@ -88,7 +88,7 @@ class User(Model):
                     User.board_key==model['board_key'],
                     User.uid==model['uid']
                 ).one()
-        
+
                 session.expunge(user)
                 return user
             except NoResultFound:

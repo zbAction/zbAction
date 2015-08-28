@@ -1,7 +1,12 @@
+import json
+
 from flask import Blueprint, jsonify
 from sqlalchemy.orm.exc import NoResultFound
 
+from main import cache
+
 from db import session_factory
+from models.action import Action
 from models.forum import Forum
 from models.mod import Mod
 from models.user import User
@@ -52,3 +57,16 @@ def list_users(board_key):
                 user.uid: user.name for user in users
             }
         })
+
+# @cache.memoize(timeout=300)
+@api.route('/actions/get/<action_id>', methods=['GET'])
+def get_action_by_id(action_id):
+    with session_factory() as sess:
+        action = sess.query(Action).filter(
+            Action.id==action_id
+        ).first()
+
+        if not action:
+            return jsonify({})
+
+        return jsonify(json.loads(action.to_json()))
