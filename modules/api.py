@@ -58,7 +58,7 @@ def list_users(board_key):
             }
         })
 
-# @cache.memoize(timeout=300)
+@cache.memoize(timeout=300)
 @api.route('/actions/get/<action_id>', methods=['GET'])
 def get_action_by_id(action_id):
     with session_factory() as sess:
