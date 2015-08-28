@@ -109,7 +109,7 @@
 		var ModWrapper = function(send, key){
 			this.send = send.bind(null, key);
 			this.register = register.bind(this, key);
-			this.user = USER;
+			this.users = USER;
 		};
 
 		var load_approved = function(data){
