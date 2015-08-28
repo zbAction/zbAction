@@ -31,6 +31,7 @@ from routes import *
 
 from secrets import secrets
 
+app.secret_key = secrets.secret_key
+
 if __name__ == '__main__':
-    app.secret_key = secrets.secret_key
     app.run(host ='0.0.0.0', port=secrets.web_port, threaded=secrets.DEBUG, debug=secrets.DEBUG)
