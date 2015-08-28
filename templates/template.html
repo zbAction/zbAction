@@ -15,22 +15,7 @@
 			</div>
 		</aside>
 		{% endif %}
-		<aside id="header">
-			<div class="wrapper">
-				<nav>
-					<a href="{{ url_for('index') }}"></a>
-					<a href="{{ url_for('docs') }}">Documentation</a>
-					<a href="{{ url_for('support') }}">Support</a>
-					{% if not current_user.is_authenticated() %}
-						<a href="{{ url_for('meta.login') }}">Log In</a>
-						<a href="{{ url_for('meta.register') }}">Register</a>
-					{% else %}
-						<a href="{{ url_for('manager.manage') }}">Manage Account</a>
-						<a href="{{ url_for('meta.logout', __form_key=get_form_key()) }}">Log Out</a>
-					{% endif %}
-				</nav>
-			</div>
-		</aside>
+		{% include '_header.html' %}
 		<header id="top">
 			<div class="wrapper">
 				<h1>{{ self.title() or 'zbAction' }}</h1>

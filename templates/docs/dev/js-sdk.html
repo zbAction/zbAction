@@ -114,7 +114,7 @@
         <aside class="property">
             <span class="param">Properties:</span>
             <p class="arg">
-                <b>id</b> (number) - A number uniquely identifying an action.
+                <b>id</b> (number, internal) - A number uniquely identifying an action. This value is automatically set when passing an action template to an action event handler.
             </p>
             <p class="arg">
                 <b>event</b> (string) - An event name used to identify an action.
@@ -135,9 +135,12 @@
                 <b>source.uid</b> (number) - The uid of the source user.
             </p>
             <p class="arg">
-                <b>seen</b> (boolean, optional) - A flag representing whether or not this action has already been seen. After an action is forwarded by the zbAction server, it is marked as seen. Newly forwarded actions will have this flag set to <span class="literal">false</span>. Any subsequent forwards will have this flag set to <span class="literal">true</span>. This functionality is subject to change and may be removed without notice.
+                <b>seen</b> (boolean, internal) - A flag representing whether or not this action has already been seen. After an action is forwarded by the zbAction server, it is marked as seen. Newly forwarded actions will have this flag set to <span class="literal">false</span>. Any subsequent forwards will have this flag set to <span class="literal">true</span>. This functionality is subject to change and may be removed without notice.
             </p>
         </aside>
+        <p>
+            Note that any attempts to override an internal property will be ignored. Actions must have a source or receiver but not both.
+        </p>
     </aside>
 </div>
 {% endblock %}
