@@ -39,6 +39,7 @@ def docs(category, page):
 def support():
     return redirect('http://s15.zetaboards.com/zba/index/')
 
+@app.route('/')
 @app.route('/index')
 def index():
     return render_template('home.html')
