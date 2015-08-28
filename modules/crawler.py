@@ -29,7 +29,7 @@ class Crawler(object):
                         '{}members/{}/?force_ads'.format(self.url, to_scrape)
                     ).text
 
-                    print '{}members/{}/?force_ads'.format(self.url, to_scrape)
+                    # print '{}members/{}/?force_ads'.format(self.url, to_scrape)
 
                     soup = BeautifulSoup(data, 'lxml') # 'html.parser')
                     links = soup.select('#member_list_full a')
