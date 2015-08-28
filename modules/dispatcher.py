@@ -15,6 +15,7 @@ class Dispatcher(Thread):
             receiver = User.from_access_key(action.receiver)
 
             data = {
+                'id': action.id,
                 'timestamp': str(action.timestamp),
                 'event': action.event,
                 'details': action.details,
