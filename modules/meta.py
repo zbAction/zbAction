@@ -7,6 +7,7 @@ from flask.ext.login import login_required, login_user, logout_user
 from main import bcrypt
 
 from db import engine
+from errors import *
 from helpers import gen_key_script
 from logger import log
 from models.forum import Forum
