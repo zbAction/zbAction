@@ -18,7 +18,8 @@
 </aside>
 <aside id="not-owned" class="hidden">
 	<p>You must prove ownership of this forum. Place the code below in your board template's <span class="literal">Javascripts</span> section.</p>
-	{{ code.literal(gen_key_script) }}
+	{{ code.literal(gen_key_script + '
+<script src="' + url_for('serve_zbaction', _external=True) + '"></script>') }}
 	{{ forms.button(id='reg-retry', color='red', text='Retry', type='button') }}
 </aside>
 <aside id="board-in-use" class="hidden status">
