@@ -47,7 +47,7 @@ def index():
 @app.route('/zb.action.min.js')
 @cache.cached(timeout=60 * 10)
 def serve_zbaction():
-    newest = max(glob.iglob('bin/*.js'), key=os.path.getctime)
+    newest = max(glob.iglob('/var/www/zba/bin/*.js'), key=os.path.getctime)
 
     return send_file(newest, cache_timeout=0)
 
