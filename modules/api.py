@@ -13,7 +13,7 @@ from models.mod import Mod
 from models.user import User
 
 api = Blueprint('api', __name__)
-CORS(API)
+CORS(api)
 
 @api.route('/mods/list/<board_key>', methods=['GET'])
 def list_mods(board_key):
