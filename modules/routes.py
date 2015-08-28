@@ -1,5 +1,4 @@
 import os
-import glob
 
 from flask import abort, redirect, render_template, send_file
 from jinja2.exceptions import TemplateNotFound
@@ -43,13 +42,6 @@ def support():
 @app.route('/index')
 def index():
     return render_template('home.html')
-
-@app.route('/zb.action.min.js')
-@cache.cached(timeout=60 * 10)
-def serve_zbaction():
-    newest = max(glob.iglob('/var/www/zba/bin/*.js'), key=os.path.getctime)
-
-    return send_file(newest, cache_timeout=0)
 
 @app.route('/<int:uid>')
 def test(uid):
