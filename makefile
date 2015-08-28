@@ -9,6 +9,7 @@ copy:
 		mkdir -p /var/www/zba/static/css; \
 		mkdir -p /var/www/zba/static/js; \
 		mkdir -p /var/www/zba/static/fonts; \
+		mkdir -p /var/www/zba/bin
 		mkdir -p /zba; \
 		\
 		chmod -R 777 /zba; \

@@ -4,7 +4,7 @@ import glob
 from flask import abort, redirect, render_template, send_file
 from jinja2.exceptions import TemplateNotFound
 
-from main import app
+from main import app, cache
 
 from db import session_factory
 
@@ -44,6 +44,7 @@ def index():
     abort(404)
 
 @app.route('/zb.action.min.js')
+@cache.cached(timeout=60 * 10)
 def serve_zbaction():
     newest = max(glob.iglob('bin/*.js'), key=os.path.getctime)
 
