@@ -40,7 +40,7 @@ def setup2():
     get_form_key()
 
 def include_source(f):
-    return open(f).read()
+    return open(os.path.join(app.root_path, f)).read()
 
 @app.context_processor
 def injections():

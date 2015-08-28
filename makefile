@@ -9,14 +9,14 @@ copy:
 		mkdir -p /var/www/zba/static/css; \
 		mkdir -p /var/www/zba/static/js; \
 		mkdir -p /var/www/zba/static/fonts; \
-		mkdir -p /var/www/zba/bin
+		mkdir -p /var/www/zba/bin \
 		mkdir -p /zba; \
 		\
 		chmod -R 777 /zba; \
 		chmod -R 777 /var/www/zba; \
 	"
 
-	scp static/bin/zb.action.min.js zba@zba:/var/www/zba/static/bin/zb.action.min.js
+	scp -r bin zba@zba:/var/www/zba/
 
 	scp *.py zba@zba:/var/www/zba/.
 	scp -r modules zba@zba:/var/www/zba/
@@ -26,6 +26,8 @@ copy:
 	scp -r static/fonts/* zba@zba:/var/www/zba/static/fonts
 	scp -r templates zba@zba:/var/www/zba
 	scp -r static/js/*.js zba@zba:/var/www/zba/static/js/.
+
+	scp -r example zba@zba:/var/www/zba/
 
 	scp /zba/secrets.json zba@zba:/zba/secrets.json
 

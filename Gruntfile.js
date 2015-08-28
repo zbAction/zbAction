@@ -22,6 +22,11 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		scssLint: {
+			allFiles: [
+				'static/css/*.scss'
+			]
+		},
 		sass: {
 			dist: {
 				options: {
