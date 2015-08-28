@@ -41,7 +41,7 @@ def support():
 
 @app.route('/index')
 def index():
-    abort(404)
+    return render_template('home.html')
 
 @app.route('/zb.action.min.js')
 @cache.cached(timeout=60 * 10)

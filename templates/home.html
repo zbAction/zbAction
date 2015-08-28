@@ -1,0 +1,39 @@
+{% import '_forms.html' as forms %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}zbAction{% endblock %}</title>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Roboto+Slab:400,100,300,700|Roboto:400,500|Source+Code+Pro:400,700,500' rel='stylesheet' type='text/css'>
+		<link href="{{ url_for('static', filename='css/glyphicon.css') }}" rel="stylesheet" />
+		<link href="{{ url_for('static', filename='css/github-gist.css') }}" rel="stylesheet" />
+		<link href="{{ url_for('static', filename='css/zba.css') }}" rel="stylesheet" />
+	</head>
+	<body>
+		{% if not server_online %}
+		<aside id="server-offline">
+			<div class="wrapper">
+				<p>
+					<span></span>The zbAction server is currently offline. It should be back up within 12 hours.
+				</p>
+			</div>
+		</aside>
+		{% endif %}
+		{% include '_header.html' %}
+		<main id="home">
+            <section id="splash">
+                <div class="wrapper">
+                    <header>
+                        <h1>zbAction</h1>
+                    </header>
+                    <p>
+                        zbAction empowers board owners and developers&mdash;giving them the ability to add real-time functionality to boards and modifications.
+                    </p>
+                    <p>
+                        <a href="{{ url_for('meta.register') }}">See what zbAction can do for you. Register today.</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+	</body>
+</html>

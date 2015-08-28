@@ -15,10 +15,19 @@ html, body {
 	font-size: $standard_font_size;
 }
 
+h1 {
+	font-size: 32px;
+	font-family: Roboto Slab;
+	font-weight: 300;
+}
+
+h2, h3, h4 {
+	font-weight: 500;
+}
+
 h2, h3 {
 	border-bottom: 1px solid #ccc;
 	color: #888;
-	font-weight: 500;
 	padding-bottom: $standard_font_size / 2;
 }
 
@@ -44,7 +53,7 @@ hr {
 ul, ol {
 	margin-bottom: $standard_font_size * 1.5;
 	padding-left: $standard_line_height;
-	
+
 	li {
 		line-height: $standard_line_height;
 	}
@@ -96,8 +105,8 @@ main {
 }
 
 .status {
-	min-height: 20vw;
-	padding-top: 5vw;
+	min-height: 20vh;
+	padding-top: 20vh;
 	position: relative;
 	text-align: center;
 
@@ -136,3 +145,4 @@ main {
 @import 'slides';
 @import 'manager';
 @import 'docs';
+@import 'home';
