@@ -9,7 +9,7 @@ copy:
 		mkdir -p /var/www/zba/static/css; \
 		mkdir -p /var/www/zba/static/js; \
 		mkdir -p /var/www/zba/static/fonts; \
-		mkdir -p /var/www/zba/bin \
+		mkdir -p /var/www/zba/static/bin \
 		mkdir -p /zba; \
 		\
 		chmod -R 777 /zba; \
@@ -24,6 +24,7 @@ copy:
 	scp -r static/fonts/* zba@zba:/var/www/zba/static/fonts
 	scp -r templates zba@zba:/var/www/zba
 	scp -r static/js/*.js zba@zba:/var/www/zba/static/js/.
+	scp -r static/bin zba@zba:/var/www/zba/static/bin
 
 	scp -r example zba@zba:/var/www/zba/
 
