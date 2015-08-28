@@ -45,11 +45,9 @@ class SocketHandler(websocket.WebSocketHandler):
         if board.enabled == False:
             return
 
-        if '.zetaboards.com/' in self.origin:
-            if self.origin != board.bare_location:
+        if '.zetaboards.com/' not in self.origin:
+            if self.origin != board.real_location:
                 return
-        elif self.origin != board.real_location:
-            return
 
         name = user['name']
         user = User.create_from(user)
