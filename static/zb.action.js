@@ -155,8 +155,7 @@
 						// The real send data is constructed here.
 						// The action data given by developers is
 						// only additional data to fill in the blanks.
-						if(data.details instanceof Object)
-							data.details = JSON.stringify(data.details);
+						data.details = JSON.stringify(data.details);
 
 						data = {
 							event: (mod_key + '.' + data.event).substring(0, 255),
