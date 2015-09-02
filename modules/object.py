@@ -24,7 +24,7 @@ class Object(dict):
                 self[key] = []
 
                 for x in val[key]:
-                    self[key].push(Object(x))
+                    self[key].append(Object(x))
             else:
                 self[key] = val[key]
 
