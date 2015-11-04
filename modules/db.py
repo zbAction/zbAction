@@ -6,7 +6,7 @@ from secrets import secrets
 
 eng = 'mysql://{username}:{password}@{host}:3306/{name}?charset=utf8'.format(**secrets.db.__dict__)
 engine = create_engine(
-	eng, pool_recycle=1800
+	eng, pool_recycle=600
 )
 
 factory = sessionmaker(bind=engine)
