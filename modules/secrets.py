@@ -5,7 +5,7 @@ from object import Object
 
 secrets = Object()
 
-path = os.path.abspath(os.path.join('/zba', 'secrets.json'))
+path = os.path.abspath(os.path.join('/home/andrew/Projects/zba', 'secrets.json'))
 
 with open(path) as f:
     lines = ''.join(f.readlines())
