@@ -58,7 +58,7 @@ def form_key_required(ep):
 def not_logged_in(ep):
     @wraps(ep)
     def func(**kwargs):
-        if current_user.is_authenticated():
+        if current_user.is_authenticated:
             return redirect(url_for('index'))
         else:
             return ep(**kwargs)
