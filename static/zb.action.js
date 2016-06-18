@@ -195,7 +195,7 @@
                     ws.send('0');
 
                     setTimeout(keep_alive, 1000);
-                }
+                };
 
                 keep_alive();
             }
