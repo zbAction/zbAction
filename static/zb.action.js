@@ -12,7 +12,7 @@
         USER_URL = 'http://localhost:4343/api/users/list/';
     }
     else{
-        SOCKET_URL = 'ws://zba.reticent.io/sync';
+        SOCKET_URL = 'ws://zbaction.reticent.io/gateway';
         MOD_URL = 'http://zbaction.reticent.io/api/mods/list/';
         USER_URL = 'http://zbaction.reticent.io/api/users/list/';
     }

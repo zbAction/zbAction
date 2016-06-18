@@ -16,7 +16,10 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(userid):
-    return Forum.from_id(int(userid))
+    try:
+        return Forum.from_id(int(userid))
+    except:
+        return None
 
 def cache_bust(ep, **kwargs):
     if ep == 'static' and 'filename' in kwargs:

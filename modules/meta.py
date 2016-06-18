@@ -68,7 +68,7 @@ def finalize():
             'status': UNKNOWN_EXCEPTION
         })
 
-    login_user(forum)
+    login_user(Forum.from_key(forum.board_key))
 
     return jsonify({
         'status': 0
