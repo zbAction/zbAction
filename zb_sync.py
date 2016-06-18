@@ -18,7 +18,7 @@ dispatcher.daemon = True
 
 if __name__ == '__main__':
     tornado = web.Application([
-        (r'/sync', SocketHandler)
+        (r'/gateway', SocketHandler)
     ], autoreload=secrets.DEBUG)
 
     tornado.listen(secrets.ws_port)

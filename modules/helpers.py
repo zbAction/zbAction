@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import textwrap
+import socket
 import traceback
 import requests
 
@@ -19,7 +20,7 @@ def get_url(url):
 def check_server():
     try:
         # 50ms timeout
-        requests.get(secrets.websocket_url, timeout=0.05)
+        socket.create_connection(('127.0.0.1', secrets.ws_port), timeout=0.05)
         return True
     except:
         return False
