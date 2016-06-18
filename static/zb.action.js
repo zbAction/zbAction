@@ -190,6 +190,14 @@
                 }).done(function(){
                     $.getJSON(MOD_URL + CURRENT_USER.board_key, load_approved);
                 });
+
+                var keep_alive = function(){
+                    ws.send('0');
+
+                    setTimeout(keep_alive, 1000);
+                }
+
+                keep_alive();
             }
         };
 
