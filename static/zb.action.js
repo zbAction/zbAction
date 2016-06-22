@@ -13,8 +13,8 @@
     }
     else{
         SOCKET_URL = 'wss://zbaction.reticent.io/gateway';
-        MOD_URL = 'http://zbaction.reticent.io/api/mods/list/';
-        USER_URL = 'http://zbaction.reticent.io/api/users/list/';
+        MOD_URL = 'https://zbaction.reticent.io/api/mods/list/';
+        USER_URL = 'https://zbaction.reticent.io/api/users/list/';
     }
 
     var ACTION_TEMPLATE = {
