@@ -114,7 +114,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
     def on_message(self, message):
         # Ignore keepalive...
-        if message == '0':
+        if message == '"0"':
             return
 
         try:
