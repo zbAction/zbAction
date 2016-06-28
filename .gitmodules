@@ -1,0 +1,3 @@
+[submodule "static/mods"]
+	path = static/mods
+	url = https://github.com/zbAction/Modifications.git
