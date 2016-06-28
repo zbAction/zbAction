@@ -55,6 +55,10 @@ zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', function(zba){
 		$('.c_post').each(function(){
 			var html = $(this).html();
 			html = html.replace(regex, function(m, name){
+                var uid = zba.users.by_name(name);
+
+                if(!uid) return m;
+                
 				var $link = $('<a>')
 								.attr('href', $.zb.stat.url + 'profile/' + zba.users.by_name(name) + '/')
 								.text(name);
