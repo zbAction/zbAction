@@ -113,6 +113,10 @@ class SocketHandler(websocket.WebSocketHandler):
             self.push_action(action, self.user.access_key, 0)
 
     def on_message(self, message):
+        # Ignore keepalive...
+        if message == '0':
+            return
+
         try:
             log('Received:', message)
 
