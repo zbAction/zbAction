@@ -34,7 +34,7 @@
         board_key: window.__zbAction.board_key,
         bpath: $.zb.stat.bpath,
         uid: $.zb.stat.mid,
-        name: 'andrew' // $('#top_info a[href*="/profile/"]').text()
+        name: $('#top_info a[href*="/profile/"]').text()
     };
 
     var USER_LIST = {};
