@@ -7,13 +7,14 @@
 zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', function(zba){
 	var ls_key = 'zba_19fef61b-333d-4c32-9e44-28c04edf6dae';
 	var regex = /\[mention\](.+?)\[\/mention\]/gi;
-	var message = '{poster} has mentioned you in a post. Click <a href="{post_url}">here</a> to see it.';
+	var message = '{poster} has mentioned you in a post.';
 
 	zba.register('zba-user-mention', function(action){
 		$.growl({
-			title: 'User Mention',
-			message: JSON.parse(action.details),
-			duration: 5000
+			title: '',
+			message: message.replace('{poster}', action.source.name),
+			duration: 5000,
+			url: JSON.parse(action.details)
 		});
 	});
 
@@ -40,7 +41,7 @@ zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', function(zba){
 			users.forEach(function(user){
 				zba.send({
 					event: 'zba-user-mention',
-					details: message.replace('{poster}', you).replace('{post_url}', post_url),
+					details: post_url,
 					receiver: {
 						uid: zba.users.by_name(user)
 					}
