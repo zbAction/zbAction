@@ -34,10 +34,6 @@ def docs(category, page):
     except TemplateNotFound:
         abort(404)
 
-@app.route('/support')
-def support():
-    return redirect('http://s15.zetaboards.com/zba/index/')
-
 @app.route('/')
 @app.route('/index')
 def index():
