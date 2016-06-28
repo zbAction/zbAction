@@ -67,7 +67,7 @@ zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', function(zba){
 	}
 
 	// This check should be sufficient to ensure only new posts are checked for mentions.
-	if(location.href.match(/topic\/\d+/) || location.href.match(/\/post\/(\?mode=1|$)/)){
+	if(location.href.match(/topic\/\d+/) || location.href.match(/\/post\/(\?type=1&mode=1|$)/)){
 		check_mention();
 	}
 
