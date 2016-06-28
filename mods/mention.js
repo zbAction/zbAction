@@ -14,7 +14,8 @@ zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', function(zba){
 			title: '',
 			message: message.replace('{poster}', action.source.name),
 			duration: 5000,
-			url: JSON.parse(action.details)
+			url: JSON.parse(action.details),
+			location: 'bl'
 		});
 	});
 
