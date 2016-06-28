@@ -34,6 +34,10 @@ def docs(category, page):
     except TemplateNotFound:
         abort(404)
 
+@app.route('/support')
+def support():
+    return redirect('https://forum.zbaction.reticent.io')
+
 @app.route('/')
 @app.route('/index')
 def index():
