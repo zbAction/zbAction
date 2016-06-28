@@ -10,8 +10,10 @@ zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', function(zba){
 	var message = '{poster} has mentioned you in a post. Click <a href="{post_url}">here</a> to see it.';
 
 	zba.register('zba-user-mention', function(action){
-		$.jGrowl(JSON.parse(action.details), {
-			life: 5000
+		$.growl({
+			title: 'User Mention',
+			message: JSON.parse(action.details),
+			duration: 5000
 		});
 	});
 
