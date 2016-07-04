@@ -20,18 +20,8 @@ window.__zbAction = {
 <script src="{{ url_for('static', filename='zb.action.js') }}"></script>
 <script>
 function test(zbAction){
-	zbAction.register('testing', function(data){
-		console.log(data);
-	});
-
-	zbAction.send({
-		event: 'testing',
-		details: 'test',
-		receiver: {
-			uid: 71 // $.zb.stat.mid
-		}
-	});
+	console.log('connected');
 }
 
-zbAction.ready('9a1bb521-83d3-4d1b-93b7-6535697c54d0', test);
+zbAction.ready('19fef61b-333d-4c32-9e44-28c04edf6dae', test);
 </script>

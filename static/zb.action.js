@@ -176,6 +176,9 @@
                     send = null;
 
                     try{
+                        // Reset.
+                        that._wait = {};
+                        _error = [];
                         ready_load();
                     }
                     catch(e){
@@ -252,8 +255,6 @@
                     USER_LIST = resp.users;
                 }).done(function(){
                     heartbeat();
-                    that._wait = {};
-                    _error = [];
                     $.getJSON(MOD_URL + CURRENT_USER.board_key).then(load_approved);
                 });
             }
