@@ -59,6 +59,18 @@
                 <b>exec_func</b> (function) - The execution function to run when the event <span class="literal">action_event</span> is received. This function is passed a single argument: an <a href="#object.action_template">action template</a> with the event's information.
             </p>
         </aside>
+        <aside class="property" id="object.zbaction.error">
+            <header>
+                <b>error(exec_func)</b>
+            </header>
+            <p>
+                Registers an event handler for execution in the event that zbAction is unable to connect to the server. This function should be used to cleanup your modification since a new instance will be created on reconnect.
+            </p>
+            <span class="param">Parameters:</span>
+            <p class="arg">
+                <b>exec_func</b> (function) - The execution function to run when zbAction is unable to connect to the server.
+            </p>
+        </aside>
         <aside class="property" id="object.zbaction.send">
             <header>
                 <b>send(action_template)</b>
