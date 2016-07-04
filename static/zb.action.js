@@ -7,7 +7,7 @@
     var USER_URL;
 
     if(location.href.indexOf('localhost:') !== -1){
-        SOCKET_URL = 'ws://localhost:4242/sync';
+        SOCKET_URL = 'ws://localhost:4242/gateway';
         MOD_URL = 'http://localhost:4343/api/mods/list/';
         USER_URL = 'http://localhost:4343/api/users/list/';
     }
@@ -30,12 +30,8 @@
         }
     };
 
-    var CURRENT_USER = {
-        board_key: window.__zbAction.board_key,
-        bpath: $.zb.stat.bpath,
-        uid: $.zb.stat.mid,
-        name: $('#top_info a[href*="/profile/"]').text()
-    };
+    var HEARTBEAT_TIMEOUT = 10000 // 10 seconds.
+    var RECONNECT_DELAY = 5000 // 5 seconds.
 
     var USER_LIST = {};
 
@@ -55,6 +51,8 @@
         }
     };
 
+    var BOARD_KEY = window.__zbAction.board_key;
+
     // Disallow automated board key viewing. If
     // somebody wants to view a board key they'll have
     // to view the source. This prevents malicious users
@@ -70,7 +68,15 @@
         var ws = Socket();
         var that = this;
 
-        this._wait = [];
+        this._wait = {};
+        var _error = [];
+
+        var CURRENT_USER = {
+            board_key: BOARD_KEY,
+            bpath: $.zb.stat.bpath,
+            uid: $.zb.stat.mid,
+            name: $('#top_info strong a[href*="/profile/"]').text()
+        };
 
         ws.onload(function(){
             ws.send({
@@ -80,7 +86,25 @@
             });
         });
 
-        ws.load(SOCKET_URL);
+        var ready_load = function(){
+            $(document).ready(function(){
+                // This is set one more time in the event
+                // the DOM is not loaded. So basically if people
+                // put this script somewhere that isn't in the below
+                // the board section.
+                CURRENT_USER.name = $('#top_info strong a[href*="/profile/"]').text();
+
+                ws.load(SOCKET_URL);
+            });
+        };
+
+        ready_load();
+
+        ws.onclose(function(){
+            _error.forEach(function(fn){
+                fn.call(that);
+            });
+        });
 
         // zbAction objects do not have create methods
         // until after their initial handshake. This is
@@ -106,10 +130,15 @@
             });
         };
 
+        var error = function(fn){
+            _error.push(fn);
+        };
+
         var ModWrapper = function(send, key){
             this.send = send.bind(null, key);
             this.register = register.bind(this, key);
             this.users = USER;
+            this.error = error;
         };
 
         var load_approved = function(data){
@@ -124,6 +153,40 @@
                 type: 'get_unread',
                 data: CURRENT_USER
             });
+        };
+
+        var heartbeat = function(){
+            var latest = new Date();
+
+            ws.on('heartbeat', function(){
+                latest = new Date();
+            });
+
+            ws.send({
+                key: 0,
+                type: 'heartbeat',
+                data: 'heartbeat'
+            });
+
+            var check = function(){
+                var now = new Date();
+
+                // Slack for latency.
+                if(now - latest > HEARTBEAT_TIMEOUT + 1){
+                    send = null;
+
+                    try{
+                        ready_load();
+                    }
+                    catch(e){
+                        // Fail silently.
+                    }
+                }
+                
+                setTimeout(check, HEARTBEAT_TIMEOUT);
+            };
+
+            setTimeout(check, HEARTBEAT_TIMEOUT);
         };
 
         // This is defined on handshake receive.
@@ -188,16 +251,11 @@
                 $.getJSON(USER_URL + CURRENT_USER.board_key, function(resp){
                     USER_LIST = resp.users;
                 }).done(function(){
-                    $.getJSON(MOD_URL + CURRENT_USER.board_key, load_approved);
+                    heartbeat();
+                    that._wait = {};
+                    _error = [];
+                    $.getJSON(MOD_URL + CURRENT_USER.board_key).then(load_approved);
                 });
-
-                var keep_alive = function(){
-                    ws.send('0');
-
-                    setTimeout(keep_alive, 1000);
-                };
-
-                keep_alive();
             }
         };
 

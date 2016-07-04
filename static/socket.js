@@ -8,6 +8,7 @@
 
 	Socket.prototype._ws = null;
 	Socket.prototype._onload = null;
+	Socket.prototype._onclose = null;
 
 	Socket.prototype.on = function(evt, fn){
 		if(!evt) throw 'No event specified.';
@@ -55,6 +56,14 @@
 			var data = JSON.parse(e.data);
 			that.emit(data.event, data);
 		};
+
+		this._ws.onclose = function(){
+			if(that._onclose)
+				that._onclose.apply(that, arguments);
+				
+			// Dispose of old connection.
+			that._ws = null;
+		}
 	};
 
 	Socket.prototype.onload = function(fn){
@@ -66,6 +75,10 @@
 			throw 'You must connect to a websocket first.';
 
 		this._ws.send(JSON.stringify(data));
+	};
+
+	Socket.prototype.onclose = function(fn){
+		this._onclose = fn;
 	};
 
 	window.Socket = Socket;

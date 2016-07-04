@@ -1,5 +1,7 @@
 from datetime import datetime
 import json
+import time
+from threading import Thread
 import traceback
 
 from tornado import websocket
@@ -40,12 +42,13 @@ class SocketHandler(websocket.WebSocketHandler):
         # since access keys are required to send
         # messages.
         if board is None:
+            print('no board')
             return
 
         if board.enabled == False:
             return
 
-        if '.zetaboards.com/' not in self.origin:
+        if '.zetaboards.com/' not in self.origin and 'localhost:' not in self.origin:
             if self.origin != board.real_location:
                 return
 
@@ -72,6 +75,33 @@ class SocketHandler(websocket.WebSocketHandler):
         )
 
         self.push_action(handshake, self.user.access_key, 0)
+
+    def heartbeat(self, user, key, mod_key):
+        if hasattr(self, 'heartbeat_started'):
+            return
+
+        setattr(self, 'heartbeat_started', True)
+
+        def beat():
+            while 1:
+                if getattr(self, 'disconnected', False):
+                    return
+                    
+                hb = Action(
+                    event='heartbeat',
+                    details='0',
+                    source=self.user.access_key,
+                    receiver=self.user.access_key
+                )
+
+                self.push_action(hb, self.user.access_key, 0)
+
+                time.sleep(5)
+
+        t = Thread(target=beat)
+        t.daemon = True
+
+        t.start()
 
     def push_action(self, action, key, mod_key):
         if not self.user or not self.user.validate_key(key):
@@ -125,6 +155,7 @@ class SocketHandler(websocket.WebSocketHandler):
             # A dict of message handlers.
             handlers = {
                 'handshake': self.handshake,
+                'heartbeat': self.heartbeat,
                 'get_unread': self.get_unread,
                 'action': self.push_action
             }
@@ -149,6 +180,8 @@ class SocketHandler(websocket.WebSocketHandler):
             conn_mutex.acquire()
             connections.remove((self.toKey(), self))
             conn_mutex.release()
+
+            setattr(self, 'disconnected', True)
 
             log('Disconnected from user:', self.toKey())
 
