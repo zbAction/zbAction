@@ -1,0 +1,31 @@
+{% extends 'template.html' %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<article class="post">
+    <div class="wrapper">
+        <header>
+            <h2>
+                <a href="https://forum.zbaction.reticent.io/d/{{ post.id }}">{{ post.title }}</a>
+                <span class="meta">Posted by 
+                    <a href="https://forum.zbaction.reticent.io/u/{{ post.author }}">{{ post.author }}</a> 
+                    on {{ post.timestamp.date() }}.
+                </span>
+            </h2>
+        </header>
+        <p>
+            {{ post.content | safe }}
+        </p>
+        <p>Click <a href="https://forum.zbaction.reticent.io/d/{{ post.id }}">here</a> for the official forum post.
+        <p>
+            <a href="{{ url_for('announcements') }}">&#8592; Announcement List</a>
+        </p>
+    </div>
+</article>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

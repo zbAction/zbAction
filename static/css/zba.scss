@@ -55,7 +55,7 @@ ul, ol {
 	padding-left: $standard_line_height;
 
 	li {
-		line-height: $standard_line_height;
+		line-height: $standard_line_height * 0.75;
 	}
 }
 
@@ -64,7 +64,7 @@ img {
 	margin-top: $standard_font_size;
 }
 
-b {
+b, strong {
 	font-weight: 500;
 }
 
@@ -146,3 +146,4 @@ main {
 @import 'manager';
 @import 'docs';
 @import 'home';
+@import 'blog';

@@ -1,0 +1,23 @@
+.post {
+    header {
+        margin-bottom: $standard_font_size;
+    }
+    
+    h2 {
+        border-bottom: none;
+    }
+
+    .meta {
+        display: block;
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    p + p {
+        margin-top: 0px;
+    }
+
+    p + ul, p + ol {
+        margin-top: -$standard_font_size;
+    }
+}
