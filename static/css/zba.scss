@@ -59,9 +59,14 @@ ul, ol {
 	}
 }
 
+p img {
+	display: block;
+}
+
 img {
 	border: 1px solid #ccc;
 	margin-top: $standard_font_size;
+	margin-bottom: $standard_font_size;
 }
 
 b, strong {
