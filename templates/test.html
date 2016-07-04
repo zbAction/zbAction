@@ -19,7 +19,28 @@ window.__zbAction = {
 <script src="{{ url_for('static', filename='socket.js') }}"></script>
 <script src="{{ url_for('static', filename='zb.action.js') }}"></script>
 <script>
-function test(zbAction){
+function test(zba){
+	zba.register('test', function(a){
+		console.log(a);
+	});
+
+	$('a').click(function(e){
+		e.preventDefault();
+
+		try {
+			zba.send({
+				event: 'test',
+				details: 'test',
+				receiver: {
+					uid: '0'
+				}
+			});
+		}
+		catch(e){
+			console.log('not connected');
+		}
+	});
+
 	console.log('connected');
 }
 

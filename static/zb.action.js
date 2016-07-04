@@ -141,6 +141,14 @@
             this.error = error;
         };
 
+        var get_unread = function(){
+            ws.send({
+                key: 0,
+                type: 'get_unread',
+                data: CURRENT_USER
+            });
+        };
+
         var load_approved = function(data){
             var approved = data.mods || [];
 
@@ -148,11 +156,7 @@
                 if(approved.indexOf(key) !== -1)
                     that._wait[key].call(null, new ModWrapper(send, key));
 
-            ws.send({
-                key: 0,
-                type: 'get_unread',
-                data: CURRENT_USER
-            });
+            get_unread();
         };
 
         var heartbeat = function(){
@@ -173,20 +177,19 @@
 
                 // Slack for latency.
                 if(now - latest > HEARTBEAT_TIMEOUT + 1){
-                    send = null;
-
                     try{
                         // Reset.
-                        that._wait = {};
-                        _error = [];
-                        ready_load();
+                        ws.load(SOCKET_URL);
+                        get_unread();
+                        heartbeat();
                     }
                     catch(e){
                         // Fail silently.
                     }
                 }
-                
-                setTimeout(check, HEARTBEAT_TIMEOUT);
+                else{
+                    setTimeout(check, HEARTBEAT_TIMEOUT);
+                }
             };
 
             setTimeout(check, HEARTBEAT_TIMEOUT);
@@ -243,12 +246,17 @@
                         throw e;
                     }
 
-                    ws.send({
-                        key: USER_KEY,
-                        mod_key: mod_key,
-                        type: 'action',
-                        data: data
-                    });
+                    try{
+                        ws.send({
+                            key: USER_KEY,
+                            mod_key: mod_key,
+                            type: 'action',
+                            data: data
+                        });
+                    }
+                    catch(e){
+                        throw new Error('Not connected to zbAction server.');
+                    }
                 };
 
                 $.getJSON(USER_URL + CURRENT_USER.board_key, function(resp){
