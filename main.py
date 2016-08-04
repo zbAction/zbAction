@@ -26,7 +26,7 @@ bcrypt = Bcrypt(app)
 
 loader = PackageLoader(__name__, 'example')
 
-import setup
+import modules.setup
 from routes import *
 
 from secrets import secrets
